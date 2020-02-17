@@ -35,7 +35,7 @@ export class RequestsPage implements OnInit {
     }
 
 
-    searchPlace() {
+    searchRequests() {
         this.requestService.searchPlaces(this.requestsSearch).subscribe(
             resp => {
                 if (resp.count > 0) {
@@ -58,6 +58,4 @@ export class RequestsPage implements OnInit {
         // this.loadPlaces();
         // this.data_not_found = false;
     }
-
-
 }

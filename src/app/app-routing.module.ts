@@ -13,6 +13,18 @@ const routes: Routes = [
   {
     path: 'history',
     loadChildren: () => import('./Pages/history/history.module').then( m => m.HistoryPageModule)
+  },
+  {
+    path: 'request-details/:id',
+    loadChildren: () => import('./Pages/request-details/request-details.module').then( m => m.RequestDetailsPageModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./Pages/Auth/login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'register',
+    loadChildren: () => import('./Pages/Auth/register/register.module').then( m => m.RegisterPageModule)
   }
 ];
 @NgModule({

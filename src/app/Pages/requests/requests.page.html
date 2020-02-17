@@ -5,16 +5,16 @@
 </ion-header>
 
 <ion-content>
-    <ion-searchbar showCancelButton="focus" animated (ionChange)="requestsSearch"></ion-searchbar>
+    <ion-searchbar showCancelButton="focus" animated (ionChange)="searchRequests()"></ion-searchbar>
 
     <ion-list>
 <!--        <ion-list-header>-->
 <!--            Recent Conversations-->
 <!--        </ion-list-header>-->
 
-        <ion-item *ngFor="let item of requestsData">
+        <ion-item *ngFor="let item of requestsData" routerLink="/request-details/{{item.id}}">
             <ion-avatar slot="start">
-                <img src="assets/images/1.jpge">
+                <img src="assets/images/1.jpg">
             </ion-avatar>
             <ion-label>
                 <h2>We Need: {{item.specialties.medical.name}}</h2>
