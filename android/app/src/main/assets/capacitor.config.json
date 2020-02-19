@@ -1,0 +1,8 @@
+{
+  "appId": "sd.detatech.vitaluser",
+  "appName": "vitalhealth",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "cordova": {}
+}

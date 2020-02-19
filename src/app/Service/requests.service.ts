@@ -25,7 +25,7 @@ export class RequestsService {
     }
 
     /**
-     * Return list of places as observable
+     * Return list of Requests as observable
      */
     public getRequest(page = 0): Observable<any> {
         // return this.http.get(`${this.Url}requestSpecialists?${this.getByPage(page)}`);
@@ -34,7 +34,7 @@ export class RequestsService {
 
 
     /**
-     * Search places by title
+     * Search request by title
      */
     public searchPlaces(title: string): Observable<any> {
         console.log('Search params', title);
