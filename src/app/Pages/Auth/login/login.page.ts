@@ -26,6 +26,7 @@ export class LoginPage implements OnInit {
                 if (this.usersData.error) {
                     alert('error data');
                 } else {
+                    localStorage.setItem('token', this.usersData.token);
                     alert('ok');
                 }
             })

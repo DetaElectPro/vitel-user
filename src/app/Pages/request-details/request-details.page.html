@@ -7,20 +7,43 @@
 <ion-content>
     <ion-card>
         <ion-card-header>
-            <ion-card-title>title</ion-card-title>
+            <ion-card-title>Hospital: {{request.name}}</ion-card-title>
         </ion-card-header>
         <ion-card-content>
             <ion-avatar slot="start">
-                <img src="assets/images/1.jpg">
+                <img src="assets/images/2.jpg">
             </ion-avatar>
-            <ion-label>
-                <p>id: {{request.id}}</p>
-                <h2>We Need: {{request.specialties.medical.name}}</h2>
-                <h3>Specialized in: {{request.specialties.name}}</h3>
-                <h3>Hospital: {{request.name}}</h3>
-                <p>Address: {{request.address}}</p>
-                <p>data: {{request.created_at}}</p>
-            </ion-label>
+            <p>order #: {{request.id}}</p>
+            <h2>We Need: {{request.specialties.medical.name}}</h2>
+            <h3>Specialized in: {{request.specialties.name}}</h3>
+            <p>Address: {{request.address}}</p>
+            <p>start at: {{request.start_time}}</p>
+            <p>end at: {{request.end_time}}</p>
+            <p>work hours: {{request.hours}}</p>
         </ion-card-content>
     </ion-card>
+
+    <ion-card>
+        <ion-card-title>Info</ion-card-title>
+        <ion-card-subtitle>The request was created by:</ion-card-subtitle>
+        <ion-card-content>
+            <h1>Name: {{request.user.name}}</h1>
+            <h1>Phone: {{request.user.phone}}</h1>
+        </ion-card-content>
+    </ion-card>
+<!--    <ion-card>-->
+<!--        <ion-card-content>-->
+<!--            <ion-item>-->
+<!--                <div id="mapId3" style="width: 100%; height: 200px"></div>-->
+<!--            </ion-item>-->
+<!--        </ion-card-content>-->
+<!--    </ion-card>-->
+    <ion-footer class="ion-text-center ion-align-items-center">
+        <ion-button expand="block" (click)="acceptRequest()">
+            <ion-icon name="thumbs-up"></ion-icon>
+            <div>Accept</div>
+        </ion-button>
+
+    </ion-footer>
+
 </ion-content>

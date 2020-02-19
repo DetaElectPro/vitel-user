@@ -20,4 +20,13 @@ export class Requests {
         }
     };
 
+    user: {
+        id: number;
+        name: string;
+        phone: string;
+        email: null;
+        image: string;
+        active: number;
+        status: number;
+    };
 }

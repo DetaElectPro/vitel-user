@@ -1,12 +1,17 @@
 @font-face {
   font-family: 'Open-Sans';
-  src: url('/assets/font/Regular.ttf') format('ttf');
+  src: url('/assets/font/Medium.ttf')
 }
 
 * {
   font-family: Open-Sans;
 }
 
+
+ion-toolbar {
+  --color: #FFFFFF;
+  --background: #3dc2ff
+}
 // card style
 .card {
   background: #FFF;
@@ -79,7 +84,7 @@
   transform: translateZ(1px);
 }
 
-.lds-circle>div {
+.lds-circle > div {
   display: inline-block;
   width: 51px;
   height: 51px;
@@ -109,7 +114,6 @@
     transform: rotateY(3600deg);
   }
 }
-
 
 
 .lds-heart {
