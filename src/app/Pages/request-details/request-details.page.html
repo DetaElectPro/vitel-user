@@ -1,10 +1,26 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>request-details</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>request-details</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <h1>#{{requestId}}</h1>
-
+    <ion-card>
+        <ion-card-header>
+            <ion-card-title>title</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-avatar slot="start">
+                <img src="assets/images/1.jpg">
+            </ion-avatar>
+            <ion-label>
+                <p>id: {{request.id}}</p>
+                <h2>We Need: {{request.specialties.medical.name}}</h2>
+                <h3>Specialized in: {{request.specialties.name}}</h3>
+                <h3>Hospital: {{request.name}}</h3>
+                <p>Address: {{request.address}}</p>
+                <p>data: {{request.created_at}}</p>
+            </ion-label>
+        </ion-card-content>
+    </ion-card>
 </ion-content>

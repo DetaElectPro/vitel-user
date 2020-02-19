@@ -32,6 +32,13 @@ export class RequestsService {
         return this.http.get(`${this.Url}requestSpecialists`);
     }
 
+    /**
+     * Return list of Requests as observable
+     */
+    public getRequestById(id): Observable<any> {
+        return this.http.get(`${this.Url}requestSpecialists/${id}`);
+    }
+
 
     /**
      * Search request by title

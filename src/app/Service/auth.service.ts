@@ -15,7 +15,7 @@ export class AuthService {
     url = 'https://medical.detatech.xyz/api/auth/';
 
 
-    authenticationState = new BehaviorSubject(false);
+    authenticationState = new BehaviorSubject(null);
 
     constructor(
         private storage: Storage,
@@ -28,20 +28,22 @@ export class AuthService {
     }
 
     checkToken() {
-        this.storage.get(TOKEN_KEY).then(res => {
-            if (res) {
-                this.authenticationState.next(true);
-            }
+        return new Promise((resolve, reject) => {
+            this.storage.get(TOKEN_KEY)
+                .then(res => {
+                    if (res) {
+                        this.authenticationState.next(true);
+                    } else {
+                        this.authenticationState.next(false);
+                    }
+
+                    resolve(res);
+                })
+                .catch(error => {
+                    reject(error);
+                });
         });
     }
-
-    // login(login): Observable<any> {
-    //     const loginData = this.http.post(`${this.url}auth/login`, login);
-    //     console.log(loginData);
-    //     return this.storage.set(TOKEN_KEY, 'loginData').then(() => {
-    //         this.authenticationState.next(true);
-    //     });
-    // }
 
     logout() {
         return this.storage.remove(TOKEN_KEY).then(() => {
@@ -49,8 +51,17 @@ export class AuthService {
         });
     }
 
+
     isAuthenticated() {
-        return this.authenticationState.value;
+        return new Promise((resolve, reject) => {
+            this.checkToken()
+                .then(res => {
+                    resolve(this.authenticationState.value);
+                })
+                .catch(error => {
+                    reject(error);
+                });
+        });
     }
 
 

@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {RequestsService} from '../../Service/requests.service';
+import {Requests} from '../../Models/requests';
 
 @Component({
     selector: 'app-requests',
@@ -8,7 +9,8 @@ import {RequestsService} from '../../Service/requests.service';
 })
 export class RequestsPage implements OnInit {
 
-    requestsData: any = [];
+    // requestsData: any = [];
+    requestsData: Requests[];
     requestsSearch: any;
     dataNotFound: boolean;
 
@@ -25,9 +27,7 @@ export class RequestsPage implements OnInit {
         this.requestService.getRequest().subscribe(
             res => {
                 this.requestsData = res;
-                // this.specialistsData = this.requestsData.specialties;
-                // this.medicalData = this.specialistsData.medical;
-                console.log(this.requestsData[0].name);
+                // console.log(this.requestsData);
             },
             err => {
                 console.log(err);
