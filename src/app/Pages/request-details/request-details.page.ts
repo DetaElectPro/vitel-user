@@ -3,7 +3,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {LoadingController, AlertController} from '@ionic/angular';
 import {RequestsService} from '../../Service/requests.service';
 import {Requests} from '../../Models/requests';
-import {Map, tileLayer, marker} from 'leaflet';
+
+// import {Map, tileLayer, marker} from 'leaflet';
 
 @Component({
     selector: 'app-request-details',
@@ -12,14 +13,15 @@ import {Map, tileLayer, marker} from 'leaflet';
 })
 export class RequestDetailsPage implements OnInit {
 
-    map: Map;
-    propertyList = [];
+    // map: Map;
+    // propertyList = [];
+    result: any;
     requestId: number;
     request: Requests = {
         address: '',
         created_at: '',
         end_time: '',
-        hours: '',
+        number_of_hour: '',
         id: 0,
         price: 0,
         specialties: {id: 0, medical: {id: 0, name: ''}, name: ''},
@@ -57,8 +59,8 @@ export class RequestDetailsPage implements OnInit {
             await loading.present();
             await this.requestServe.getRequestById(this.requestId)
                 .subscribe(res => {
-                    this.request = res;
-                    console.log(this.request.user.name);
+                    this.result = res;
+                    this.request = this.result.data;
                     loading.dismiss();
                 }, err => {
                     console.log(err);
@@ -70,10 +72,9 @@ export class RequestDetailsPage implements OnInit {
     }
 
     acceptRequest() {
-        const data = JSON.stringify({id: this.requestId, status: 1});
-        this.requestServe.userAcceptRequestSpecialists(data)
+        this.requestServe.userAcceptRequestSpecialists(this.requestId)
             .subscribe(res => {
-                    this.acceptRes = res;
+                    console.log(this.acceptRes = res);
                     if (this.acceptRes.accept) {
                         alert('ok');
                     } else {
@@ -86,6 +87,74 @@ export class RequestDetailsPage implements OnInit {
                     console.log(this.acceptRes);
                 }
             );
+    }
+    cancelRequest() {
+        this.requestServe.cancelRequestByUser(this.requestId)
+            .subscribe(res => {
+                    console.log(this.acceptRes = res);
+                    if (this.acceptRes.accept) {
+                        alert('ok');
+                    } else {
+                        alert('error');
+                    }
+
+                },
+                error => {
+                    this.acceptRes = error;
+                    console.log(this.acceptRes);
+                }
+            );
+    }
+
+
+    async requestConfirm() {
+        const alert = await this.presentAlertConfirm.create({
+            header: 'Confirm!',
+            message: 'Message <strong>Do you want to follow up and agree to the request?</strong>!!!',
+            buttons: [
+                {
+                    text: 'Cancel',
+                    role: 'cancel',
+                    cssClass: 'secondary',
+                    handler: (blah) => {
+                        console.log('Confirm Cancel: blah');
+                    }
+                }, {
+                    text: 'Okay',
+                    handler: () => {
+                        console.log('Confirm Okay');
+                        this.acceptRequest();
+                    }
+                }
+            ]
+        });
+
+        await alert.present();
+    }
+
+    async requestCancel() {
+        const alert = await this.presentAlertConfirm.create({
+            header: 'Confirm!',
+            message: 'Message <strong>Do you want to continue and cancel the order?</strong>!!!',
+            buttons: [
+                {
+                    text: 'Cancel',
+                    role: 'cancel',
+                    cssClass: 'secondary',
+                    handler: (blah) => {
+                        console.log('Confirm Cancel: blah');
+                    }
+                }, {
+                    text: 'Okay',
+                    handler: () => {
+                        console.log('Confirm Okay');
+                        this.acceptRequest();
+                    }
+                }
+            ]
+        });
+
+        await alert.present();
     }
 
 

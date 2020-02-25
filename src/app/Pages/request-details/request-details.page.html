@@ -19,7 +19,7 @@
             <p>Address: {{request.address}}</p>
             <p>start at: {{request.start_time}}</p>
             <p>end at: {{request.end_time}}</p>
-            <p>work hours: {{request.hours}}</p>
+            <p>work hours: {{request.number_of_hour}}</p>
         </ion-card-content>
     </ion-card>
 
@@ -31,18 +31,26 @@
             <h1>Phone: {{request.user.phone}}</h1>
         </ion-card-content>
     </ion-card>
-<!--    <ion-card>-->
-<!--        <ion-card-content>-->
-<!--            <ion-item>-->
-<!--                <div id="mapId3" style="width: 100%; height: 200px"></div>-->
-<!--            </ion-item>-->
-<!--        </ion-card-content>-->
-<!--    </ion-card>-->
+    <!--    <ion-card>-->
+    <!--        <ion-card-content>-->
+    <!--            <ion-item>-->
+    <!--                <div id="mapId3" style="width: 100%; height: 200px"></div>-->
+    <!--            </ion-item>-->
+    <!--        </ion-card-content>-->
+    <!--    </ion-card>-->
     <ion-footer class="ion-text-center ion-align-items-center">
-        <ion-button expand="block" (click)="acceptRequest()">
-            <ion-icon name="thumbs-up"></ion-icon>
-            <div>Accept</div>
-        </ion-button>
+        <div *ngIf="request.status == 1">
+            <ion-button expand="block" (click)="requestConfirm()">
+                <ion-icon name="thumbs-up"></ion-icon>
+                <div>Accept</div>
+            </ion-button>
+        </div>
+        <div *ngIf="request.status == 2">
+            <ion-button color="danger" expand="block" (click)="acceptRequest()">
+                <ion-icon name="thumbs-up"></ion-icon>
+                <div>Cancel</div>
+            </ion-button>
+        </div>
 
     </ion-footer>
 

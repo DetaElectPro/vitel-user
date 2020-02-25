@@ -6,7 +6,13 @@ import { Component } from '@angular/core';
   styleUrls: ['setting.page.scss']
 })
 export class SettingPage {
+  private token: string;
+  image = '../assets/images/man.png';
 
-  constructor() {}
+
+  constructor() {
+    this.token = localStorage.getItem('access_token');
+
+  }
 
 }

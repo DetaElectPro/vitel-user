@@ -3,24 +3,22 @@ import {Observable} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Storage} from '@ionic/storage';
 
-const TOKEN_KEY = 'auth-token';
-
 @Injectable({
     providedIn: 'root'
 })
 export class RequestsService {
-    Url = 'https://medical.detatech.xyz/api/';
+    // Url = 'https://medical.detatech.xyz/api/';
+    Url = 'http://localhost:8000/api/';
     private myHeaders: any;
-    private TOKENKEY: string;
+    token = `Bearer ${localStorage.getItem('token')}`;
 
     constructor(
-        private storage: Storage,
         private http: HttpClient
     ) {
         this.myHeaders = {
             headers: new HttpHeaders()
                 .set('Content-Type', 'application/json')
-                .set('Authorization', 'Bearer ' + localStorage.getItem('token'))
+                .set('Authorization', this.token)
         };
     }
 
@@ -40,14 +38,14 @@ export class RequestsService {
      */
     public getRequest(page = 0): Observable<any> {
         // return this.http.get(`${this.Url}requestSpecialists?${this.getByPage(page)}`);
-        return this.http.get(`${this.Url}requestSpecialists`, this.myHeaders);
+        return this.http.get(`${this.Url}request_specialists?page=${page}`, this.myHeaders);
     }
 
     /**
      * Return list of Requests as observable
      */
     public getRequestById(id): Observable<any> {
-        return this.http.get(`${this.Url}requestSpecialists/${id}`, this.myHeaders);
+        return this.http.get(`${this.Url}request_specialists/${id}`, this.myHeaders);
     }
 
 
@@ -56,12 +54,23 @@ export class RequestsService {
      */
     public searchPlaces(title: string): Observable<any> {
         console.log('Search params', title);
-        return this.http.get(`${this.Url}requests?search=${title}`, this.myHeaders);
+        return this.http.get(`${this.Url}search_request_specialists?search=${title}`, this.myHeaders);
     }
 
-    public userAcceptRequestSpecialists(data) {
-        console.log(this.myHeaders);
-        return this.http.post(`${this.Url}userAcceptRequestSpecialists`, data, this.myHeaders);
+    /**
+     * Show my History request
+     */
+    public requestSpecialistsHistory(title: string): Observable<any> {
+        console.log('Search params', title);
+        return this.http.get(`${this.Url}request_specialists_history`, this.myHeaders);
+    }
+
+    public userAcceptRequestSpecialists(id) {
+        return this.http.get(`${this.Url}acceptRequestByUser/${id}`, this.myHeaders);
+    }
+
+    public cancelRequestByUser(id) {
+        return this.http.get(`${this.Url}cancelRequestByUser/${id}`, this.myHeaders);
     }
 
 }

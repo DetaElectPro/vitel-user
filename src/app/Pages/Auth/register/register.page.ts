@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {AuthService} from '../../../Service/auth.service';
 
 @Component({
     selector: 'app-register',
@@ -6,20 +7,32 @@ import {Component, OnInit} from '@angular/core';
     styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
-    registerData: any = [
-        {fullname: ''},
-        {phone: ''},
-        {password: ''},
-        {password_check: ''}
-    ];
+    registerData: any = {name: '', phone: '', password: '', role: 3};
 
-    constructor() {
+    result: any;
+
+    constructor(private authServe: AuthService) {
     }
 
     ngOnInit() {
     }
 
     userRegister() {
-        console.log('Work');
+        this.authServe.registerServes(this.registerData)
+            .then(data => {
+                this.result = data;
+                console.log(data);
+                if (this.registerData.error) {
+                    alert('error data');
+                } else {
+                    console.log('data: ', this.registerData);
+                    console.log('token: ', this.registerData.token);
+                    localStorage.setItem('token', this.registerData.token);
+                    alert('ok');
+                }
+            })
+            .catch(err => {
+                console.log('serve Error: ', err);
+            });
     }
 }

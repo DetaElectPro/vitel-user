@@ -12,7 +12,8 @@ const TOKEN_KEY = 'auth-token';
 
 export class AuthService {
     token: any;
-    url = 'https://medical.detatech.xyz/api/auth/';
+    // url = 'https://medical.detatech.xyz/api/auth/';
+    url = 'http://localhost:8000/api/auth/';
 
 
     authenticationState = new BehaviorSubject(null);
@@ -77,6 +78,20 @@ export class AuthService {
                     this.storage.set(TOKEN_KEY, this.token).then(() => {
                         this.authenticationState.next(true);
                     });
+                    resolve(res);
+                }, (err) => {
+                    reject(err);
+                });
+        });
+    }
+
+    registerServes(userData) {
+        console.log(userData);
+        return new Promise((resolve, reject) => {
+            this.http.post(this.url + 'register', JSON.stringify(userData), {
+                headers: new HttpHeaders().set('Content-Type', 'application/json'),
+            })
+                .subscribe(res => {
                     resolve(res);
                 }, (err) => {
                     reject(err);

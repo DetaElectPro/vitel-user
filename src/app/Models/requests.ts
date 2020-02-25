@@ -7,7 +7,8 @@ export class Requests {
     start_time: string;
     // tslint:disable-next-line:variable-name
     end_time: string;
-    hours: string;
+    // tslint:disable-next-line:variable-name
+    number_of_hour: string;
     status: number;
     // tslint:disable-next-line:variable-name
     created_at: string;
