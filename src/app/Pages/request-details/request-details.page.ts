@@ -76,7 +76,7 @@ export class RequestDetailsPage implements OnInit {
             .subscribe(res => {
                     console.log(this.acceptRes = res);
                     if (this.acceptRes.accept) {
-                        alert('ok');
+                        this.router.navigateByUrl('/history');
                     } else {
                         alert('error');
                     }
@@ -88,6 +88,7 @@ export class RequestDetailsPage implements OnInit {
                 }
             );
     }
+
     cancelRequest() {
         this.requestServe.cancelRequestByUser(this.requestId)
             .subscribe(res => {

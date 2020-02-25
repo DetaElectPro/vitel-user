@@ -1,9 +1,21 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>history</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>history</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+    <ion-grid>
+        <ion-row>
+            <ion-col>Title</ion-col>
+            <ion-col>Status</ion-col>
+            <ion-col>Date</ion-col>
+        </ion-row>
+        <ion-row *ngFor="let item of historyData">
+            <ion-col>{{item.name}}</ion-col>
+            <div *ngIf="item.status ==2"></div>
+            <ion-col><ion-fab-button color="warning">Waiting</ion-fab-button></ion-col>
+            <ion-col>Date</ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>

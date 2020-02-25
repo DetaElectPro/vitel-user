@@ -1,15 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {RequestsService} from '../../Service/requests.service';
+import {History} from '../../Models/history';
 
 @Component({
-  selector: 'app-history',
-  templateUrl: './history.page.html',
-  styleUrls: ['./history.page.scss'],
+    selector: 'app-history',
+    templateUrl: './history.page.html',
+    styleUrls: ['./history.page.scss'],
 })
 export class HistoryPage implements OnInit {
 
-  constructor() { }
+    resultData: any;
+    historyData: History;
+    errorHand: any;
 
-  ngOnInit() {
-  }
+    constructor(
+        private historyServ: RequestsService
+    ) {
+    }
 
+    ngOnInit() {
+        this.loadData();
+    }
+
+    loadData() {
+        this.historyServ.requestSpecialistsHistory()
+            .subscribe(res => {
+                    this.historyData = res;
+                },
+                error =>
+                    this.errorHand = error
+            );
+    }
 }

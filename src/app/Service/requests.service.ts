@@ -60,8 +60,7 @@ export class RequestsService {
     /**
      * Show my History request
      */
-    public requestSpecialistsHistory(title: string): Observable<any> {
-        console.log('Search params', title);
+    public requestSpecialistsHistory(): Observable<any> {
         return this.http.get(`${this.Url}request_specialists_history`, this.myHeaders);
     }
 
