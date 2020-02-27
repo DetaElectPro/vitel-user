@@ -14,8 +14,10 @@
         <ion-row *ngFor="let item of historyData">
             <ion-col>{{item.name}}</ion-col>
             <div *ngIf="item.status ==2"></div>
-            <ion-col><ion-fab-button color="warning">Waiting</ion-fab-button></ion-col>
-            <ion-col>Date</ion-col>
+            <ion-col>
+                <ion-fab-button color="warning">Waiting</ion-fab-button>
+            </ion-col>
+            <ion-col>{{item.start_time| date: 'y-MM-d'}}</ion-col>
         </ion-row>
     </ion-grid>
 </ion-content>

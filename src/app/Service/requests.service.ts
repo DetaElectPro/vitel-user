@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Storage} from '@ionic/storage';
+// import {Storage} from '@ionic/storage';
 
 @Injectable({
     providedIn: 'root'
@@ -61,7 +61,7 @@ export class RequestsService {
      * Show my History request
      */
     public requestSpecialistsHistory(): Observable<any> {
-        return this.http.get(`${this.Url}request_specialists_history`, this.myHeaders);
+        return this.http.get(`${this.Url}request_specialists_doctor_history`, this.myHeaders);
     }
 
     public userAcceptRequestSpecialists(id) {

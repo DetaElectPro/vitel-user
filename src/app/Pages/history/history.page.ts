@@ -25,10 +25,11 @@ export class HistoryPage implements OnInit {
     loadData() {
         this.historyServ.requestSpecialistsHistory()
             .subscribe(res => {
-                    this.historyData = res;
+                    console.log(this.historyData = res);
                 },
                 error =>
-                    this.errorHand = error
-            );
+                    console.log('server: ', this.errorHand = error)
+    )
+        ;
     }
 }

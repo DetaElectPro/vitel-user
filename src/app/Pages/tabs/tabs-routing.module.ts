@@ -26,6 +26,15 @@ const routes: Routes = [
                             import('../setting/setting.module').then(m => m.SettingPageModule)
                     }
                 ]
+            }, {
+                path: 'wallet',
+                children: [
+                    {
+                        path: '',
+                        loadChildren: () =>
+                            import('../wallet/wallet.module').then(m => m.WalletPageModule)
+                    }
+                ]
             },
             {
                 path: '',
