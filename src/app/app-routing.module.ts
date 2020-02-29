@@ -26,7 +26,15 @@ const routes: Routes = [
     {
         path: 'register',
         loadChildren: () => import('./Pages/Auth/register/register.module').then(m => m.RegisterPageModule)
-    }
+    },
+  {
+    path: 'ambulance',
+    loadChildren: () => import('./Pages/ambulance/ambulance.module').then( m => m.AmbulancePageModule)
+  },
+  {
+    path: 'medical-board',
+    loadChildren: () => import('./Pages/Profiles/medical-board/medical-board.module').then( m => m.MedicalBoardPageModule)
+  }
 ];
 
 @NgModule({

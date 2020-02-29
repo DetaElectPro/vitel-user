@@ -1,6 +1,6 @@
 {
-  "appId": "sd.detatech.vitaluser",
-  "appName": "vitalhealth",
+  "appId": "com.detatech.vitaluser",
+  "appName": "Vital Doctor",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",

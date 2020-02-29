@@ -31,13 +31,7 @@
             <h1>Phone: {{request.user.phone}}</h1>
         </ion-card-content>
     </ion-card>
-    <!--    <ion-card>-->
-    <!--        <ion-card-content>-->
-    <!--            <ion-item>-->
-    <!--                <div id="mapId3" style="width: 100%; height: 200px"></div>-->
-    <!--            </ion-item>-->
-    <!--        </ion-card-content>-->
-    <!--    </ion-card>-->
+
     <ion-footer class="ion-text-center ion-align-items-center">
         <div *ngIf="request.status == 1">
             <ion-button expand="block" (click)="requestConfirm()">

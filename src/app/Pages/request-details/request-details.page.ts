@@ -4,8 +4,6 @@ import {LoadingController, AlertController} from '@ionic/angular';
 import {RequestsService} from '../../Service/requests.service';
 import {Requests} from '../../Models/requests';
 
-// import {Map, tileLayer, marker} from 'leaflet';
-
 @Component({
     selector: 'app-request-details',
     templateUrl: './request-details.page.html',

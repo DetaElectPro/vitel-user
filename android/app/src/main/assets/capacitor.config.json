@@ -1,5 +1,5 @@
 {
-  "appId": "sd.detatech.vitaluser",
+  "appId": "com.detatech.vitaluser",
   "appName": "vitalhealth",
   "bundledWebRuntime": false,
   "npmClient": "npm",
