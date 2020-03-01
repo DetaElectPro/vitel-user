@@ -34,6 +34,10 @@ const routes: Routes = [
   {
     path: 'medical-board',
     loadChildren: () => import('./Pages/Profiles/medical-board/medical-board.module').then( m => m.MedicalBoardPageModule)
+  },
+  {
+    path: 'web-view',
+    loadChildren: () => import('./Pages/web-view/web-view.module').then( m => m.WebViewPageModule)
   }
 ];
 

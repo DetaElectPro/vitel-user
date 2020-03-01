@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">vitalhealth</string>
-    <string name="title_activity_main">vitalhealth</string>
-    <string name="package_name">sd.detatech.vitaluser</string>
-    <string name="custom_url_scheme">sd.detatech.vitaluser</string>
+    <string name="app_name">Vital Doctor</string>
+    <string name="title_activity_main">Vital Doctor</string>
+    <string name="package_name">com.detatech.vitaluser</string>
+    <string name="custom_url_scheme">com.detatech.vitaluser</string>
 </resources>

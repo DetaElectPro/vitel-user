@@ -12,11 +12,13 @@ const TOKEN_KEY = 'auth-token';
 
 export class AuthService {
     token: any;
-    // url = 'https://medical.detatech.xyz/api/auth/';
-    url = 'http://localhost:8000/api/auth/';
+    // url = 'https://medical.detatech.xyz/api/';
+    url = 'http://localhost:8000/api/';
 
 
     authenticationState = new BehaviorSubject(null);
+    private myHeaders: any;
+    token2 = `Bearer ${localStorage.getItem('token')}`;
 
     constructor(
         private storage: Storage,
@@ -26,6 +28,11 @@ export class AuthService {
         this.plt.ready().then(() => {
             this.checkToken();
         });
+        this.myHeaders = {
+            headers: new HttpHeaders()
+                .set('Content-Type', 'application/json')
+                .set('Authorization', this.token2)
+        };
     }
 
     checkToken() {
@@ -69,7 +76,7 @@ export class AuthService {
     loginServes(userData) {
         console.log(userData);
         return new Promise((resolve, reject) => {
-            this.http.post(this.url + 'login', JSON.stringify(userData), {
+            this.http.post(this.url + 'auth/login', JSON.stringify(userData), {
                 headers: new HttpHeaders().set('Content-Type', 'application/json'),
             })
                 .subscribe(res => {
@@ -88,7 +95,7 @@ export class AuthService {
     registerServes(userData) {
         console.log(userData);
         return new Promise((resolve, reject) => {
-            this.http.post(this.url + 'register', JSON.stringify(userData), {
+            this.http.post(this.url + 'auth/register', JSON.stringify(userData), {
                 headers: new HttpHeaders().set('Content-Type', 'application/json'),
             })
                 .subscribe(res => {
@@ -98,4 +105,33 @@ export class AuthService {
                 });
         });
     }
+
+    medicalBoardService(boardData) {
+        console.log(boardData);
+        return new Promise((resolve, reject) => {
+            this.http.post(this.url + 'employs', boardData, {
+                headers: new HttpHeaders().set('Content-Type', 'application/json')
+                    .set('Authorization', this.token2),
+            })
+                .subscribe(res => {
+                    resolve(res);
+                }, (err) => {
+                    reject(err);
+                });
+        });
+    }
+
+    /**
+     * Return list of Requests as observable
+     */
+    public medicalFiledService(): Observable<any> {
+        return this.http.get(this.url + 'medical_specialties');
+        // return this.http.get(this.url + 'medical_fields');
+    }
+
+
+    public medicalSpecialtiesService(id): Observable<any> {
+        return this.http.get(`${this.url}medical_specialties/${id}`);
+    }
+
 }

@@ -9,17 +9,23 @@ import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HttpClientModule} from '@angular/common/http';
-import {MedicalBoardPipe} from './Pages/Profiles/medical-board.pipe';
 import {IonicStorageModule} from '@ionic/storage';
-
+import {IonicSelectableModule} from 'ionic-selectable';
+import {InAppBrowser} from '@ionic-native/in-app-browser';
 
 @NgModule({
-    declarations: [AppComponent, MedicalBoardPipe],
+    declarations: [AppComponent],
     entryComponents: [],
-    imports: [BrowserModule, IonicModule.forRoot(), IonicStorageModule.forRoot(), AppRoutingModule, HttpClientModule],
+    imports: [BrowserModule,
+        IonicModule.forRoot(),
+        IonicStorageModule.forRoot(),
+        AppRoutingModule,
+        HttpClientModule,
+        IonicSelectableModule],
     providers: [
         StatusBar,
         SplashScreen,
+        InAppBrowser,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
 
     ],

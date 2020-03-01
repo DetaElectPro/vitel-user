@@ -1,12 +1,21 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'app-tab1',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss']
+    selector: 'app-tab1',
+    templateUrl: 'home.page.html',
+    styleUrls: ['home.page.scss']
 })
-export class HomePage {
+export class HomePage implements OnInit {
+    userInfo: any;
 
-  constructor() {}
+    constructor() {
+
+        this.userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    }
+
+    ngOnInit(): void {
+        console.log(this.userInfo);
+    }
+
 
 }

@@ -51,5 +51,14 @@
         </ion-card-content>
     </ion-card>
 
+    <div *ngIf="userInfo.status == 2">
+        <p>Please complete the profile and upload the <strong>CV</strong></p>
+        <ion-button expand="block" color="danger">upload cv</ion-button>
+    </div>
+    <div *ngIf="userInfo.status == 1">
+        <p>Please complete the profile</p>
+        <ion-button expand="block" color="danger">Please complete the Medical profile</ion-button>
+    </div>
+
     <!--  <app-explore-container name="Tab 1 page"></app-explore-container>-->
 </ion-content>
