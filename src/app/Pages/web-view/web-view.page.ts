@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
 
 
 @Component({
@@ -9,11 +8,10 @@ import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
 })
 export class WebViewPage implements OnInit {
 
-    constructor(private iab: InAppBrowser) {
+    constructor() {
     }
 
     ngOnInit() {
-        const browser = this.iab.create('https://ionic.io', '_self', {location: 'no'});
     }
 
 }

@@ -14,7 +14,7 @@
                     <ion-col>
                         <div routerLink="/requests">
                             <ion-badge color="primary">
-                                <ion-icon name="newspaper-outline"></ion-icon>
+                                <ion-icon name="newspaper-sharp"></ion-icon>
                             </ion-badge>
                             <p>Requests</p>
                         </div>
@@ -22,7 +22,7 @@
                     <ion-col>
                         <div routerLink="/history">
                             <ion-badge color="primary">
-                                <ion-icon name="book-outline"></ion-icon>
+                                <ion-icon name="book-sharp"></ion-icon>
                             </ion-badge>
                             <p>History</p>
                         </div>
@@ -31,14 +31,6 @@
 
                 <ion-row>
                     <ion-col>
-                        <div routerLink="/tabs/wallet">
-                            <ion-badge color="primary" n-badge>
-                                <ion-icon name="wallet-outline"></ion-icon>
-                            </ion-badge>
-                            <p>Wallet</p>
-                        </div>
-                    </ion-col>
-                    <ion-col>
                         <div routerLink="/ambulance">
                             <ion-badge color="primary">
                                 <ion-icon src="assets/icon/ambulance.svg"></ion-icon>
@@ -46,17 +38,37 @@
                             <p>Ambulance</p>
                         </div>
                     </ion-col>
+
+                    <ion-col>
+                        <div routerLink="/tabs/wallet">
+                            <ion-badge color="primary" n-badge>
+                                <ion-icon name="wallet"></ion-icon>
+                            </ion-badge>
+                            <p>Wallet</p>
+                        </div>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row>
+                    <ion-col>
+                        <div routerLink="/tabs/wallet">
+                            <ion-badge color="primary" n-badge>
+                                <ion-icon name="pulse"></ion-icon>
+                            </ion-badge>
+                            <p>Icu Serves</p>
+                        </div>
+                    </ion-col>
                 </ion-row>
             </ion-grid>
         </ion-card-content>
     </ion-card>
 
-    <div *ngIf="userInfo.status == 2">
-        <p>Please complete the profile and upload the <strong>CV</strong></p>
+    <div *ngIf="userInfo?.status == 2">
+        <p class="ion-text-center">Please complete the profile and upload the <strong>CV</strong></p>
         <ion-button expand="block" color="danger">upload cv</ion-button>
     </div>
-    <div *ngIf="userInfo.status == 1">
-        <p>Please complete the profile</p>
+    <div *ngIf="userInfo?.status == 1">
+        <p class="ion-text-center">Please complete the profile</p>
         <ion-button expand="block" color="danger">Please complete the Medical profile</ion-button>
     </div>
 

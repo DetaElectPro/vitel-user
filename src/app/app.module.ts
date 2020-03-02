@@ -11,7 +11,6 @@ import {AppComponent} from './app.component';
 import {HttpClientModule} from '@angular/common/http';
 import {IonicStorageModule} from '@ionic/storage';
 import {IonicSelectableModule} from 'ionic-selectable';
-import {InAppBrowser} from '@ionic-native/in-app-browser';
 
 @NgModule({
     declarations: [AppComponent],
@@ -25,7 +24,6 @@ import {InAppBrowser} from '@ionic-native/in-app-browser';
     providers: [
         StatusBar,
         SplashScreen,
-        InAppBrowser,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
 
     ],

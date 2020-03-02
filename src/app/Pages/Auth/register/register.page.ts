@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../../Service/auth.service';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-register',
@@ -11,7 +12,7 @@ export class RegisterPage implements OnInit {
 
     result: any;
 
-    constructor(private authServe: AuthService) {
+    constructor(private authServe: AuthService, private route: Router) {
     }
 
     ngOnInit() {
@@ -25,10 +26,7 @@ export class RegisterPage implements OnInit {
                 if (this.registerData.error) {
                     alert('error data');
                 } else {
-                    console.log('data: ', this.registerData);
-                    console.log('token: ', this.registerData.token);
-                    localStorage.setItem('token', this.registerData.token);
-                    alert('ok');
+                    this.route.navigate(['/login']);
                 }
             })
             .catch(err => {

@@ -10,13 +10,13 @@
     <ion-card color="light" *ngIf="token">
         <ion-item>
             <ion-avatar slot="start">
-                <img src="{{image}}"/>
+                <img src="{{userInfo.image}}"/>
             </ion-avatar>
-            <ion-label>Name: Omer</ion-label>
+            <ion-label>Name: {{userInfo.name}}</ion-label>
         </ion-item>
         <ion-card-header>
 
-            <ion-card-subtitle>Phone: 09xxxxx</ion-card-subtitle>
+            <ion-card-subtitle>Phone: {{userInfo.phone}}</ion-card-subtitle>
 
         </ion-card-header>
     </ion-card>
@@ -37,7 +37,7 @@
         </ion-item>
 
         <ion-item color="secondary" href="#">
-            My Waller
+            My Wallet
             <span class="wallet-outline" slot="end"></span>
         </ion-item>
 
@@ -65,10 +65,10 @@
             <ion-icon name="log-out" slot="end"></ion-icon>
         </ion-button>
 
-        <ion-button *ngIf="!token" expand="full" (click)="Login()">
-            Login
-            <ion-icon name="log-out" slot="end"></ion-icon>
-        </ion-button>
+<!--        <ion-button *ngIf="!token" expand="full" (click)="Login()">-->
+<!--            Login-->
+<!--            <ion-icon name="log-out" slot="end"></ion-icon>-->
+<!--        </ion-button>-->
 
     </ion-list>
 </ion-content>

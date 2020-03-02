@@ -12,6 +12,7 @@ const TOKEN_KEY = 'auth-token';
 
 export class AuthService {
     token: any;
+    user: any;
     // url = 'https://medical.detatech.xyz/api/';
     url = 'http://localhost:8000/api/';
 
@@ -54,6 +55,7 @@ export class AuthService {
     }
 
     logout() {
+        this.storage.remove('userInfo');
         return this.storage.remove(TOKEN_KEY).then(() => {
             this.authenticationState.next(false);
         });
@@ -81,10 +83,13 @@ export class AuthService {
             })
                 .subscribe(res => {
                     this.token = res;
-                    this.token = this.token.access_token;
+                    this.user = res;
+                    this.token = this.token.token;
                     this.storage.set(TOKEN_KEY, this.token).then(() => {
                         this.authenticationState.next(true);
                     });
+                    this.storage.set('userInfo', this.user.user).then(r =>
+                        console.log('login:', r));
                     resolve(res);
                 }, (err) => {
                     reject(err);

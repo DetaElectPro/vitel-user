@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Storage} from '@ionic/storage';
 
 @Component({
     selector: 'app-tab1',
@@ -8,13 +9,20 @@ import {Component, OnInit} from '@angular/core';
 export class HomePage implements OnInit {
     userInfo: any;
 
-    constructor() {
-
-        this.userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    constructor(
+        private storage: Storage
+    ) {
+        // this.userInfo = JSON.parse(localStorage.getItem('userInfo'));
     }
 
     ngOnInit(): void {
-        console.log(this.userInfo);
+        this.storage.get('userInfo')
+            .then(res => {
+                this.userInfo = res;
+            })
+            .catch(err => {
+                console.log(err);
+            });
     }
 
 

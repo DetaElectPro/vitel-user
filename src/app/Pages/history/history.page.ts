@@ -16,10 +16,11 @@ export class HistoryPage implements OnInit {
     constructor(
         private historyServ: RequestsService
     ) {
+        this.loadData();
+
     }
 
     ngOnInit() {
-        this.loadData();
     }
 
     loadData() {
@@ -29,7 +30,7 @@ export class HistoryPage implements OnInit {
                 },
                 error =>
                     console.log('server: ', this.errorHand = error)
-    )
+            )
         ;
     }
 }

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../../Service/auth.service';
 import {Router} from '@angular/router';
+import {Storage} from '@ionic/storage';
 
 @Component({
     selector: 'app-login',
@@ -13,7 +14,8 @@ export class LoginPage implements OnInit {
 
     constructor(
         private authServe: AuthService,
-        private router: Router
+        private router: Router,
+        private storage: Storage
     ) {
     }
 
@@ -28,9 +30,7 @@ export class LoginPage implements OnInit {
                 if (this.usersData.error) {
                     alert('error data');
                 } else {
-                    console.log('status: ', this.usersData.user.status);
                     localStorage.setItem('token', this.usersData.token);
-                    localStorage.setItem('userInfo', JSON.stringify(this.usersData.user));
                     if (this.usersData.user.status === 1) {
                         this.router.navigate(['/medical-board']);
                     }

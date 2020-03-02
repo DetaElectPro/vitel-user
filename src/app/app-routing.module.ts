@@ -5,7 +5,7 @@ import {AuthGuard} from './guard/auth.guard';
 const routes: Routes = [
     {
         path: '',
-        loadChildren: () => import('./Pages/tabs/tabs.module').then(m => m.TabsPageModule)
+        loadChildren: () => import('./Pages/tabs/tabs.module').then(m => m.TabsPageModule), canActivate: [AuthGuard]
     },
     {
         path: 'requests',
@@ -27,18 +27,18 @@ const routes: Routes = [
         path: 'register',
         loadChildren: () => import('./Pages/Auth/register/register.module').then(m => m.RegisterPageModule)
     },
-  {
-    path: 'ambulance',
-    loadChildren: () => import('./Pages/ambulance/ambulance.module').then( m => m.AmbulancePageModule)
-  },
-  {
-    path: 'medical-board',
-    loadChildren: () => import('./Pages/Profiles/medical-board/medical-board.module').then( m => m.MedicalBoardPageModule)
-  },
-  {
-    path: 'web-view',
-    loadChildren: () => import('./Pages/web-view/web-view.module').then( m => m.WebViewPageModule)
-  }
+    {
+        path: 'ambulance',
+        loadChildren: () => import('./Pages/ambulance/ambulance.module').then(m => m.AmbulancePageModule)
+    },
+    {
+        path: 'medical-board',
+        loadChildren: () => import('./Pages/Profiles/medical-board/medical-board.module').then(m => m.MedicalBoardPageModule)
+    },
+    {
+        path: 'web-view',
+        loadChildren: () => import('./Pages/web-view/web-view.module').then(m => m.WebViewPageModule)
+    }
 ];
 
 @NgModule({

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-// import {Storage} from '@ionic/storage';
+import {Storage} from '@ionic/storage';
 
 @Injectable({
     providedIn: 'root'
@@ -13,7 +13,8 @@ export class RequestsService {
     token = `Bearer ${localStorage.getItem('token')}`;
 
     constructor(
-        private http: HttpClient
+        private http: HttpClient,
+        private storage: Storage,
     ) {
         this.myHeaders = {
             headers: new HttpHeaders()
