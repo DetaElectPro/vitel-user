@@ -38,6 +38,14 @@ const routes: Routes = [
     {
         path: 'web-view',
         loadChildren: () => import('./Pages/web-view/web-view.module').then(m => m.WebViewPageModule)
+    },
+    {
+        path: 'emergency-request',
+        loadChildren: () => import('./Pages/emergency/request/request.module').then(m => m.RequestPageModule)
+    },
+    {
+        path: 'emergency-history',
+        loadChildren: () => import('./Pages/emergency/history/history.module').then(m => m.HistoryPageModule)
     }
 ];
 

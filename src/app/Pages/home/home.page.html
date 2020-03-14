@@ -41,7 +41,7 @@
 
                     <ion-col>
                         <div routerLink="/tabs/wallet">
-                            <ion-badge color="primary" n-badge>
+                            <ion-badge color="primary">
                                 <ion-icon name="wallet"></ion-icon>
                             </ion-badge>
                             <p>Wallet</p>
@@ -52,7 +52,7 @@
                 <ion-row>
                     <ion-col>
                         <div routerLink="/tabs/wallet">
-                            <ion-badge color="primary" n-badge>
+                            <ion-badge color="primary">
                                 <ion-icon name="pulse"></ion-icon>
                             </ion-badge>
                             <p>Icu Serves</p>
@@ -65,7 +65,7 @@
 
     <div *ngIf="userInfo?.status == 2">
         <p class="ion-text-center">Please complete the profile and upload the <strong>CV</strong></p>
-        <ion-button expand="block" color="danger">upload cv</ion-button>
+        <ion-button expand="block" color="danger" (click)="openBrow()">upload cv</ion-button>
     </div>
     <div *ngIf="userInfo?.status == 1">
         <p class="ion-text-center">Please complete the profile</p>
