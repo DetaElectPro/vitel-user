@@ -36,10 +36,6 @@ const routes: Routes = [
         loadChildren: () => import('./Pages/user-pages/medical-board/medical-board.module').then(m => m.MedicalBoardPageModule)
     },
     {
-        path: 'web-view',
-        loadChildren: () => import('./Pages/web-view/web-view.module').then(m => m.WebViewPageModule)
-    },
-    {
         path: 'emergency-pages-request',
         loadChildren: () => import('./Pages/emergency-pages/request/request.module').then(m => m.RequestPageModule)
     },

@@ -80,5 +80,12 @@ export class RequestsService {
         return this.http.get(`${this.Url}cancelRequestByAdmin/${id}`, this.myHeaders);
     }
 
+    public userAcceptRequestSpecialists(id) {
+        return this.http.get(`${this.Url}acceptRequestByUser/${id}`, this.myHeaders);
+    }
+
+    public cancelRequestByUser(id) {
+        return this.http.get(`${this.Url}cancelRequestByUser/${id}`, this.myHeaders);
+    }
 
 }
