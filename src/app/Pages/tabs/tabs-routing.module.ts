@@ -13,7 +13,7 @@ const routes: Routes = [
                     {
                         path: '',
                         loadChildren: () =>
-                            import('../home/home.module').then(m => m.HomePageModule)
+                            import('../Dashboard/home/home.module').then(m => m.HomePageModule)
                     }
                 ]
             },
@@ -23,7 +23,7 @@ const routes: Routes = [
                     {
                         path: '',
                         loadChildren: () =>
-                            import('../setting/setting.module').then(m => m.SettingPageModule)
+                            import('../Dashboard/setting/setting.module').then(m => m.SettingPageModule)
                     }
                 ]
             }, {
@@ -32,7 +32,7 @@ const routes: Routes = [
                     {
                         path: '',
                         loadChildren: () =>
-                            import('../wallet/wallet.module').then(m => m.WalletPageModule)
+                            import('../user-pages/wallet/wallet.module').then(m => m.WalletPageModule)
                     }
                 ]
             },

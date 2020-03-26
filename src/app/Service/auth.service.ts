@@ -13,9 +13,9 @@ const TOKEN_KEY = 'auth-token';
 export class AuthService {
     token: any;
     user: any;
-    // url = 'https://medical.detatech.xyz/api/';
+    url = 'https://medical.detatech.xyz/api/';
     // url = 'http://localhost:8000/api/';
-    url = 'http://192.168.2.3:8000//api/';
+    // url = 'http://192.168.2.5:8000/api/';
 
 
     authenticationState = new BehaviorSubject(null);
@@ -54,11 +54,13 @@ export class AuthService {
                 });
         });
     }
-
     logout() {
-        this.storage.remove('userInfo');
-        return this.storage.remove(TOKEN_KEY).then(() => {
-            this.authenticationState.next(false);
+        this.http.post(`${this.url}logout`, localStorage.getItem('token'));
+        return this.storage.remove('userInfo').then(res => {
+            console.log('logOut: ', res);
+            this.storage.remove(TOKEN_KEY).then(() => {
+                this.authenticationState.next(false);
+            });
         });
     }
 
@@ -138,6 +140,18 @@ export class AuthService {
 
     public medicalSpecialtiesService(id): Observable<any> {
         return this.http.get(`${this.url}medical_specialties/${id}`);
+    }
+
+    public checkUserService(): Observable<any> {
+        return this.http.get(`${this.url}auth/check_user`, this.myHeaders);
+    }
+
+    public updateFcmToken(data): Observable<any> {
+        return this.http.put(`${this.url}auth/check_user`, data, this.myHeaders);
+    }
+
+    public getSlide(): Observable<any> {
+        return this.http.get(`${this.url}home`, this.myHeaders);
     }
 
 }

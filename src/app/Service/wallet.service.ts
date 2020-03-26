@@ -8,8 +8,10 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 export class WalletService {
 
     // Url = 'http://localhost:8000/api/';
-    Url = 'http://192.168.2.3:8000/api/';
-    private myHeaders: any;
+    // Url = 'http://192.168.2.6:8000/api/';
+    Url = 'https://medical.detatech.xyz/api/';
+
+    myHeaders: any;
     token = `Bearer ${localStorage.getItem('token')}`;
 
     constructor(
@@ -26,7 +28,7 @@ export class WalletService {
      * Return my Point as observable
      */
     public getBalanceService(): Observable<any> {
-        return this.http.get(`${this.Url}my_wallets`, this.myHeaders);
+        return this.http.get(`${this.Url}wallets`, this.myHeaders);
     }
 
 }
