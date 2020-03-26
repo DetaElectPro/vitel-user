@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {MedicalBoard} from '../../../Models/medical-board';
 import {LoadingController} from '@ionic/angular';
 import {AuthService} from '../../../Service/auth.service';
-import {IonicSelectableComponent} from 'ionic-selectable';
 import {formatDate} from '@angular/common';
 
 @Component({
@@ -22,11 +21,8 @@ export class MedicalBoardPage implements OnInit {
         registration_date: '',
         years_of_experience: 0
     };
-
-    private dataResult: any;
-    // specialtiesList: SpecialiesOptaion[];
     specialtiesList: any;
-
+    private dataResult: any;
 
     constructor(
         private loadingController: LoadingController,
@@ -39,17 +35,25 @@ export class MedicalBoardPage implements OnInit {
     }
 
 
-    medicalBsaveData() {
+    async medicalBsaveData() {
+        const loading = this.loadingController.create({
+            spinner: null,
+            message: 'Please wait...',
+            translucent: true,
+        });
+        (await loading).present();
         this.MedicalBoard.birth_of_date = formatDate(this.MedicalBoard.birth_of_date, 'yyyy-MM-dd', 'en_US');
         this.MedicalBoard.graduation_date = formatDate(this.MedicalBoard.graduation_date, 'yyyy-MM-dd', 'en_US');
         this.MedicalBoard.registration_date = formatDate(this.MedicalBoard.registration_date, 'yyyy-MM-dd', 'en_US');
         // @ts-ignore
         this.MedicalBoard.medical_field_id = this.MedicalBoard.medical_field_id.id;
         this.medicalServ.medicalBoardService(this.MedicalBoard)
-            .then(data => {
-                console.log('data: ', this.dataResult = data);
+            .then(async data => {
+                (await loading).dismiss();
+                this.dataResult = data;
             })
-            .catch(err => {
+            .catch(async err => {
+                (await loading).dismiss();
                 console.log(err);
             });
     }
@@ -74,10 +78,10 @@ export class MedicalBoardPage implements OnInit {
                 });
     }
 
-    portChange(event: {
-        component: IonicSelectableComponent,
-        value: any
-    }) {
-        console.log('port:', event.value);
-    }
+    // portChange(event: {
+    //     component: IonicSelectableComponent,
+    //     value: any
+    // }) {
+    //     console.log('port:', event.value);
+    // }
 }

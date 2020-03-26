@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../../Service/auth.service';
 import {Router} from '@angular/router';
-import {Storage} from '@ionic/storage';
+import {LoadingController} from '@ionic/angular';
+
 
 @Component({
     selector: 'app-login',
@@ -9,24 +10,32 @@ import {Storage} from '@ionic/storage';
     styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-    loginData = {phone: '', password: '', role: 3};
+    loginData = {phone: '', password: '', role: 3, fcm_registration_in: ''};
     usersData: any = [];
 
     constructor(
         private authServe: AuthService,
         private router: Router,
-        private storage: Storage
+        public loadingController: LoadingController
     ) {
     }
 
     ngOnInit() {
+        this.loginData.fcm_registration_in = localStorage.getItem('fcm_registration_in');
     }
 
 
-    userLogin() {
+    async userLogin() {
+        const loading = await this.loadingController.create({
+            message: 'Please wait...',
+            translucent: true,
+
+        });
+        await loading.present();
         this.authServe.loginServes(this.loginData)
-            .then(data => {
-                this.usersData = data;
+            .then(async response => {
+                await loading.dismiss();
+                this.usersData = response;
                 if (this.usersData.error) {
                     alert('error data');
                 } else {
@@ -34,12 +43,13 @@ export class LoginPage implements OnInit {
                     if (this.usersData.user.status === 1) {
                         this.router.navigate(['/medical-board']);
                     }
-                    if (this.usersData.user.status === 2) {
+                    if (this.usersData.user.status === 2 || this.usersData.user.status === 3) {
                         this.router.navigate(['/']);
                     }
                 }
             })
-            .catch(err => {
+            .catch(async err => {
+                await loading.dismiss();
                 console.log('serve Error: ', err);
             });
     }
