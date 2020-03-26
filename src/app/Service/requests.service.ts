@@ -33,13 +33,6 @@ export class RequestsService {
         }
     }
 
-    /**
-     * Return list of Requests as observable
-     */
-    public getRequest(page = 0): Observable<any> {
-        // return this.http.get(`${this.Url}requestSpecialists?${this.getByPage(page)}`);
-        return this.http.get(`${this.Url}request_specialists?page=${page}`, this.myHeaders);
-    }
 
     /**
      * Return list of Requests as observable
@@ -67,17 +60,17 @@ export class RequestsService {
     /**
      * Show my History request
      */
-    public requestSpecialistsHistory(): Observable<any> {
-        return this.http.get(`${this.Url}request_specialists_admin_history`, this.myHeaders);
+
+    /**
+     * Return list of Requests as observable
+     */
+    public getRequest(page = 0): Observable<any> {
+        // return this.http.get(`${this.Url}requestSpecialists?${this.getByPage(page)}`);
+        return this.http.get(`${this.Url}request_specialists?page=${page}`, this.myHeaders);
     }
 
-
-    public adminAcceptRequestSpecialists(id) {
-        return this.http.get(`${this.Url}acceptRequestByAdmin/${id}`, this.myHeaders);
-    }
-
-    public cancelRequestByAdmin(id) {
-        return this.http.get(`${this.Url}cancelRequestByAdmin/${id}`, this.myHeaders);
+    public requestSpecialistsHistory(page = 0): Observable<any> {
+        return this.http.get(`${this.Url}request_specialists_doctor_history?page=${page}`, this.myHeaders);
     }
 
     public userAcceptRequestSpecialists(id) {

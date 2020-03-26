@@ -3,6 +3,8 @@ export class Requests {
     name: string;
     address: string;
     price: number;
+    longitude: number;
+    latitude: number;
     // tslint:disable-next-line:variable-name
     start_time: string;
     // tslint:disable-next-line:variable-name

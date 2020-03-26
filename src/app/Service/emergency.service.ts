@@ -25,20 +25,19 @@ export class EmergencyService {
   /**
    * Show my History request
    */
+  // public addEmergency(data): Observable<any> {
+  //   return this.http.post(`${this.Url}emergency_serviced`, data, this.myHeaders);
+  // }
   public addEmergency(data): Observable<any> {
-    return this.http.post(`${this.Url}emergency_serviced`, data, this.myHeaders);
+    return this.http.get(`${this.Url}emergency_serviced`, this.myHeaders);
   }
 
   /**
    * Return list of History as observable
    */
-  public adminEmergencyHistory(page = 0): Observable<any> {
+  public adminUserHistory(page = 0): Observable<any> {
     return this.http.get(`${this.Url}emergency_serviced_admin_history?page=${page}`, this.myHeaders);
   }
 
 
-
-  public ambulanceRequest(data) {
-    return this.http.post(`${this.Url}ambulances`, data, this.myHeaders);
-  }
 }

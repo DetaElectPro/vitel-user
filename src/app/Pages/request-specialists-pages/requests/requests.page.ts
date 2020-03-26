@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {RequestsService} from '../../../Service/requests.service';
 import {Requests} from '../../../Models/requests';
 import {IonInfiniteScroll} from '@ionic/angular';
+import {NavigationExtras, Router} from '@angular/router';
 
 @Component({
     selector: 'app-requests',
@@ -26,6 +27,7 @@ export class RequestsPage implements OnInit {
 
     constructor(
         private requestService: RequestsService,
+        private route: Router,
     ) {
     }
 
@@ -43,7 +45,7 @@ export class RequestsPage implements OnInit {
                 this.totalData = this.result.total;
                 this.totalPage = this.result.total_pages;
                 this.requestsData = this.result.data;
-                // console.log(this.requestsData);
+                console.log(this.requestsData);
             },
             err => {
                 console.log(err);
@@ -97,7 +99,26 @@ export class RequestsPage implements OnInit {
 
     }
 
+    doRefresh(event) {
+        this.loadRequests();
+
+        setTimeout(() => {
+            event.target.complete();
+        }, 2000);
+    }
+
     toggleInfiniteScroll() {
         this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
+    }
+
+    openDetails(item) {
+        const navigationExtras: NavigationExtras = {
+            queryParams: {
+                latitude: item.latitude,
+                longitude: item.longitude,
+                id: item.id,
+            }
+        };
+        this.route.navigate([`request-details/${item.id}`], navigationExtras);
     }
 }

@@ -1,51 +1,74 @@
 <ion-header>
     <ion-toolbar>
-        <ion-title>request-details</ion-title>
+        <ion-buttons slot="start">
+            <ion-button expand="block" routerDirection="backward" routerLink="/request">
+                <ion-icon name="arrow-back-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>Request Details</ion-title>
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-no-padding">
+    <!-- card with content and item with person profile  -->
+    <div id="mapId" style="width: 100%; height: 40%">
+    </div>
+
     <ion-card>
-        <ion-card-header>
-            <ion-card-title>Hospital: {{request.name}}</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
+        <ion-item>
             <ion-avatar slot="start">
-                <img src="assets/images/2.jpg">
+                <img src="{{request.user.image}}"/>
             </ion-avatar>
-            <p>order #: {{request.id}}</p>
-            <h2>We Need: {{request.specialties.medical.name}}</h2>
-            <h3>Specialized in: {{request.specialties.name}}</h3>
-            <p>Address: {{request.address}}</p>
-            <p>start at: {{request.start_time}}</p>
-            <p>end at: {{request.end_time}}</p>
-            <p>work hours: {{request.number_of_hour}}</p>
-        </ion-card-content>
-    </ion-card>
+            <ion-label>
+                <h3>Create by: DR. {{request.user.name}}</h3>
+                <!--                <p>{{item.dob}}</p>-->
+            </ion-label>
+        </ion-item>
 
-    <ion-card>
-        <ion-card-title>Info</ion-card-title>
-        <ion-card-subtitle>The request was created by:</ion-card-subtitle>
         <ion-card-content>
-            <h1>Name: {{request.user.name}}</h1>
-            <h1>Phone: {{request.user.phone}}</h1>
+            <p>Hospital: {{request.name}}</p>
+            <p>Address {{request.address}}</p>
+            <p>We Need: {{request.specialties.medical.name}}</p>
+            <p>Specialized in: {{request.specialties.name}}</p>
         </ion-card-content>
-    </ion-card>
+        <ion-row>
+            <ion-col class="ion-no-padding" size="4">
+                <ion-button color="primary" fill="clear" size="small">
+                    Order #:{{request.id}}
+                </ion-button>
+            </ion-col>
+            <ion-col class="ion-no-padding" size="3">
+                <ion-button fill="clear" size="small">
+                    Hour: {{request.number_of_hour}}
+                </ion-button>
+            </ion-col>
+            <ion-col class="ion-no-padding" size="5">
+                <ion-button color="primary" fill="clear" size="small">
+                    Start at: {{request.start_time| date: 'MMM dd'}}
+                </ion-button>
+            </ion-col>
 
-    <ion-footer class="ion-text-center ion-align-items-center">
-        <div *ngIf="request.status == 1">
-            <ion-button expand="block" (click)="requestConfirm()">
+        </ion-row>
+    </ion-card>
+    <ion-card>
+        <ion-card-content>
+            <p>Price: {{request.price}}</p>
+            <p>End At: {{request.end_time| date: 'MM/ dd'}}</p>
+            <p *ngIf="request.status == 2">Contact: {{request.user.phone}}</p>
+        </ion-card-content>
+
+        <div *ngIf="request.status == 1" class="ion-text-center ion-align-items-center">
+            <ion-button (click)="requestConfirm()" expand="block">
                 <ion-icon name="thumbs-up"></ion-icon>
                 <div>Accept</div>
             </ion-button>
         </div>
         <div *ngIf="request.status == 2">
-            <ion-button color="danger" expand="block" (click)="acceptRequest()">
+            <ion-button (click)="requestCancel()" color="danger" expand="block">
                 <ion-icon name="thumbs-up"></ion-icon>
                 <div>Cancel</div>
             </ion-button>
         </div>
 
-    </ion-footer>
-
+    </ion-card>
 </ion-content>

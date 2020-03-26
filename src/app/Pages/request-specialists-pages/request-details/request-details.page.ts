@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {LoadingController, AlertController} from '@ionic/angular';
+import {AlertController, LoadingController} from '@ionic/angular';
 import {RequestsService} from '../../../Service/requests.service';
 import {Requests} from '../../../Models/requests';
+import {Map, marker, tileLayer} from 'leaflet';
 
 @Component({
     selector: 'app-request-details',
@@ -11,11 +12,13 @@ import {Requests} from '../../../Models/requests';
 })
 export class RequestDetailsPage implements OnInit {
 
-    // map: Map;
-    // propertyList = [];
+    map: Map;
     result: any;
+    params: any;
     requestId: number;
     request: Requests = {
+        name: '',
+        latitude: 0, longitude: 0,
         address: '',
         created_at: '',
         end_time: '',
@@ -25,8 +28,7 @@ export class RequestDetailsPage implements OnInit {
         specialties: {id: 0, medical: {id: 0, name: ''}, name: ''},
         start_time: '',
         status: 0,
-        user: {active: 0, email: null, id: 0, image: '', name: '', phone: '', status: 0},
-        name
+        user: {active: 0, email: null, id: 0, image: '', name: '', phone: '', status: 0}
     };
     private acceptRes: any;
 
@@ -43,6 +45,10 @@ export class RequestDetailsPage implements OnInit {
                 this.requestId = params.id;
             }
         );
+
+        this.route.queryParams.subscribe(params => {
+            this.params = params;
+        });
     }
 
     ngOnInit() {
@@ -92,14 +98,15 @@ export class RequestDetailsPage implements OnInit {
             .subscribe(res => {
                     console.log(this.acceptRes = res);
                     if (this.acceptRes.accept) {
-                        alert('ok');
+                        this.router.navigate(['/']);
                     } else {
-                        alert('error');
+                        alert('server error try again or contact with us');
                     }
 
                 },
                 error => {
                     this.acceptRes = error;
+                    alert('server Error #r2 contact with us');
                     console.log(this.acceptRes);
                 }
             );
@@ -147,7 +154,7 @@ export class RequestDetailsPage implements OnInit {
                     text: 'Okay',
                     handler: () => {
                         console.log('Confirm Okay');
-                        this.acceptRequest();
+                        this.cancelRequest();
                     }
                 }
             ]
@@ -157,29 +164,23 @@ export class RequestDetailsPage implements OnInit {
     }
 
 
-    // ionViewDidEnter() {
-    //     this.map = new Map('mapId3').setView([15.35663, 32.1109], 16);
-    //
-    //     tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-    //         attribution: 'edupala.com'
-    //     }).addTo(this.map);
-    //
-    //     // fetch('./assets/data.json').then(res => res.json())
-    //     //     .then(json => {
-    //     //         this.propertyList = json.properties;
-    //     this.leafletMap();
-    //     // });
-    // }
-    //
-    // leafletMap() {
-    //     for (const property of this.propertyList) {
-    //         marker([property.lat, property.long]).addTo(this.map)
-    //             .bindPopup(property.city)
-    //             .openPopup();
-    //     }
-    // }
-    //
-    // ionViewWillLeave() {
-    //     this.map.remove();
-    // }
+    ionViewDidEnter() {
+        this.map = new Map('mapId').setView([this.params.latitude, this.params.longitude], 20);
+
+        tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+            // tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+            attribution: 'detaTech.xyz'
+        }).addTo(this.map);
+        this.leafletMap();
+    }
+
+    leafletMap() {
+        marker([this.params.latitude, this.params.longitude]).addTo(this.map)
+            .bindPopup(this.request.address)
+            .openPopup();
+    }
+
+    ionViewWillLeave() {
+        this.map.remove();
+    }
 }

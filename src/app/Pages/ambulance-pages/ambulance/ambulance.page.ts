@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {icon, Map, marker, tileLayer} from 'leaflet';
-import {EmergencyService} from '../../../Service/emergency.service';
 import {LoadingController, ToastController} from '@ionic/angular';
 import {Router} from '@angular/router';
+import {AmbulanceService} from '../../../Service/ambulance.service';
 
 
 @Component({
@@ -20,7 +20,7 @@ export class AmbulancePage implements OnInit {
     coords: any;
 
     constructor(
-        private requesServ: EmergencyService,
+        private requesServ: AmbulanceService,
         private router: Router,
         public loadingController: LoadingController,
         public toastController: ToastController) {
@@ -79,7 +79,7 @@ export class AmbulancePage implements OnInit {
             message: 'Please wait...',
         });
         await loading.present();
-        this.requesServ.ambulanceRequest(this.locData)
+        this.requesServ.ambulanceRequestService(this.locData)
             .subscribe(async response => {
                     await loading.dismiss();
                     this.data = response;
