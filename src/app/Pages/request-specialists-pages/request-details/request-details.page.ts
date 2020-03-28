@@ -176,7 +176,7 @@ export class RequestDetailsPage implements OnInit {
 
     leafletMap() {
         marker([this.params.latitude, this.params.longitude]).addTo(this.map)
-            .bindPopup(this.request.address)
+            .bindPopup('location')
             .openPopup();
     }
 

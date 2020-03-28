@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from "rxjs";
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -20,18 +20,6 @@ export class AmbulanceService {
     };
   }
 
-
-  /**
-   * Add page value url param
-   */
-  getByPage(page: number): string {
-    if (page) {
-      return '&page=' + page;
-    } else {
-      return '';
-    }
-  }
-
   public ambulanceRequestService(data) {
     return this.http.post(`${this.Url}ambulances`, data, this.myHeaders);
   }
@@ -42,5 +30,9 @@ export class AmbulanceService {
 
   public getAmbulanceByIdService(id): Observable<any> {
     return this.http.get(`${this.Url}ambulances/${id}`, this.myHeaders);
+  }
+
+  public cancelRequestByUser(id): Observable<any> {
+    return this.http.delete(`${this.Url}ambulances/${id}`, this.myHeaders);
   }
 }

@@ -35,8 +35,8 @@ export class EmergencyService {
   /**
    * Return list of History as observable
    */
-  public adminUserHistory(page = 0): Observable<any> {
-    return this.http.get(`${this.Url}emergency_serviced_admin_history?page=${page}`, this.myHeaders);
+  public userEmergencyHistory(page = 0): Observable<any> {
+    return this.http.get(`${this.Url}emergency_serviced_user_history?page=${page}`, this.myHeaders);
   }
 
 

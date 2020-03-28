@@ -17,7 +17,8 @@ const routes: Routes = [
     },
     {
         path: 'request-details/:id',
-        loadChildren: () => import('./Pages/request-specialists-pages/request-details/request-details.module').then(m => m.RequestDetailsPageModule)
+        loadChildren: () => import('./Pages/request-specialists-pages/request-details/request-details.module')
+            .then(m => m.RequestDetailsPageModule)
     },
     {
         path: 'login',
@@ -43,14 +44,16 @@ const routes: Routes = [
         path: 'emergency-pages-history',
         loadChildren: () => import('./Pages/emergency-pages/history/history.module').then(m => m.HistoryPageModule)
     },
-  {
-    path: 'ambulance-history',
-    loadChildren: () => import('./Pages/ambulance-pages/ambulance-history/ambulance-history.module').then(m => m.AmbulanceHistoryPageModule)
-  },
-  {
-    path: 'ambulance-details',
-    loadChildren: () => import('./Pages/ambulance-pages/ambulance-details/ambulance-details.module').then(m => m.AmbulanceDetailsPageModule)
-  }
+    {
+        path: 'ambulance-history',
+        loadChildren: () => import('./Pages/ambulance-pages/ambulance-history/ambulance-history.module')
+            .then(m => m.AmbulanceHistoryPageModule)
+    },
+    {
+        path: 'ambulance-details/:id',
+        loadChildren: () => import('./Pages/ambulance-pages/ambulance-details/ambulance-details.module')
+            .then(m => m.AmbulanceDetailsPageModule)
+    }
 
 ];
 

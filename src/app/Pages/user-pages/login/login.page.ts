@@ -40,6 +40,7 @@ export class LoginPage implements OnInit {
                     alert('error data');
                 } else {
                     localStorage.setItem('token', this.usersData.token);
+                    localStorage.setItem('doctorID', this.usersData.id);
                     if (this.usersData.user.status === 1) {
                         this.router.navigate(['/medical-board']);
                     }

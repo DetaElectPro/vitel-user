@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Storage} from '@ionic/storage';
 import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
+import {ActionSheetController} from '@ionic/angular';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-home',
@@ -12,7 +14,9 @@ export class HomePage implements OnInit {
 
     constructor(
         private storage: Storage,
-        private iab: InAppBrowser
+        public router: Router,
+        private iab: InAppBrowser,
+        public actionSheetController: ActionSheetController
     ) {
         // this.userInfo = JSON.parse(localStorage.getItem('userInfo'));
     }
@@ -28,7 +32,7 @@ export class HomePage implements OnInit {
     }
 
     openBrow() {
-        const browser = this.iab.create('http://192.168.2.3:8000/profile/' + this.userInfo.id);
+        const browser = this.iab.create('https://medical.detatech.xyz/profile/' + this.userInfo.id);
         // browser.executeScript('...');
         // browser.insertCSS(...);
         // browser.on('loadstop').subscribe(event => {
@@ -41,5 +45,33 @@ export class HomePage implements OnInit {
             error => {
                 console.log('error: ', error);
             });
+    }
+
+
+    async presentActionSheet() {
+        const actionSheet = await this.actionSheetController.create({
+            header: 'Create Request',
+            buttons: [{
+                text: 'Create Request',
+                icon: 'add-circle-outline',
+                handler: () => {
+                    this.router.navigate(['/ambulance']);
+                }
+            }, {
+                text: 'browser',
+                icon: 'list-circle-outline',
+                handler: () => {
+                    this.router.navigate(['/ambulance-history']);
+                }
+            }, {
+                text: 'Cancel',
+                icon: 'close',
+                role: 'cancel',
+                handler: () => {
+                    console.log('Cancel clicked');
+                }
+            }]
+        });
+        await actionSheet.present();
     }
 }
