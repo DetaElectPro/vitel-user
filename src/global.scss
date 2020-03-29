@@ -37,12 +37,12 @@ ion-toolbar {
 ion-content {
   --ion-background-color: #ffff;
 
-  ion-item {
-    --ion-background-color: #eee;
-  }
+  //ion-item {
+  //  --ion-background-color: #eee;
+  //}
 
   ion-list {
-    background: #eee !important;
+    background: #FFFFFF !important;
   }
 
   ion-searchbar {
@@ -50,7 +50,7 @@ ion-content {
   }
 
   ion-checkbox {
-    --background: #eee !important
+    --background: #ffff !important
   }
 }
 

@@ -55,9 +55,22 @@ export class EmergencyService {
     return this.http.post(`${this.Url}emergency_serviced_user_emergency/${id}`, data, this.myHeaders);
   }
 
-  public userCancleRequestEmergency(id,): Observable<any> {
+  public userCancleRequestEmergency(id): Observable<any> {
     return this.http.get(`${this.Url}emergency_serviced_emergency/${id}`, this.myHeaders);
   }
 
+// Pharmacy
 
+
+  public getPharmcyRequest(page = 0): Observable<any> {
+    return this.http.get(`${this.Url}pharmacies?page=${page}`, this.myHeaders);
+  }
+
+  public getPharmcyRequestbyID(id): Observable<any> {
+    return this.http.get(`${this.Url}pharmacies/${id}`, this.myHeaders);
+  }
+
+  sendPharmcyRequest(data): Observable<any> {
+    return this.http.post(`${this.Url}pharmacies`, data, this.myHeaders);
+  }
 }

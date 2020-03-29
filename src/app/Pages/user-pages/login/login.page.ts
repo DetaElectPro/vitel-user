@@ -10,7 +10,7 @@ import {LoadingController} from '@ionic/angular';
     styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-    loginData = {phone: '', password: '', role: 3, fcm_registration_in: ''};
+    loginData = {phone: '', password: '', role: 4, fcm_registration_in: ''};
     usersData: any = [];
 
     constructor(

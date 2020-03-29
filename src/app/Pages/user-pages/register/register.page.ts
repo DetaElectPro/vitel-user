@@ -9,7 +9,7 @@ import {LoadingController} from '@ionic/angular';
     styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
-    registerData: any = {name: '', phone: '', password: '', password_check: '', role: 3, fcm_registration_in: ''};
+    registerData: any = {name: '', phone: '', password: '', password_check: '', role: 4, fcm_registration_in: ''};
 
     result: any;
 

@@ -7,17 +7,32 @@
 <ion-content [fullscreen]="true">
     <ion-list>
         <ion-item>
-            <ion-label position="floating">You are looking for: </ion-label>
-            <ion-input [(ngModel)]=""></ion-input>
+            <ion-label position="floating">You are looking for:</ion-label>
+            <ion-input [(ngModel)]="medicine.name"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label position="floating">your address:</ion-label>
-            <ion-input [(ngModel)]=""></ion-input>
+            <ion-label position="floating">Your address:</ion-label>
+            <ion-input [(ngModel)]="medicine.address"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label position="floating">Dose</ion-label>
-            <ion-input [(ngModel)]=""></ion-input>
+            <ion-label position="floating">Dose:</ion-label>
+            <ion-input [(ngModel)]="medicine.dose"></ion-input>
+            <!--            <p>{{medicine.dose}} m.g</p>-->
         </ion-item>
-        <p></p>
+
+
+        <ion-item>
+            <ion-label position="floating">Any company:</ion-label>
+            <ion-checkbox [(ngModel)]="medicine.company"></ion-checkbox>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="floating">Type:</ion-label>
+            <ion-input [(ngModel)]="medicine.type"></ion-input>
+        </ion-item>
+
+        <ion-button (click)="sendRequest()" expand="block" shape="round">Send</ion-button>
+
     </ion-list>
+
 </ion-content>

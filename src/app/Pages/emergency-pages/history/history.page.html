@@ -28,8 +28,6 @@
                 refreshingText="Refreshing...">
         </ion-refresher-content>
     </ion-refresher>
-    <app-emergency-tabs (click)="goTo()" name="2"></app-emergency-tabs>
-
     <ion-grid>
         <ion-row>
             <ion-col class="text-amber ion-text-center">Title</ion-col>
@@ -37,7 +35,8 @@
             <ion-col class="text-amber ion-text-center">Date</ion-col>
         </ion-row>
         <ion-row *ngFor="let item of historyData">
-            <ion-col class="text-blue ion-text-center" routerLink="/emergency-pages-history/{{item.id}}">{{item.type}}</ion-col>
+            <ion-col class="text-blue ion-text-center"
+                     routerLink="/emergency-pages-history/{{item.id}}">{{item.type}}</ion-col>
 
             <ion-col class="text-amber ion-text-center">
                 {{item.available}}
