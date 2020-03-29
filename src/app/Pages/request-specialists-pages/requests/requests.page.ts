@@ -1,6 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {RequestsService} from '../../../Service/requests.service';
-import {Requests} from '../../../Models/requests';
 import {IonInfiniteScroll} from '@ionic/angular';
 import {NavigationExtras, Router} from '@angular/router';
 
@@ -15,7 +14,7 @@ export class RequestsPage implements OnInit {
 
     // requestsData: any = [];
     result: any;
-    requestsData: Requests[];
+    requestsData: any;
     requestsSearch: any;
     dataNotFound: boolean;
     page: number;
@@ -45,7 +44,6 @@ export class RequestsPage implements OnInit {
                 this.totalData = this.result.total;
                 this.totalPage = this.result.total_pages;
                 this.requestsData = this.result.data;
-                console.log(this.requestsData);
             },
             err => {
                 console.log(err);
@@ -54,7 +52,7 @@ export class RequestsPage implements OnInit {
 
 
     searchRequests() {
-        this.requestService.searchPlaces(this.requestsSearch).subscribe(
+        this.requestService.searchRequestsSecialists(this.requestsSearch).subscribe(
             resp => {
                 if (resp.count > 0) {
                     this.requestsData = resp.results;
@@ -72,9 +70,7 @@ export class RequestsPage implements OnInit {
     }
 
     clearSearch() {
-        // this.search_place = '';
-        // this.loadPlaces();
-        // this.data_not_found = false;
+        this.loadRequests();
     }
 
 
@@ -89,12 +85,13 @@ export class RequestsPage implements OnInit {
                         this.perPage = this.result.per_page;
                         this.totalData = this.result.total;
                         this.totalPage = this.result.total_pages;
-                        let Rlength = this.result.data.length;
-                        for (let i = 0; i < Rlength; i++) {
+                        const length = this.result.data.length;
+                        for (let i = 0; i < length; i++) {
                             this.requestsData.push(this.result.data[i]);
                         }
                     }),
                 event.target.complete();
+            this.toggleInfiniteScroll();
         }, 1000);
 
     }

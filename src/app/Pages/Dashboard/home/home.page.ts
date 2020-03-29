@@ -48,9 +48,9 @@ export class HomePage implements OnInit {
     }
 
 
-    async presentActionSheet() {
+    async ambulanceActionSheet() {
         const actionSheet = await this.actionSheetController.create({
-            header: 'Create Request',
+            header: 'Ambulances Services',
             buttons: [{
                 text: 'Create Request',
                 icon: 'add-circle-outline',
@@ -62,6 +62,89 @@ export class HomePage implements OnInit {
                 icon: 'list-circle-outline',
                 handler: () => {
                     this.router.navigate(['/ambulance-history']);
+                }
+            }, {
+                text: 'Cancel',
+                icon: 'close',
+                role: 'cancel',
+                handler: () => {
+                    console.log('Cancel clicked');
+                }
+            }]
+        });
+        await actionSheet.present();
+    }
+
+    async requestActionSheet() {
+        const actionSheet = await this.actionSheetController.create({
+            header: 'Requests Services',
+            buttons: [{
+                text: 'Browse new requests',
+                icon: 'list-circle-outline',
+                handler: () => {
+                    this.router.navigate(['/requests']);
+                }
+            }, {
+                text: 'History',
+                icon: 'document-attach-outline',
+                handler: () => {
+                    this.router.navigate(['/history']);
+                }
+            }, {
+                text: 'Cancel',
+                icon: 'close',
+                role: 'cancel',
+                handler: () => {
+                    console.log('Cancel clicked');
+                }
+            }]
+        });
+        await actionSheet.present();
+    }
+
+    async emergencyActionSheet() {
+        const actionSheet = await this.actionSheetController.create({
+            header: 'Requests Services',
+            buttons: [{
+                text: 'Browse new requests',
+                icon: 'list-circle-outline',
+                handler: () => {
+                    this.router.navigate(['/emergency-pages-request']);
+                }
+            }, {
+                text: 'History',
+                icon: 'document-attach-outline',
+                handler: () => {
+                    // this.router.navigate(['/emergency-pages-history']);
+                    alert('available soon');
+                }
+            }, {
+                text: 'Cancel',
+                icon: 'close',
+                role: 'cancel',
+                handler: () => {
+                    console.log('Cancel clicked');
+                }
+            }]
+        });
+        await actionSheet.present();
+    }
+
+    async pharmacyActionSheet() {
+        const actionSheet = await this.actionSheetController.create({
+            header: 'pharmacy Services',
+            buttons: [{
+                text: 'Create Request',
+                icon: 'pharmacyActionSheet',
+                handler: () => {
+                    this.router.navigate(['/emergency-pages-request']);
+                }
+            }, {
+                text: 'Create Request',
+                icon: 'list-circle-outline',
+                handler: () => {
+                    // this.router.navigate(['/emergency-pages-history']);
+                    alert('available soon');
                 }
             }, {
                 text: 'Cancel',

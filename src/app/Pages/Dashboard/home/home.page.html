@@ -1,55 +1,78 @@
-<!--<ion-header>-->
-<!--    <ion-toolbar>-->
-<!--        <ion-title>Dashboard</ion-title>-->
-<!--    </ion-toolbar>-->
-<!--</ion-header>-->
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Dashboard</ion-title>
+    </ion-toolbar>
+</ion-header>
 
-<ion-content [fullscreen]="true" class="ion-no-padding">
+<ion-content [fullscreen]="true" class="padding">
+    <ion-card *ngIf="userInfo" color="light">
+        <ion-item>
+            <ion-avatar slot="start">
+                <img src="{{userInfo?.image}}"/>
+            </ion-avatar>
+            <ion-label>Welcome, <br>Dr. {{userInfo?.name}}</ion-label>
+        </ion-item>
+    </ion-card>
     <ion-grid>
         <ion-row>
-            <!--            <ion-col size="12">-->
-            <!--                <ion-icon name="person"></ion-icon>-->
-            <!--                <ion-text>-->
-            <!--                    <h1>Welcome,-->
-            <!--                        <br> Mr. John Doe</h1>-->
-            <!--                </ion-text>-->
-            <!--            </ion-col>-->
-            <ion-col routerLink="/requests" size="6">
-                <!-- simple card with icon and text -->
-                <ion-card color="light">
-                    <ion-icon name="newspaper-sharp"></ion-icon>
-                    <ion-text>
-                        <h3>Requests</h3>
-                    </ion-text>
-                </ion-card>
-            </ion-col>
-            <ion-col routerLink="/history" size="6">
-                <!-- simple card with icon and text -->
-                <ion-card color="danger">
-                    <ion-icon name="book"></ion-icon>
-                    <ion-text>
-                        <h3>History</h3>
-                    </ion-text>
-                </ion-card>
-            </ion-col>
-            <ion-col (click)="presentActionSheet()" size="6">
+            <ion-col (click)="requestActionSheet()" size="4">
                 <!-- simple card with icon and text -->
                 <ion-card color="success">
-                    <ion-icon src="assets/icon/ambulance.svg"></ion-icon>
+                    <ion-icon src="assets/icon/hospital.svg"></ion-icon>
                     <ion-text>
-                        <h3>Ambulance</h3>
+                        <p class="home-button ion-text-center">Requests</p>
                     </ion-text>
                 </ion-card>
             </ion-col>
-            <ion-col routerLink="/tabs/wallet" size="6">
+            <ion-col (click)="emergencyActionSheet()" size="4">
                 <!-- simple card with icon and text -->
-                <ion-card color="secondary">
-                    <ion-icon name="wallet"></ion-icon>
+                <ion-card color="danger">
+                    <ion-icon src="assets/icon/icu.svg"></ion-icon>
                     <ion-text>
-                        <h3>My wallet</h3>
+                        <p class="home-button ion-text-center">Emergency</p>
+                    </ion-text>
+                </ion-card>
+            </ion-col>
+            <ion-col (click)="ambulanceActionSheet()" size="4">
+                <!-- simple card with icon and text -->
+                <ion-card color="warning">
+                    <ion-icon src="assets/icon/ambulance.svg"></ion-icon>
+                    <ion-text>
+                        <p class="home-button ion-text-center">Ambulance</p>
                     </ion-text>
                 </ion-card>
             </ion-col>
         </ion-row>
+        <ion-row>
+            <ion-col routerLink="/tabs/wallet" size="4">
+                <!-- simple card with icon and text -->
+                <ion-card color="warning">
+                    <ion-icon name="wallet"></ion-icon>
+                    <ion-text>
+                        <p class="home-button ion-text-center">My wallet</p>
+                    </ion-text>
+                </ion-card>
+            </ion-col>
+
+            <ion-col (click)="pharmacyActionSheet()" size="4">
+                <!-- simple card with icon and text -->
+                <ion-card color="secondary">
+                    <ion-icon src="assets/icon/pharmacy.svg"></ion-icon>
+                    <ion-text>
+                        <p class="home-button ion-text-center">Pharmacy</p>
+                    </ion-text>
+                </ion-card>
+            </ion-col>
+            <ion-col routerLink="/blog" size="4">
+                <!-- simple card with icon and text -->
+                <ion-card color="success">
+                    <ion-icon name="list-circle-outline"></ion-icon>
+                    <ion-text>
+                        <p class="home-button ion-text-center">Blog</p>
+                    </ion-text>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+
     </ion-grid>
 </ion-content>

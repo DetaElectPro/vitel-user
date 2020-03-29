@@ -53,7 +53,25 @@ const routes: Routes = [
         path: 'ambulance-details/:id',
         loadChildren: () => import('./Pages/ambulance-pages/ambulance-details/ambulance-details.module')
             .then(m => m.AmbulanceDetailsPageModule)
-    }
+    },
+    {
+        path: 'emergency-details/:id',
+        loadChildren: () => import('./Pages/emergency-pages/emergency-details/emergency-details.module')
+            .then(m => m.EmergencyDetailsPageModule)
+    },  {
+    path: 'blog',
+    loadChildren: () => import('./Pages/Blog-pages/blog/blog.module').then( m => m.BlogPageModule)
+  },
+  {
+    path: 'blog-details',
+    loadChildren: () => import('./Pages/Blog-pages/blog-details/blog-details.module').then( m => m.BlogDetailsPageModule)
+  },
+  {
+    path: 'find-pharmacy',
+    loadChildren: () => import('./Pages/pharmacy-pages/find-pharmacy/find-pharmacy.module').then( m => m.FindPharmacyPageModule)
+  }
+
+
 
 ];
 

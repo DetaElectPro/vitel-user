@@ -37,7 +37,7 @@
             <ion-col class="text-amber ion-text-center">Date</ion-col>
         </ion-row>
         <ion-row *ngFor="let item of historyData">
-            <ion-col class="text-blue ion-text-center" routerLink="/request-details/{{item.id}}">{{item.type}}</ion-col>
+            <ion-col class="text-blue ion-text-center" routerLink="/emergency-pages-history/{{item.id}}">{{item.type}}</ion-col>
 
             <ion-col class="text-amber ion-text-center">
                 {{item.available}}
@@ -45,7 +45,7 @@
 
 
             <ion-col class="text-blue-grey ion-text-center"
-                     routerLink="/request-details/{{item.id}}">{{item.created_at| date: 'y-MM-d'}}</ion-col>
+                     routerLink="/emergency-pages-history/{{item.id}}">{{item.created_at| date: 'y-MM-d'}}</ion-col>
         </ion-row>
     </ion-grid>
 

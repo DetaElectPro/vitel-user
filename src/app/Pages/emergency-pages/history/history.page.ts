@@ -29,7 +29,6 @@ export class HistoryPage implements OnInit {
         this.requestData();
 
         setTimeout(() => {
-            console.log('Async operation has ended');
             event.target.complete();
         }, 2000);
     }
@@ -72,7 +71,4 @@ export class HistoryPage implements OnInit {
 
     }
 
-    goTo() {
-        this.router.navigate(['/emergency-pages-request']);
-    }
 }

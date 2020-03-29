@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {LoadingController, ToastController} from '@ionic/angular';
 import {EmergencyService} from '../../../Service/emergency.service';
 
 @Component({
@@ -10,57 +9,90 @@ import {EmergencyService} from '../../../Service/emergency.service';
 })
 export class RequestPage implements OnInit {
 
-  requestData = {
-    name: '', address: '', price_per_day: 0, type: '', available: 0, contact: ''
-  };
+  emergencyData: any;
+  page: number;
+  perPage = 0;
+  totalData: number;
+  totalPage: number;
   private errorMessage: any;
-  private requrstResult: any;
+  private result: any;
+  private search: string;
+  private dataNotFound: boolean;
 
   constructor(private router: Router,
-              private emergencyServ: EmergencyService,
-              public loadingController: LoadingController,
-              public toastController: ToastController) {
+              private emergencyServ: EmergencyService) {
   }
 
   ngOnInit() {
+    this.requestData();
   }
 
-  async sendRequest() {
-    const loading = await this.loadingController.create({
-      message: 'Please wait...',
-    });
-    this.emergencyServ.addEmergency(this.requestData)
-        .subscribe(async res => {
-              await loading.dismiss();
-              console.log('response: ', this.requrstResult = res);
-              if (this.requrstResult.success) {
-                this.presentToast(this.requrstResult.message);
-                this.router.navigate(['/emergency-pages-history']);
-              } else {
-                this.presentToast(this.requrstResult.message);
-              }
+  doRefresh(event) {
+    this.requestData();
+
+    setTimeout(() => {
+      event.target.complete();
+    }, 2000);
+  }
+
+  requestData() {
+    this.emergencyServ.getEmergency()
+        .subscribe(res => {
+              this.result = res;
+              this.perPage = this.result.per_page;
+              this.page = this.result.current_page;
+              this.totalData = this.result.total;
+              this.totalPage = this.result.total_pages;
+              this.emergencyData = this.result.data.data;
 
             },
-            async error1 => {
-              await loading.dismiss();
-              console.log('Error: ', this.errorMessage = error1);
-              this.presentToast('error try again');
-            });
+            error =>
+                console.log('server: ', this.errorMessage = error)
+        );
   }
 
 
-  async presentToast(messge) {
-    const toast = await this.toastController.create({
-      message: messge,
-      duration: 3000,
-      color: 'primary',
-      position: 'middle'
-    });
-    toast.present();
+  loadData(event) {
+    this.page = this.page + 1;
+    setTimeout(() => {
+      this.emergencyServ.getEmergency(this.page)
+          .subscribe(
+              res => {
+                this.result = res;
+                // this.emergencyData = this.result.data;
+                this.perPage = this.result.per_page;
+                this.totalData = this.result.total;
+                this.totalPage = this.result.total_pages;
+                const length = this.result.data.length;
+                for (let i = 0; i < length; i++) {
+                  this.emergencyData.push(this.result.data[i]);
+                }
+              }),
+          event.target.complete();
+    }, 1000);
+
   }
 
-  goTo() {
-    this.router.navigate(['/emergency-pages-history']);
-
+  searchRequests() {
+    this.emergencyServ.search(this.search).subscribe(
+        resp => {
+          if (resp.count > 0) {
+            this.emergencyData = resp.results;
+            this.dataNotFound = false;
+          } else {
+            this.emergencyData = [];
+            this.dataNotFound = true;
+          }
+          console.log('Search Result', resp);
+        },
+        err => {
+          console.log(err);
+        }
+    );
   }
+
+  clearSearch() {
+    this.requestData();
+  }
+
 }

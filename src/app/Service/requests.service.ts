@@ -52,9 +52,8 @@ export class RequestsService {
     /**
      * Search request by title
      */
-    public searchPlaces(title: string): Observable<any> {
-        console.log('Search params', title);
-        return this.http.get(`${this.Url}search_request_specialists?search=${title}`, this.myHeaders);
+    public searchRequestsSecialists(title: string): Observable<any> {
+        return this.http.get(`${this.Url}search_request_specialists/${title}`, this.myHeaders);
     }
 
     /**

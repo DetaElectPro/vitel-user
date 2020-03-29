@@ -12,7 +12,8 @@
 </ion-content>
 
 <ion-content *ngIf="requestsData">
-    <ion-searchbar (ionChange)="searchRequests()" animated showCancelButton="focus"></ion-searchbar>
+    <ion-searchbar (ionCancel)="clearSearch()" (ionChange)="searchRequests()" animated
+                   showCancelButton="focus"></ion-searchbar>
     <ion-refresher (ionRefresh)="doRefresh($event)" slot="fixed">
         <ion-refresher-content
                 pullingIcon="arrow-down-outline"
@@ -22,18 +23,18 @@
         </ion-refresher-content>
     </ion-refresher>
     <ion-list>
-<!--        <ion-item *ngFor="let item of requestsData" routerLink="/request-details/{{item.id}}">-->
-        <ion-item *ngFor="let item of requestsData" (click)="openDetails(item)">
+        <!--        <ion-item *ngFor="let item of requestsData" routerLink="/request-details/{{item.id}}">-->
+        <ion-item (click)="openDetails(item)" *ngFor="let item of requestsData">
             <ion-avatar slot="start">
                 <img src="assets/images/1.jpg">
             </ion-avatar>
             <ion-label>
-                <p>id: {{item.id}}</p>
-                <h2>We Need: {{item.specialties.medical.name}}</h2>
-                <h3>Specialized in: {{item.specialties.name}}</h3>
-                <h3>Hospital: {{item.name}}</h3>
-                <p>Address: {{item.address}}</p>
-                <p>data: {{item.created_at}}</p>
+                <p>id: {{item?.id}}</p>
+                <h2>We Need: {{item.specialties?.medical.name}}</h2>
+                <h3>Specialized in: {{item.specialties?.name}}</h3>
+                <h3>Hospital: {{item?.name}}</h3>
+                <p>Address: {{item?.address}}</p>
+                <p>data: {{item?.created_at}}</p>
             </ion-label>
         </ion-item>
     </ion-list>

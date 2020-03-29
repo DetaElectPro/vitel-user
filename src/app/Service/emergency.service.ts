@@ -35,8 +35,28 @@ export class EmergencyService {
   /**
    * Return list of History as observable
    */
+  public getEmergency(page = 0): Observable<any> {
+    return this.http.get(`${this.Url}emergency_serviced?page=${page}`, this.myHeaders);
+  }
+
   public userEmergencyHistory(page = 0): Observable<any> {
     return this.http.get(`${this.Url}emergency_serviced_user_history?page=${page}`, this.myHeaders);
+  }
+
+  public search(search): Observable<any> {
+    return this.http.get(`${this.Url}emergency_serviced_search/${search}`, this.myHeaders);
+  }
+
+  public getRequestById(id): Observable<any> {
+    return this.http.get(`${this.Url}emergency_serviced/${id}`, this.myHeaders);
+  }
+
+  public userRequestEmergency(id, data): Observable<any> {
+    return this.http.post(`${this.Url}emergency_serviced_user_emergency/${id}`, data, this.myHeaders);
+  }
+
+  public userCancleRequestEmergency(id,): Observable<any> {
+    return this.http.get(`${this.Url}emergency_serviced_emergency/${id}`, this.myHeaders);
   }
 
 
