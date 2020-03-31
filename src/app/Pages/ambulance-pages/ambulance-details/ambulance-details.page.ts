@@ -17,8 +17,8 @@ export class AmbulanceDetailsPage implements OnInit {
   params: any;
   requestId: number;
   request: any;
-  private acceptRes: any;
-  private userInfo: any;
+  acceptRes: any;
+  userInfo: any;
 
   constructor(
       private route: ActivatedRoute,

@@ -13,6 +13,7 @@ export class RequestsPage implements OnInit {
     @ViewChild(IonInfiniteScroll, {static: true}) infiniteScroll: IonInfiniteScroll;
 
     // requestsData: any = [];
+    imageNumber: number;
     result: any;
     requestsData: any;
     requestsSearch: any;
@@ -32,6 +33,8 @@ export class RequestsPage implements OnInit {
 
     ngOnInit() {
         this.loadRequests();
+        this.imageNumber = Math.round(Math.random() * 5);
+
     }
 
     loadRequests() {

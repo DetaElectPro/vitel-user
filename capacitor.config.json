@@ -1,6 +1,6 @@
 {
-  "appId": "io.ionic.starter",
-  "appName": "vitel-user",
+  "appId": "com.detatech.vitaluser",
+  "appName": "Vital user",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",

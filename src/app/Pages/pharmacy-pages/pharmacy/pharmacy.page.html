@@ -7,19 +7,17 @@
         <ion-title class="ion-text-center">Pharmacy</ion-title>
     </ion-toolbar>
 </ion-header>
-
-<ion-content *ngIf="!pharmacyData">
-    <div class="ion-padding custom-skeleton">
-        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
-        <ion-skeleton-text animated></ion-skeleton-text>
-        <ion-skeleton-text animated style="width: 88%"></ion-skeleton-text>
-        <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
-        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
-    </div>
+<ion-content *ngIf="!pharmacyData" class="ion-padding custom-skeleton">
+    <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+    <ion-skeleton-text animated></ion-skeleton-text>
+    <ion-skeleton-text animated style="width: 88%"></ion-skeleton-text>
+    <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+    <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
 </ion-content>
 
-
 <ion-content *ngIf="pharmacyData">
+    <ion-searchbar (ionCancel)="clearSearch()" (ionChange)="searchRequests()" animated
+                   showCancelButton="focus"></ion-searchbar>
     <ion-refresher (ionRefresh)="doRefresh($event)" slot="fixed">
         <ion-refresher-content
                 pullingIcon="arrow-down-outline"
@@ -28,33 +26,27 @@
                 refreshingText="Refreshing...">
         </ion-refresher-content>
     </ion-refresher>
-    <ion-grid>
-        <ion-row>
-            <ion-col class="text-amber ion-text-center">Title</ion-col>
-            <ion-col class="text-amber ion-text-center">available</ion-col>
-            <ion-col class="text-amber ion-text-center">Date</ion-col>
-        </ion-row>
-        <ion-row *ngFor="let item of pharmacyData">
-            <ion-col class="text-blue ion-text-center"
-                     routerLink="/emergency-pages-history/{{item?.id}}">{{item?.type}}</ion-col>
 
-            <ion-col class="text-amber ion-text-center">
-                {{item.available}}
-            </ion-col>
-
-
-            <ion-col class="text-blue-grey ion-text-center"
-                     routerLink="/emergency-pages-history/{{item.id}}">{{item?.created_at| date: 'y-MM-d'}}</ion-col>
-        </ion-row>
-    </ion-grid>
-
-
+    <ion-list>
+        <ion-item *ngFor="let item of pharmacyData" routerLink="/request-details/{{item.id}}">
+            <!--            <ion-avatar slot="start">-->
+            <!--                <img src="assets/images/1.jpg">-->
+            <!--            </ion-avatar>-->
+            <ion-label>
+                <p>id: {{item?.id}}</p>
+                <h2>Name: {{item?.name}}</h2>
+                <h3>Type: {{item?.type}}</h3>
+                <h3>dose: {{item?.dose}} m/g</h3>
+                <p>Address: {{item?.address}}</p>
+                <p>Type: {{item?.type}}</p>
+                <p>data: {{item?.created_at|date: 'YYYY, MMMM, dd '}}</p>
+            </ion-label>
+        </ion-item>
+    </ion-list>
     <ion-infinite-scroll (ionInfinite)="loadData($event)" threshold="100px">
         <ion-infinite-scroll-content
                 loadingSpinner="bubbles"
                 loadingText="Loading more data...">
         </ion-infinite-scroll-content>
     </ion-infinite-scroll>
-
 </ion-content>
-

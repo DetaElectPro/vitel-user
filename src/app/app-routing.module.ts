@@ -58,17 +58,25 @@ const routes: Routes = [
         path: 'emergency-details/:id',
         loadChildren: () => import('./Pages/emergency-pages/emergency-details/emergency-details.module')
             .then(m => m.EmergencyDetailsPageModule)
+    },
+    {
+        path: 'blog',
+        loadChildren: () => import('./Pages/Blog-pages/blog/blog.module').then(m => m.BlogPageModule)
+    },
+    {
+        path: 'blog-details',
+        loadChildren: () => import('./Pages/Blog-pages/blog-details/blog-details.module').then(m => m.BlogDetailsPageModule)
+    },
+    {
+        path: 'find-pharmacy',
+        loadChildren: () => import('./Pages/pharmacy-pages/find-pharmacy/find-pharmacy.module').then(m => m.FindPharmacyPageModule)
+    },
+    {
+        path: 'pharmacy',
+        loadChildren: () => import('./Pages/pharmacy-pages/pharmacy/pharmacy.module').then(m => m.PharmacyPageModule)
     },  {
-    path: 'blog',
-    loadChildren: () => import('./Pages/Blog-pages/blog/blog.module').then( m => m.BlogPageModule)
-  },
-  {
-    path: 'blog-details',
-    loadChildren: () => import('./Pages/Blog-pages/blog-details/blog-details.module').then( m => m.BlogDetailsPageModule)
-  },
-  {
-    path: 'find-pharmacy',
-    loadChildren: () => import('./Pages/pharmacy-pages/find-pharmacy/find-pharmacy.module').then( m => m.FindPharmacyPageModule)
+    path: 'pharmacy-details',
+    loadChildren: () => import('./Pages/pharmacy-pages/pharmacy-details/pharmacy-details.module').then( m => m.PharmacyDetailsPageModule)
   }
 
 

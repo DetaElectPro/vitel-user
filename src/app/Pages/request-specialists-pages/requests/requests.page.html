@@ -1,6 +1,10 @@
 <ion-header>
     <ion-toolbar>
-        <ion-title>Requests</ion-title>
+        <ion-buttons slot="start">
+            <ion-back-button color="light">
+            </ion-back-button>
+        </ion-buttons>
+        <ion-title class="ion-text-center">Requests</ion-title>
     </ion-toolbar>
 </ion-header>
 <ion-content *ngIf="!requestsData" class="ion-padding custom-skeleton">
@@ -26,15 +30,15 @@
         <!--        <ion-item *ngFor="let item of requestsData" routerLink="/request-details/{{item.id}}">-->
         <ion-item (click)="openDetails(item)" *ngFor="let item of requestsData">
             <ion-avatar slot="start">
-                <img src="assets/images/1.jpg">
+                <img src="assets/images/{{imageNumber}}.jpg">
             </ion-avatar>
             <ion-label>
-                <p>id: {{item?.id}}</p>
+                <p>#: {{item?.id}}</p>
                 <h2>We Need: {{item.specialties?.medical.name}}</h2>
                 <h3>Specialized in: {{item.specialties?.name}}</h3>
                 <h3>Hospital: {{item?.name}}</h3>
-                <p>Address: {{item?.address}}</p>
-                <p>data: {{item?.created_at}}</p>
+                <h3>Location: {{item?.address}}</h3>
+                <p>Created at: {{item?.created_at | date:'yyyy-MMMM-dd' }}</p>
             </ion-label>
         </ion-item>
     </ion-list>

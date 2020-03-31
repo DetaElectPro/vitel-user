@@ -134,7 +134,7 @@ export class HomePage implements OnInit {
         const actionSheet = await this.actionSheetController.create({
             header: 'pharmacy Services',
             buttons: [{
-                text: 'find pharmacy',
+                text: 'Find pharmacy',
                 icon: 'assets/icon/pharmacy.svg',
                 handler: () => {
                     this.router.navigate(['/find-pharmacy']);
@@ -143,8 +143,7 @@ export class HomePage implements OnInit {
                 text: 'Request history',
                 icon: 'list-circle-outline',
                 handler: () => {
-                    // this.router.navigate(['/emergency-pages-history']);
-                    alert('available soon');
+                    this.router.navigate(['/pharmacy']);
                 }
             }, {
                 text: 'Cancel',
