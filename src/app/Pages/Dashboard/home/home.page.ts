@@ -3,6 +3,7 @@ import {Storage} from '@ionic/storage';
 import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
 import {ActionSheetController} from '@ionic/angular';
 import {Router} from '@angular/router';
+import {AuthService} from '../../../Service/auth.service';
 
 @Component({
     selector: 'app-home',
@@ -11,14 +12,16 @@ import {Router} from '@angular/router';
 })
 export class HomePage implements OnInit {
     userInfo: any;
+    response: any;
 
     constructor(
         private storage: Storage,
         public router: Router,
         private iab: InAppBrowser,
+        private userServ: AuthService,
         public actionSheetController: ActionSheetController
     ) {
-        // this.userInfo = JSON.parse(localStorage.getItem('userInfo'));
+        this.getDashboardData();
     }
 
     ngOnInit(): void {
@@ -29,21 +32,54 @@ export class HomePage implements OnInit {
             .catch(err => {
                 console.log(err);
             });
+        // this.updateFcmToken();
     }
 
-    openBrow() {
-        const browser = this.iab.create('https://medical.detatech.xyz/profile/' + this.userInfo.id);
-        // browser.executeScript('...');
-        // browser.insertCSS(...);
-        // browser.on('loadstop').subscribe(event => {
-        //     browser.insertCSS({code: 'body{color: red;'});
-        // });
 
+    ionViewDidEnter() {
+        if (localStorage.getItem('fcm_registration_in')) {
+            this.updateFcmToken();
+        }
+    }
+
+    openCvUpdate() {
+        const browser = this.iab.create('https://medical.detatech.xyz/profile/' + this.userInfo.id);
         browser.on('loadstop').subscribe(event => {
                 console.log('sus: ', event);
             },
             error => {
                 console.log('error: ', error);
+            });
+    }
+
+
+    getDashboardData() {
+        this.userServ.checkUserService()
+            .subscribe(response => {
+                this.response = response;
+                if (this.response.status === true) {
+                    console.log('check: ', this.response);
+                } else {
+                    alert('filed');
+                }
+            }, error => {
+                console.log('server: ', error);
+            });
+    }
+
+    updateFcmToken() {
+        const data = {
+            fcm_registration_in: localStorage.getItem('fcm_registration_in')
+        };
+        this.userServ.updateFcmToken(data)
+            .subscribe(response => {
+                console.log('res: ', response);
+                // if (this.response.status === true) {
+                // } else {
+                //     alert('filed');
+                // }
+            }, error => {
+                console.log('server: ', error);
             });
     }
 
@@ -140,19 +176,34 @@ export class HomePage implements OnInit {
                     this.router.navigate(['/find-pharmacy']);
                 }
             }, {
-                text: 'Request history',
+                text: 'Last Request',
                 icon: 'list-circle-outline',
                 handler: () => {
                     this.router.navigate(['/pharmacy']);
                 }
             }, {
-                text: 'Cancel',
-                icon: 'close',
-                role: 'cancel',
+                text: 'Your Request history',
+                icon: 'list-circle-outline',
                 handler: () => {
-                    console.log('Cancel clicked');
+                    // this.router.navigate(['/pharmacy']);
+                    alert('soon');
                 }
-            }]
+            },
+                {
+                    text: 'Your Accept history',
+                    icon: 'list-circle-outline',
+                    handler: () => {
+                        // this.router.navigate(['/pharmacy']);
+                        alert('soon');
+                    }
+                }, {
+                    text: 'Cancel',
+                    icon: 'close',
+                    role: 'cancel',
+                    handler: () => {
+                        console.log('Cancel clicked');
+                    }
+                }]
         });
         await actionSheet.present();
     }

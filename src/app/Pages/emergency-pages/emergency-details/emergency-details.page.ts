@@ -11,7 +11,6 @@ import {EmergencyService} from '../../../Service/emergency.service';
 export class EmergencyDetailsPage implements OnInit {
 
   result: any;
-  params: any;
   requestId: number;
   emergency: any;
   emergencyData: any;

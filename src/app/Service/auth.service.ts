@@ -19,8 +19,8 @@ export class AuthService {
 
 
     authenticationState = new BehaviorSubject(null);
-    private myHeaders: any;
     token2 = `Bearer ${localStorage.getItem('token')}`;
+    private myHeaders: any;
 
     constructor(
         private storage: Storage,
@@ -54,6 +54,7 @@ export class AuthService {
                 });
         });
     }
+
     logout() {
         this.http.post(`${this.url}logout`, localStorage.getItem('token'));
         return this.storage.remove('userInfo').then(res => {
@@ -92,7 +93,7 @@ export class AuthService {
                         this.authenticationState.next(true);
                     });
                     this.storage.set('userInfo', this.user.user).then(r =>
-                        console.log('login:', r));
+                        r.toString());
                     resolve(res);
                 }, (err) => {
                     reject(err);
@@ -115,7 +116,6 @@ export class AuthService {
     }
 
     medicalBoardService(boardData) {
-        console.log(boardData);
         return new Promise((resolve, reject) => {
             this.http.post(this.url + 'employs', boardData, {
                 headers: new HttpHeaders().set('Content-Type', 'application/json')

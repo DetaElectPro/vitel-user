@@ -28,18 +28,19 @@
     </ion-refresher>
 
     <ion-list>
-        <ion-item *ngFor="let item of pharmacyData" routerLink="/request-details/{{item.id}}">
-            <!--            <ion-avatar slot="start">-->
-            <!--                <img src="assets/images/1.jpg">-->
-            <!--            </ion-avatar>-->
+        <ion-item *ngFor="let item of pharmacyData" color="standard" routerLink="/pharmacy-details/{{item.id}}">
+            <ion-avatar slot="start">
+                <img src="{{item?.user?.image}}"/>
+                <p>Dr- {{item?.user?.name}}</p>
+            </ion-avatar>
             <ion-label>
-                <p>id: {{item?.id}}</p>
+                <p>#: {{item?.id}}</p>
                 <h2>Name: {{item?.name}}</h2>
                 <h3>Type: {{item?.type}}</h3>
                 <h3>dose: {{item?.dose}} m/g</h3>
-                <p>Address: {{item?.address}}</p>
+                <p>Location: {{item?.address}}</p>
                 <p>Type: {{item?.type}}</p>
-                <p>data: {{item?.created_at|date: 'YYYY, MMMM, dd '}}</p>
+                <p>Created at: {{item?.created_at|date: 'yyyy-MMMM-dd '}}</p>
             </ion-label>
         </ion-item>
     </ion-list>

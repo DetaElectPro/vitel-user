@@ -73,4 +73,9 @@ export class EmergencyService {
   sendPharmcyRequest(data): Observable<any> {
     return this.http.post(`${this.Url}pharmacies`, data, this.myHeaders);
   }
+
+  updatePharmcyRequest(id, data): Observable<any> {
+    console.log(data);
+    return this.http.patch(`${this.Url}pharmacies/${id}`, data, this.myHeaders);
+  }
 }

@@ -3,6 +3,7 @@ import {MedicalBoard} from '../../../Models/medical-board';
 import {LoadingController} from '@ionic/angular';
 import {AuthService} from '../../../Service/auth.service';
 import {formatDate} from '@angular/common';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-medical-board',
@@ -16,15 +17,16 @@ export class MedicalBoardPage implements OnInit {
         address: '',
         birth_of_date: '',
         graduation_date: '',
-        medical_field_id: 0,
+        medical_field_id: null,
         medical_registration_number: '',
         registration_date: '',
-        years_of_experience: 0
+        years_of_experience: null
     };
     specialtiesList: any;
     private dataResult: any;
 
     constructor(
+        private router: Router,
         private loadingController: LoadingController,
         private medicalServ: AuthService
     ) {
@@ -51,6 +53,11 @@ export class MedicalBoardPage implements OnInit {
             .then(async data => {
                 (await loading).dismiss();
                 this.dataResult = data;
+                if (this.dataResult.success) {
+                    this.router.navigate(['/']);
+                } else {
+                    alert('error try again');
+                }
             })
             .catch(async err => {
                 (await loading).dismiss();

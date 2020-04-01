@@ -6,6 +6,7 @@ import {StatusBar} from '@ionic-native/status-bar/ngx';
 
 import {FCM} from 'capacitor-fcm';
 import {Plugins, PushNotification} from '@capacitor/core';
+
 const {PushNotifications} = Plugins;
 
 const fcm = new FCM();
@@ -33,9 +34,9 @@ export class AppComponent {
         this.platform.ready().then(() => {
             this.statusBar.styleDefault();
             this.splashScreen.hide();
-            // this.onLoade();
-            // this.subscribeTo();
-            // this.getToken();
+            this.onLoade();
+            this.subscribeTo();
+            this.getToken();
         });
     }
 
