@@ -75,12 +75,20 @@ const routes: Routes = [
         path: 'pharmacy',
         loadChildren: () => import('./Pages/pharmacy-pages/pharmacy/pharmacy.module').then(m => m.PharmacyPageModule)
     },
-  {
-    path: 'pharmacy-details/:id',
-    loadChildren: () => import('./Pages/pharmacy-pages/pharmacy-details/pharmacy-details.module')
-        .then( m => m.PharmacyDetailsPageModule)
-  }
-
+    {
+        path: 'pharmacy-details/:id',
+        loadChildren: () => import('./Pages/pharmacy-pages/pharmacy-details/pharmacy-details.module')
+            .then(m => m.PharmacyDetailsPageModule)
+    },
+    {
+        path: 'pharmacy-history',
+        loadChildren: () => import('./Pages/pharmacy-pages/history/history.module').then(m => m.HistoryPageModule)
+    },
+    {
+        path: 'accept-pharmacy',
+        loadChildren: () => import('./Pages/pharmacy-pages/accep-pharmacy/accep-pharmacy.module')
+            .then(m => m.AccepPharmacyPageModule)
+    },
 
 
 ];

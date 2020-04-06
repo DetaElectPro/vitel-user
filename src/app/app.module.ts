@@ -11,6 +11,13 @@ import {AppComponent} from './app.component';
 import {HttpClientModule} from '@angular/common/http';
 import {IonicStorageModule} from '@ionic/storage';
 import {IonicSelectableModule} from 'ionic-selectable';
+import {FCM} from '@ionic-native/fcm/ngx';
+import {JwtModule} from '@auth0/angular-jwt';
+
+
+export function tokenGetter() {
+    return localStorage.getItem('token');
+}
 
 @NgModule({
     declarations: [AppComponent],
@@ -20,10 +27,18 @@ import {IonicSelectableModule} from 'ionic-selectable';
         IonicStorageModule.forRoot(),
         AppRoutingModule,
         HttpClientModule,
+        JwtModule.forRoot({
+            config: {
+                tokenGetter,
+                whitelistedDomains: ['medical.detatech.xyz'],
+                // blacklistedRoutes: ['example.com/examplebadroute/']
+            }
+        }),
         IonicSelectableModule],
     providers: [
         StatusBar,
         SplashScreen,
+        FCM,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
 
     ],

@@ -42,8 +42,6 @@ export class PharmacyPage implements OnInit {
                     this.totalData = this.result.total;
                     this.totalPage = this.result.total_pages;
                     this.pharmacyData = this.result.data;
-                    console.log('rsp: ', res);
-
                 },
                 error =>
                     console.log('server: ', this.errorMessage = error)

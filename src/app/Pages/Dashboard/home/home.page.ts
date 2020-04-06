@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
+import {ActionSheetController, Platform} from '@ionic/angular';
 import {Storage} from '@ionic/storage';
 import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
-import {ActionSheetController} from '@ionic/angular';
 import {Router} from '@angular/router';
 import {AuthService} from '../../../Service/auth.service';
+
 
 @Component({
     selector: 'app-home',
@@ -13,15 +14,21 @@ import {AuthService} from '../../../Service/auth.service';
 export class HomePage implements OnInit {
     userInfo: any;
     response: any;
+    grant: any;
+
+    // topicName = 'doctor';
+    // remoteToken: string;
+    private notifications: any;
 
     constructor(
+        private platform: Platform,
         private storage: Storage,
         public router: Router,
         private iab: InAppBrowser,
         private userServ: AuthService,
         public actionSheetController: ActionSheetController
     ) {
-        this.getDashboardData();
+        // this.getDashboardData();
     }
 
     ngOnInit(): void {
@@ -32,14 +39,19 @@ export class HomePage implements OnInit {
             .catch(err => {
                 console.log(err);
             });
-        // this.updateFcmToken();
+
+        this.platform.ready().then(() => {
+            console.log('Fcm: ', localStorage.getItem('fcm_registration_id'));
+            if (localStorage.getItem('fcm_registration_id') === null || localStorage.getItem('fcm_registration_id') === undefined) {
+            } else {
+                this.updateFcmToken();
+            }
+        });
     }
 
 
     ionViewDidEnter() {
-        if (localStorage.getItem('fcm_registration_in')) {
-            this.updateFcmToken();
-        }
+
     }
 
     openCvUpdate() {
@@ -53,27 +65,28 @@ export class HomePage implements OnInit {
     }
 
 
-    getDashboardData() {
-        this.userServ.checkUserService()
-            .subscribe(response => {
-                this.response = response;
-                if (this.response.status === true) {
-                    console.log('check: ', this.response);
-                } else {
-                    alert('filed');
-                }
-            }, error => {
-                console.log('server: ', error);
-            });
-    }
+    // getDashboardData() {
+    //     this.userServ.checkUserService()
+    //         .subscribe(response => {
+    //             this.response = response;
+    //
+    //             if (this.response.status === true) {
+    //             } else {
+    //                 alert('filed');
+    //             }
+    //         }, error => {
+    //             console.log('server: ', error);
+    //         });
+    // }
 
-    updateFcmToken() {
+    async updateFcmToken() {
         const data = {
-            fcm_registration_in: localStorage.getItem('fcm_registration_in')
+            fcm_registration_id: localStorage.getItem('fcm_registration_id')
         };
-        this.userServ.updateFcmToken(data)
+
+        await this.userServ.updateFcmToken(data)
             .subscribe(response => {
-                console.log('res: ', response);
+                console.log('Fcm update res: ', response);
                 // if (this.response.status === true) {
                 // } else {
                 //     alert('filed');
@@ -82,7 +95,6 @@ export class HomePage implements OnInit {
                 console.log('server: ', error);
             });
     }
-
 
     async ambulanceActionSheet() {
         const actionSheet = await this.actionSheetController.create({
@@ -185,16 +197,14 @@ export class HomePage implements OnInit {
                 text: 'Your Request history',
                 icon: 'list-circle-outline',
                 handler: () => {
-                    // this.router.navigate(['/pharmacy']);
-                    alert('soon');
+                    this.router.navigate(['/pharmacy-history']);
                 }
             },
                 {
                     text: 'Your Accept history',
                     icon: 'list-circle-outline',
                     handler: () => {
-                        // this.router.navigate(['/pharmacy']);
-                        alert('soon');
+                        this.router.navigate(['/accept-pharmacy']);
                     }
                 }, {
                     text: 'Cancel',

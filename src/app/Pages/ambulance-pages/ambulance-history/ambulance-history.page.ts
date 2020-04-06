@@ -34,7 +34,7 @@ export class AmbulanceHistoryPage implements OnInit {
                     this.page = this.result.current_page;
                     this.totalData = this.result.total;
                     this.totalPage = this.result.total_pages;
-                    console.log('data: ', this.historyData = this.result.data);
+                    this.historyData = this.result.data;
                 },
                 error =>
                     console.log('server: ', this.errorHand = error)

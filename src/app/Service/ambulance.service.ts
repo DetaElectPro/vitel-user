@@ -21,18 +21,18 @@ export class AmbulanceService {
   }
 
   public ambulanceRequestService(data) {
-    return this.http.post(`${this.Url}ambulances`, data, this.myHeaders);
+    return this.http.post(`${this.Url}ambulances`, data);
   }
 
   public getAmbulanceService(page): Observable<any> {
-    return this.http.get(`${this.Url}ambulances?page=${page}`, this.myHeaders);
+    return this.http.get(`${this.Url}ambulances?page=${page}`);
   }
 
   public getAmbulanceByIdService(id): Observable<any> {
-    return this.http.get(`${this.Url}ambulances/${id}`, this.myHeaders);
+    return this.http.get(`${this.Url}ambulances/${id}`);
   }
 
   public cancelRequestByUser(id): Observable<any> {
-    return this.http.delete(`${this.Url}ambulances/${id}`, this.myHeaders);
+    return this.http.delete(`${this.Url}ambulances/${id}`);
   }
 }

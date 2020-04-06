@@ -1,8 +1,1 @@
-{
-  "appId": "com.detatech.vitaluser",
-  "appName": "Vital user",
-  "bundledWebRuntime": false,
-  "npmClient": "npm",
-  "webDir": "www",
-  "cordova": {}
-}
+{}

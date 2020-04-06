@@ -14,7 +14,7 @@ export class AmbulancePage implements OnInit {
     map: Map;
     myLatLng: any;
     newMarker: any;
-    locData = {title: '', address: [], latitude: 0.0, longitude: 0.0};
+    locData = {title: '', address: null, latitude: 0.0, longitude: 0.0};
     data: any;
     Error: any;
     coords: any;
@@ -37,8 +37,8 @@ export class AmbulancePage implements OnInit {
 
     leafletMap() {
         // In setView add latLng and zoom
-        this.map = new Map('mapId').setView([15.59, 32.54], 10);
-        tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+        this.map = new Map('mapId').setView([15.59, 32.54], 13);
+        tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {
             attribution: 'DetaTech',
         }).addTo(this.map);
 
@@ -85,7 +85,7 @@ export class AmbulancePage implements OnInit {
                     this.data = response;
                     if (this.data.success) {
                         this.presentToast(this.data.message);
-                        this.router.navigate(['history']);
+                        this.router.navigate(['ambulance-history']);
                     } else {
                         this.presentToast(this.data.message);
                     }
@@ -96,7 +96,6 @@ export class AmbulancePage implements OnInit {
                     alert('try again');
                 }
             );
-        console.log(this.locData);
     }
 
     async presentToast(messge) {

@@ -10,7 +10,7 @@ import {LoadingController} from '@ionic/angular';
     styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-    loginData = {phone: '', password: '', role: 4, fcm_registration_in: ''};
+    loginData = {phone: null, password: null, role: 4, fcm_registration_id: null};
     usersData: any = [];
 
     constructor(
@@ -21,7 +21,7 @@ export class LoginPage implements OnInit {
     }
 
     ngOnInit() {
-        this.loginData.fcm_registration_in = localStorage.getItem('fcm_registration_in');
+        this.loginData.fcm_registration_id = localStorage.getItem('fcm_registration_id');
     }
 
 

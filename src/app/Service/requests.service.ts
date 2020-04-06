@@ -38,14 +38,14 @@ export class RequestsService {
      * Return list of Requests as observable
      */
     public getRequestById(id): Observable<any> {
-        return this.http.get(`${this.Url}request_specialists/${id}`, this.myHeaders);
+        return this.http.get(`${this.Url}request_specialists/${id}`);
     }
 
     /**
      * Return Create Requests as observable
      */
     public createRequest(data): Observable<any> {
-        return this.http.post(`${this.Url}request_specialists`, data, this.myHeaders);
+        return this.http.post(`${this.Url}request_specialists`, data);
     }
 
 
@@ -53,7 +53,7 @@ export class RequestsService {
      * Search request by title
      */
     public searchRequestsSecialists(title: string): Observable<any> {
-        return this.http.get(`${this.Url}search_request_specialists/${title}`, this.myHeaders);
+        return this.http.get(`${this.Url}search_request_specialists/${title}`);
     }
 
     /**
@@ -65,19 +65,19 @@ export class RequestsService {
      */
     public getRequest(page = 0): Observable<any> {
         // return this.http.get(`${this.Url}requestSpecialists?${this.getByPage(page)}`);
-        return this.http.get(`${this.Url}request_specialists?page=${page}`, this.myHeaders);
+        return this.http.get(`${this.Url}request_specialists?page=${page}`);
     }
 
     public requestSpecialistsHistory(page = 0): Observable<any> {
-        return this.http.get(`${this.Url}request_specialists_doctor_history?page=${page}`, this.myHeaders);
+        return this.http.get(`${this.Url}request_specialists_doctor_history?page=${page}`);
     }
 
     public userAcceptRequestSpecialists(id) {
-        return this.http.get(`${this.Url}acceptRequestByUser/${id}`, this.myHeaders);
+        return this.http.get(`${this.Url}acceptRequestByUser/${id}`);
     }
 
     public cancelRequestByUser(id) {
-        return this.http.get(`${this.Url}cancelRequestByUser/${id}`, this.myHeaders);
+        return this.http.get(`${this.Url}cancelRequestByUser/${id}`);
     }
 
 }

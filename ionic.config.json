@@ -1,7 +1,9 @@
 {
   "name": "vitel-user",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
-  "type": "angular"
+  "type": "angular",
+  "id": "05cde846"
 }

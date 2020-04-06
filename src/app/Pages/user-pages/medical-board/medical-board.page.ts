@@ -84,11 +84,4 @@ export class MedicalBoardPage implements OnInit {
 
                 });
     }
-
-    // portChange(event: {
-    //     component: IonicSelectableComponent,
-    //     value: any
-    // }) {
-    //     console.log('port:', event.value);
-    // }
 }

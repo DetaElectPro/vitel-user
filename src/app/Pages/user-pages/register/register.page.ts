@@ -9,7 +9,7 @@ import {LoadingController} from '@ionic/angular';
     styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
-    registerData: any = {name: '', phone: '', password: '', password_check: '', role: 4, fcm_registration_in: ''};
+    registerData: any = {name: '', phone: '', password: '', password_check: '', role: 4, fcm_registration_id: null};
 
     result: any;
 
@@ -17,7 +17,7 @@ export class RegisterPage implements OnInit {
     }
 
     ngOnInit() {
-        this.registerData.fcm_registration_in = localStorage.getItem('fcm_registration_in');
+        this.registerData.fcm_registration_id = localStorage.getItem('fcm_registration_id');
     }
 
     async userRegister() {

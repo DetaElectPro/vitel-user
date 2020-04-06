@@ -19,8 +19,9 @@ export class AuthService {
 
 
     authenticationState = new BehaviorSubject(null);
-    token2 = `Bearer ${localStorage.getItem('token')}`;
-    private myHeaders: any;
+    // token2 = `Bearer ${localStorage.getItem('token')}`;
+    // token2: any;
+    // myHeaders: any;
 
     constructor(
         private storage: Storage,
@@ -30,11 +31,12 @@ export class AuthService {
         this.plt.ready().then(() => {
             this.checkToken();
         });
-        this.myHeaders = {
-            headers: new HttpHeaders()
-                .set('Content-Type', 'application/json')
-                .set('Authorization', this.token2)
-        };
+
+        // this.myHeaders = {
+        //     headers: new HttpHeaders()
+        //         .set('Content-Type', 'application/json')
+        //         .set('Authorization', this.token2)
+        // };
     }
 
     checkToken() {
@@ -60,11 +62,11 @@ export class AuthService {
         return this.storage.remove('userInfo').then(res => {
             console.log('logOut: ', res);
             this.storage.remove(TOKEN_KEY).then(() => {
+                localStorage.removeItem('token');
                 this.authenticationState.next(false);
             });
         });
     }
-
 
     isAuthenticated() {
         return new Promise((resolve, reject) => {
@@ -78,9 +80,7 @@ export class AuthService {
         });
     }
 
-
     loginServes(userData) {
-        console.log(userData);
         return new Promise((resolve, reject) => {
             this.http.post(this.url + 'auth/login', JSON.stringify(userData), {
                 headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -117,10 +117,7 @@ export class AuthService {
 
     medicalBoardService(boardData) {
         return new Promise((resolve, reject) => {
-            this.http.post(this.url + 'employs', boardData, {
-                headers: new HttpHeaders().set('Content-Type', 'application/json')
-                    .set('Authorization', this.token2),
-            })
+            this.http.post(this.url + 'employs', boardData)
                 .subscribe(res => {
                     resolve(res);
                 }, (err) => {
@@ -137,21 +134,21 @@ export class AuthService {
         // return this.http.get(this.url + 'medical_fields');
     }
 
-
     public medicalSpecialtiesService(id): Observable<any> {
         return this.http.get(`${this.url}medical_specialties/${id}`);
     }
 
     public checkUserService(): Observable<any> {
-        return this.http.get(`${this.url}auth/check_user`, this.myHeaders);
+        return this.http.get(`${this.url}auth/check_user`);
     }
 
     public updateFcmToken(data): Observable<any> {
-        return this.http.put(`${this.url}auth/check_user`, data, this.myHeaders);
+        return this.http.post(`${this.url}auth/fcm_update`, data);
     }
 
     public getSlide(): Observable<any> {
-        return this.http.get(`${this.url}home`, this.myHeaders);
+        return this.http.get(`${this.url}home`);
     }
+
 
 }
