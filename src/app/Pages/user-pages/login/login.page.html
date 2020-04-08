@@ -10,7 +10,7 @@
         <div>
             <img src="assets/images/vitle.png" width="30%">
         </div>
-        <h2 class="text-d-purple" ion-text>
+        <h2 class="text-d-purple ion-text-center">
             For Medical Serves
         </h2>
     </ion-list>
@@ -19,7 +19,7 @@
         <ion-card-content>
             <ion-item>
                 <ion-label position="floating">Phone</ion-label>
-                <ion-input [(ngModel)]="loginData.phone" max="20" min="6" type="number" inputmode="decimal"></ion-input>
+                <ion-input [(ngModel)]="loginData.phone" max="10" min="10" type="number"></ion-input>
             </ion-item>
 
             <ion-item>
@@ -32,9 +32,9 @@
         </ion-card-content>
 
         <p class="ion-text-center">Forgot your password?
-            <a href="password_reset">reset</a>
+            <a href="/password-reset">reset</a>
 
-        <p class="ion-text-center">Do not have an account?<a href="register"><b>Create
+        <p class="ion-text-center">Do not have an account?<a href="/register"><b>Create
             a new
             account</b></a></p>
 

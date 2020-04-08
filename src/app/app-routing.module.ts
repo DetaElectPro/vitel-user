@@ -89,6 +89,19 @@ const routes: Routes = [
         loadChildren: () => import('./Pages/pharmacy-pages/accep-pharmacy/accep-pharmacy.module')
             .then(m => m.AccepPharmacyPageModule)
     },
+  {
+    path: 'password-reset',
+    loadChildren: () => import('./Pages/user-pages/password-reset/password-reset.module').then( m => m.PasswordResetPageModule)
+  },
+  {
+    path: 'home-corona',
+    loadChildren: () => import('./Pages/Blog-pages/home-corona/home-corona.module').then(m => m.HomeCoronaPageModule)
+  },
+  {
+    path: 'corona-details',
+    loadChildren: () => import('./Pages/Blog-pages/corona-details/corona-details.module').then(m => m.CoronaDetailsPageModule)
+  },
+
 
 
 ];

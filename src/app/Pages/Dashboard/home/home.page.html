@@ -74,10 +74,27 @@
             </ion-col>
         </ion-row>
 
+        <ion-row>
+            <ion-col routerLink="/home-corona" >
+                <ion-card color="secondary">
+                    <ion-icon src="assets/icon/virus.svg"></ion-icon>
+                    <ion-text>
+                        <h2 class="home-button ion-text-center">Learn About Corona Virus</h2>
+                    </ion-text>
+                    <ion-button >open</ion-button>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+
     </ion-grid>
 
+    <div *ngIf="response?.user?.status == 1">
+        <p class="ion-text-center">Please complete Your profile</p>
+        <ion-button color="danger" expand="block" routerLink="/medical-board">open Profile</ion-button>
+    </div>
+
     <div *ngIf="response?.user?.status == 2">
-        <p class="ion-text-center">Please complete the profile and upload the <strong>CV</strong></p>
+        <p class="ion-text-center">Please complete Your profile and upload the <strong>CV</strong></p>
         <ion-button (click)="openCvUpdate()" color="danger" expand="block">upload cv</ion-button>
     </div>
 </ion-content>
