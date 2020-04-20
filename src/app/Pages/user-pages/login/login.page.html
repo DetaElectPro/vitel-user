@@ -1,0 +1,42 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title class="ion-text-center">Login {{account?.type}}</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <br>
+    <ion-list class="ion-padding-horizontal ion-text-center">
+        <div>
+            <img src="assets/images/vitle.png" width="30%">
+        </div>
+        <h2 class="text-d-purple ion-text-center">
+            For Medical Serves
+        </h2>
+    </ion-list>
+
+    <ion-card>
+        <ion-card-content>
+            <ion-item>
+                <ion-label position="floating">Phone</ion-label>
+                <ion-input [(ngModel)]="loginData.phone" max="10" min="10" type="number"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="floating">Password</ion-label>
+                <ion-input [(ngModel)]="loginData.password" max="20" min="6" type="password"></ion-input>
+            </ion-item>
+
+            <ion-button (click)="userLogin()" expand="block">Login</ion-button>
+
+        </ion-card-content>
+
+        <p class="ion-text-center">Forgot your password?
+            <a href="/password-reset">reset</a>
+
+        <p class="ion-text-center">Do not have an account?<a href="/register"><b>Create
+            a new
+            account</b></a></p>
+
+    </ion-card>
+</ion-content>
