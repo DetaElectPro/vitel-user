@@ -1,6 +1,6 @@
 <ion-header>
     <ion-toolbar>
-        <ion-title>Register - Users</ion-title>
+        <ion-title class="ion-text-center">Register {{account?.type}}</ion-title>
     </ion-toolbar>
 </ion-header>
 
@@ -18,23 +18,24 @@
     <ion-card>
         <ion-card-content>
             <ion-item>
-                <ion-label position="floating">Name</ion-label>
+                <ion-label position="floating">Full name:</ion-label>
                 <ion-input [(ngModel)]="registerData.name" max="20" min="6" type="text"></ion-input>
             </ion-item>
 
             <ion-item>
-                <ion-label position="floating">Phone</ion-label>
-                <ion-input [(ngModel)]="registerData.phone" max="20" min="6" type="number" inputmode="decimal"></ion-input>
+                <ion-label position="floating">Phone:</ion-label>
+                <ion-input [(ngModel)]="registerData.phone" inputmode="decimal" max="10" min="6"
+                           type="number"></ion-input>
             </ion-item>
 
             <ion-item>
-                <ion-label position="floating">Password</ion-label>
-                <ion-input [(ngModel)]="registerData.password" max="20" min="6" type="password"></ion-input>
+                <ion-label position="floating">Password:</ion-label>
+                <ion-input [(ngModel)]="registerData.password" max="30" min="6" type="password"></ion-input>
             </ion-item>
 
             <ion-item>
-                <ion-label position="floating">Re-Password</ion-label>
-                <ion-input [(ngModel)]="registerData.password_check" max="20" min="6" type="password"></ion-input>
+                <ion-label position="floating">Re-Password:</ion-label>
+                <ion-input [(ngModel)]="registerData.password_check" max="30" min="6" type="password"></ion-input>
             </ion-item>
 
             <ion-button (click)="userRegister()" expand="block">Registration</ion-button>

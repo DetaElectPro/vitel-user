@@ -14,11 +14,6 @@ import {AuthService} from '../../../Service/auth.service';
 export class HomePage implements OnInit {
     userInfo: any;
     response: any;
-    grant: any;
-
-    // topicName = 'doctor';
-    // remoteToken: string;
-    private notifications: any;
 
     constructor(
         private platform: Platform,
@@ -28,7 +23,6 @@ export class HomePage implements OnInit {
         private userServ: AuthService,
         public actionSheetController: ActionSheetController
     ) {
-        // this.getDashboardData();
     }
 
     ngOnInit(): void {
@@ -47,15 +41,17 @@ export class HomePage implements OnInit {
                 this.updateFcmToken();
             }
         });
-    }
-
-
-    ionViewDidEnter() {
+        this.getDashboardData();
 
     }
+
+
+    // ionViewDidEnter() {
+    //
+    // }
 
     openCvUpdate() {
-        const browser = this.iab.create('https://medical.detatech.xyz/profile/' + this.userInfo.id);
+        const browser = this.iab.create('https://api.vital-helth.com/profile/' + this.userInfo.id);
         browser.on('loadstop').subscribe(event => {
                 console.log('sus: ', event);
             },
@@ -65,19 +61,19 @@ export class HomePage implements OnInit {
     }
 
 
-    // getDashboardData() {
-    //     this.userServ.checkUserService()
-    //         .subscribe(response => {
-    //             this.response = response;
-    //
-    //             if (this.response.status === true) {
-    //             } else {
-    //                 alert('filed');
-    //             }
-    //         }, error => {
-    //             console.log('server: ', error);
-    //         });
-    // }
+    getDashboardData() {
+        this.userServ.checkUserService()
+            .subscribe(response => {
+                console.log('check_user: ', this.response = response);
+
+                if (this.response.status === true) {
+                } else {
+                    // alert('filed');
+                }
+            }, error => {
+                console.log('server: ', error);
+            });
+    }
 
     async updateFcmToken() {
         const data = {

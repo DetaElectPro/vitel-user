@@ -8,16 +8,12 @@ import {StatusBar} from '@ionic-native/status-bar/ngx';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {IonicStorageModule} from '@ionic/storage';
 import {IonicSelectableModule} from 'ionic-selectable';
 import {FCM} from '@ionic-native/fcm/ngx';
-import {JwtModule} from '@auth0/angular-jwt';
+import {TokenInterceptor} from './interceptors/token.interceptor';
 
-
-export function tokenGetter() {
-    return localStorage.getItem('token');
-}
 
 @NgModule({
     declarations: [AppComponent],
@@ -27,19 +23,17 @@ export function tokenGetter() {
         IonicStorageModule.forRoot(),
         AppRoutingModule,
         HttpClientModule,
-        JwtModule.forRoot({
-            config: {
-                tokenGetter,
-                whitelistedDomains: ['medical.detatech.xyz'],
-                // blacklistedRoutes: ['example.com/examplebadroute/']
-            }
-        }),
         IonicSelectableModule],
     providers: [
         StatusBar,
         SplashScreen,
         FCM,
-        {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
+        {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: TokenInterceptor,
+            multi: true
+        }
 
     ],
     bootstrap: [AppComponent]

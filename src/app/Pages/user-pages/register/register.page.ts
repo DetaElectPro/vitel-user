@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../../Service/auth.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
 import {LoadingController} from '@ionic/angular';
 
 @Component({
@@ -9,11 +9,22 @@ import {LoadingController} from '@ionic/angular';
     styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
-    registerData: any = {name: '', phone: '', password: '', password_check: '', role: 4, fcm_registration_id: null};
+    registerData: any = {name: '', phone: '', password: '', password_check: '', role: null, fcm_registration_id: null};
 
     result: any;
+    account: any = {type: null, role: null};
 
-    constructor(private authServe: AuthService, private route: Router, public loadingController: LoadingController) {
+    constructor(
+        private authServe: AuthService,
+        private route: Router,
+        public activatedRoute: ActivatedRoute,
+        public loadingController: LoadingController
+    ) {
+        this.activatedRoute.queryParams.subscribe(params => {
+            this.registerData.role = params.role;
+            this.account.type = params.type;
+            console.log(params);
+        });
     }
 
     ngOnInit() {
@@ -33,15 +44,27 @@ export class RegisterPage implements OnInit {
                     if (this.result.error) {
                         alert(`Message: ${this.result.message}`);
                     } else {
-                        this.route.navigate(['/login']);
+                        // this.route.navigate(['/login']);
+                        this.toLogin();
                     }
                 })
                 .catch(async err => {
-                    console.log('serve Error: ', err);
+                    const errs = JSON.parse(err.responseText);
+                    console.log('serve Error: ', errs);
                     await loading.dismiss();
                 });
         } else {
+            await loading.dismiss();
             alert(`password don't match`);
         }
+    }
+
+    async toLogin() {
+        const navigationExtras: NavigationExtras = {
+            queryParams: {
+                role: this.registerData.role,
+            }
+        };
+        await this.route.navigate(['/login'], navigationExtras);
     }
 }

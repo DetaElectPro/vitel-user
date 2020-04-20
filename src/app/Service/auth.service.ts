@@ -13,15 +13,9 @@ const TOKEN_KEY = 'auth-token';
 export class AuthService {
     token: any;
     user: any;
-    url = 'https://medical.detatech.xyz/api/';
-    // url = 'http://localhost:8000/api/';
-    // url = 'http://192.168.2.5:8000/api/';
-
+    url = 'https://api.vital-helth.com/api/';
 
     authenticationState = new BehaviorSubject(null);
-    // token2 = `Bearer ${localStorage.getItem('token')}`;
-    // token2: any;
-    // myHeaders: any;
 
     constructor(
         private storage: Storage,
@@ -31,12 +25,6 @@ export class AuthService {
         this.plt.ready().then(() => {
             this.checkToken();
         });
-
-        // this.myHeaders = {
-        //     headers: new HttpHeaders()
-        //         .set('Content-Type', 'application/json')
-        //         .set('Authorization', this.token2)
-        // };
     }
 
     checkToken() {
@@ -82,13 +70,12 @@ export class AuthService {
 
     loginServes(userData) {
         return new Promise((resolve, reject) => {
-            this.http.post(this.url + 'auth/login', JSON.stringify(userData), {
-                headers: new HttpHeaders().set('Content-Type', 'application/json'),
-            })
+            this.http.post(this.url + 'auth/login', userData)
                 .subscribe(res => {
                     this.token = res;
                     this.user = res;
                     this.token = this.token.token;
+                    localStorage.setItem('token', this.token);
                     this.storage.set(TOKEN_KEY, this.token).then(() => {
                         this.authenticationState.next(true);
                     });
@@ -102,7 +89,6 @@ export class AuthService {
     }
 
     registerServes(userData) {
-        console.log(userData);
         return new Promise((resolve, reject) => {
             this.http.post(this.url + 'auth/register', JSON.stringify(userData), {
                 headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -113,6 +99,10 @@ export class AuthService {
                     reject(err);
                 });
         });
+    }
+
+    public resetPassword(phone): Observable<any> {
+        return this.http.post(`${this.url}reset_password`, phone);
     }
 
     medicalBoardService(boardData) {
@@ -132,10 +122,6 @@ export class AuthService {
     public medicalFiledService(): Observable<any> {
         return this.http.get(this.url + 'medical_specialties');
         // return this.http.get(this.url + 'medical_fields');
-    }
-
-    public medicalSpecialtiesService(id): Observable<any> {
-        return this.http.get(`${this.url}medical_specialties/${id}`);
     }
 
     public checkUserService(): Observable<any> {

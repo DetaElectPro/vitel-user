@@ -88,12 +88,12 @@
 
     </ion-grid>
 
-    <div *ngIf="response?.user?.status == 1">
+    <div *ngIf="response?.user?.status == '1'">
         <p class="ion-text-center">Please complete Your profile</p>
         <ion-button color="danger" expand="block" routerLink="/medical-board">open Profile</ion-button>
     </div>
 
-    <div *ngIf="response?.user?.status == 2">
+    <div *ngIf="response?.user?.status == '2'">
         <p class="ion-text-center">Please complete Your profile and upload the <strong>CV</strong></p>
         <ion-button (click)="openCvUpdate()" color="danger" expand="block">upload cv</ion-button>
     </div>

@@ -100,7 +100,11 @@ const routes: Routes = [
   {
     path: 'corona-details',
     loadChildren: () => import('./Pages/Blog-pages/corona-details/corona-details.module').then(m => m.CoronaDetailsPageModule)
+  },  {
+    path: 'account-type',
+    loadChildren: () => import('./Pages/user-pages/account-type/account-type.module').then( m => m.AccountTypePageModule)
   },
+
 
 
 

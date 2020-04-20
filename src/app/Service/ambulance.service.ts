@@ -6,7 +6,7 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class AmbulanceService {
-  Url = 'https://medical.detatech.xyz/api/';
+  Url = 'https://api.vital-helth.com/api/';
   token = `Bearer ${localStorage.getItem('token')}`;
   myHeaders: any;
 

@@ -33,14 +33,13 @@ export class RequestDetailsPage implements OnInit {
     private acceptRes: any;
 
     constructor(
-        private activeRoute: ActivatedRoute,
         private presentAlertConfirm: AlertController,
         private loadingController: LoadingController,
         public router: Router,
         public route: ActivatedRoute,
         private requestServe: RequestsService
     ) {
-        this.activeRoute.params.subscribe(
+        this.route.params.subscribe(
             params => {
                 this.requestId = params.id;
             }
@@ -58,7 +57,9 @@ export class RequestDetailsPage implements OnInit {
     async requestData() {
         if (this.route.snapshot.paramMap.get('id') !== 'null') {
             const loading = await this.loadingController.create({
-                message: 'Loading...'
+                message: 'Please wait...',
+                spinner: 'bubbles',
+                translucent: true
             });
             await loading.present();
             await this.requestServe.getRequestById(this.requestId)

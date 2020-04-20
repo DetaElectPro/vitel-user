@@ -13,7 +13,6 @@ export class PharmacyDetailsPage implements OnInit {
   result: any;
   pharmacy: any;
   acceptRes: any;
-  pharmacyData: any;
   formCard = false;
   formData = {price: null, address: ''};
 
@@ -39,7 +38,9 @@ export class PharmacyDetailsPage implements OnInit {
 
   async requestData() {
     const loading = await this.loadingController.create({
-      message: 'Loading...'
+      message: 'Please wait...',
+      spinner: 'bubbles',
+      translucent: true
     });
     await loading.present();
     await this.pharmacyServe.getPharmcyRequestbyID(this.requestId)
@@ -58,7 +59,7 @@ export class PharmacyDetailsPage implements OnInit {
         .subscribe(response => {
               console.log(this.acceptRes = response);
               if (this.acceptRes.success) {
-                this.succseMessage(this.acceptRes.message)
+                this.succseMessage(this.acceptRes.message);
                 this.router.navigateByUrl('/');
               } else {
                 this.faildMessage();

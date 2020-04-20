@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {AuthService} from '../../../Service/auth.service';
 
 @Component({
   selector: 'app-password-reset',
@@ -7,8 +8,9 @@ import {Component, OnInit} from '@angular/core';
 })
 export class PasswordResetPage implements OnInit {
   passwordResetData: any;
+  result: any;
 
-  constructor() {
+  constructor(private authServ: AuthService) {
   }
 
   ngOnInit() {
@@ -16,5 +18,13 @@ export class PasswordResetPage implements OnInit {
 
   passwordResetFun() {
     alert('soon');
+    this.authServ.resetPassword(this.passwordResetData)
+        .subscribe(response => {
+              this.result = response;
+              console.log(response);
+            },
+            error1 => {
+              console.log('server Error: ', error1);
+            });
   }
 }

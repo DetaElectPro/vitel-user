@@ -58,7 +58,9 @@ export class AmbulanceDetailsPage implements OnInit {
   async requestData() {
     if (this.params.id !== 'null') {
       const loading = await this.loadingController.create({
-        message: 'Loading...'
+        message: 'Please wait...',
+        spinner: 'bubbles',
+        translucent: true,
       });
       await loading.present();
       await this.requestServe.getAmbulanceByIdService(this.requestId)

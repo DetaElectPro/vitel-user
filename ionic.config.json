@@ -5,5 +5,13 @@
     "cordova": {}
   },
   "type": "angular",
-  "id": "05cde846"
+  "id": "05cde846",
+  "v3": true,
+  "proxies": [
+    {
+      "path": "/api/",
+      "proxyUrl": "https://api.vital-helth.com/api"
+    }
+  ]
+
 }
