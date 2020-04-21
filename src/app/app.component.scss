@@ -1,10 +1,10 @@
 @font-face {
-  font-family: 'Open-Sans';
-  src: url('/assets/font/Medium.ttf')
+  font-family: 'Roboto';
+  src: url('/assets/font/Roboto-Medium.ttf')
 }
 
 * {
-  font-family: Open-Sans;
+  font-family: Roboto, serif;
 }
 
 
@@ -12,6 +12,7 @@ ion-toolbar {
   --color: #FFFFFF;
   --background: #3dc2ff
 }
+
 // card style
 .card {
   background: #FFF;
