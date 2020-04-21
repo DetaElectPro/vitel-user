@@ -13,6 +13,8 @@ export class LoginPage implements OnInit {
     loginData = {phone: null, password: null, role: null, fcm_registration_id: null};
     usersData: any = [];
     account: any = {type: null, role: null};
+    showPass = false;
+    passIcon = 'eye-outline';
 
     constructor(
         private authServe: AuthService,
@@ -61,5 +63,14 @@ export class LoginPage implements OnInit {
                     console.log('serve Error: ', err);
                 }
             );
+    }
+
+    showPassword() {
+        this.showPass = !this.showPass;
+        if (this.passIcon === 'eye-outline') {
+            this.passIcon = 'eye-off-outline';
+        } else {
+            this.passIcon = 'eye-outline';
+        }
     }
 }

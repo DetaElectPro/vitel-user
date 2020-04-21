@@ -32,8 +32,11 @@ export class RegisterPage implements OnInit {
     }
 
     async userRegister() {
+        console.log('input: ', this.registerData);
         const loading = await this.loadingController.create({
             message: 'Please wait...',
+            spinner: 'bubbles',
+            translucent: true
         });
         await loading.present();
         if (this.registerData.password === this.registerData.password_check) {

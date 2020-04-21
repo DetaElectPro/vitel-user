@@ -1,0 +1,35 @@
+.col-tel {
+  //margin-top: 50%;
+}
+
+.col-phone {
+  border: transparent;
+  //border: 1px solid;
+  // background-color: lightgrey;
+}
+
+.row {
+  border: transparent;
+  // background-color: lightgrey;
+  //border: 1px solid;
+  //border-top-left-radius: 15px;
+  //border-bottom-left-radius: 15px
+}
+
+.button-dev {
+  display: flex;
+  justify-content: center;
+}
+
+.h2-style {
+  margin-top: 30%;
+}
+
+.card-content-md h3, .card-content-md h4, .card-content-md h5, .card-content-md h6 {
+  margin-left: -5px;
+  margin-right: 7px;
+  margin-top: 36px;
+  margin-bottom: 2px;
+  font-size: 16px;
+  font-weight: 400;
+}

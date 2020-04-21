@@ -1,27 +1,26 @@
-//// style for auth pages
-//.auth-page {
-//  --background: none;
-//  //background: url("/assets/Background.png") fixed;
-//  // background: url("/assets/BackgroundShade.png") fixed;
-//  background-position: center center;
-//  background-repeat: no-repeat;
-//  background-size: cover;
-//  height: 100%;
-//  width: 100%;
-//  background-color: rgb(14, 14, 14) !important;
-//
-//  // background-color: #fff;
-//}
-//
-//.auth-page2 {
-//  --background: none;
-//  // background: url("/assets/Background.png") fixed;
-//  //background: url("/assets/BackgroundShade.png") fixed;
-//  background-position: center center;
-//  background-repeat: no-repeat;
-//  background-size: cover;
-//  height: 100%;
-//  width: 100%;
-//
-//
-//}
+.col-tel {
+  //margin-top: 50%;
+}
+
+.col-phone {
+  border: transparent;
+  //border: 1px solid;
+  // background-color: lightgrey;
+}
+
+.row {
+  border: transparent;
+  // background-color: lightgrey;
+  //border: 1px solid;
+  //border-top-left-radius: 15px;
+  //border-bottom-left-radius: 15px
+}
+
+.button-dev {
+  display: flex;
+  justify-content: center;
+}
+
+.h2-style {
+  margin-top: 30%;
+}

@@ -16,20 +16,30 @@
     </ion-list>
 
     <ion-card>
-        <ion-card-content>
-            <ion-item>
-                <ion-label position="floating">Phone</ion-label>
-                <ion-input [(ngModel)]="loginData.phone" max="10" min="10" type="number"></ion-input>
-            </ion-item>
+<!--        <ion-card-content>-->
+            <ion-grid>
+                <ion-row class="row">
+                    <ion-col class="col-tel col-sm-1" size="2">
+                        <h2 class="h2-style">+249</h2>
+                    </ion-col>
+
+                    <ion-col class="col-phone" size="10">
+<!--                        <ion-label position="floating">Phone</ion-label>-->
+                        <ion-input [(ngModel)]="loginData.phone" placeholder="Phone 1XX or 9XX" type="tel">
+                        </ion-input>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
 
             <ion-item>
-                <ion-label position="floating">Password</ion-label>
-                <ion-input [(ngModel)]="loginData.password" max="20" min="6" type="password"></ion-input>
+<!--                <ion-label position="floating">Password</ion-label>-->
+                <ion-input [(ngModel)]="loginData.password" [type]="showPass? 'text': 'password'" placeholder="Password"></ion-input>
+                <ion-icon [name]="passIcon" slot="end" (click)="showPassword()"></ion-icon>
             </ion-item>
 
             <ion-button (click)="userLogin()" expand="block">Login</ion-button>
 
-        </ion-card-content>
+<!--        </ion-card-content>-->
 
         <p class="ion-text-center">Forgot your password?
             <a href="/password-reset">reset</a>
