@@ -3,6 +3,7 @@ import {Storage} from '@ionic/storage';
 import {AuthService} from '../../../Service/auth.service';
 import {Router} from '@angular/router';
 import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
+import {AndroidPermissions} from '@ionic-native/android-permissions/ngx';
 
 @Component({
     selector: 'app-tab2',
@@ -18,8 +19,12 @@ export class SettingPage implements OnInit {
         private storage: Storage,
         private iab: InAppBrowser,
         private authServ: AuthService,
+        private androidPermissions: AndroidPermissions,
         private route: Router) {
         this.token = this.storage.get('access_token');
+
+        this.checkCameraStoregPermission();
+        this.checkStoregPermission();
 
     }
 
@@ -66,4 +71,58 @@ export class SettingPage implements OnInit {
                 console.log('error: ', error);
             });
     }
+
+    checkCameraStoregPermission() {
+        this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.CAMERA).then(
+            result => {
+                if (result.hasPermission) {
+
+                    this.requestCameraermission();
+                } else {
+                    this.requestCameraermission();
+                }
+            },
+            err => {
+                alert(err);
+            }
+        );
+    }
+
+    checkStoregPermission() {
+        this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE).then(
+            result => {
+                if (result.hasPermission) {
+
+                    this.requestSTORAGEPermission();
+                } else {
+                    this.requestSTORAGEPermission();
+                }
+            },
+            err => {
+                alert(err);
+            }
+        );
+    }
+
+
+    requestCameraermission() {
+        this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.CAMER).then(
+            () => {
+                console.log('true');
+            }
+        ).catch(error => {
+            alert('Error requesting Camera permissions');
+        });
+    }
+
+    requestSTORAGEPermission() {
+        this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE).then(
+            () => {
+                console.log('true');
+            }
+        ).catch(error => {
+            alert('Error requesting STORAGE permissions');
+        });
+    }
+
 }

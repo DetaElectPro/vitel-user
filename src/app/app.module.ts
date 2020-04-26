@@ -11,8 +11,13 @@ import {AppComponent} from './app.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {IonicStorageModule} from '@ionic/storage';
 import {IonicSelectableModule} from 'ionic-selectable';
-import {FCM} from '@ionic-native/fcm/ngx';
 import {TokenInterceptor} from './interceptors/token.interceptor';
+import {FCM} from '@ionic-native/fcm/ngx';
+import { ImagePicker } from '@ionic-native/image-picker/ngx';
+import { Crop } from '@ionic-native/crop/ngx';
+import {FileTransfer} from '@ionic-native/file-transfer/ngx';
+import {File} from '@ionic-native/file/ngx';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 
 
 @NgModule({
@@ -28,6 +33,11 @@ import {TokenInterceptor} from './interceptors/token.interceptor';
         StatusBar,
         SplashScreen,
         FCM,
+        ImagePicker,
+        FileTransfer,
+        File,
+        Crop,
+        AndroidPermissions,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
         {
             provide: HTTP_INTERCEPTORS,

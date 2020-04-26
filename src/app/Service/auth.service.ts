@@ -136,5 +136,11 @@ export class AuthService {
         return this.http.get(`${this.url}home`);
     }
 
+    public uploadCvFile(formData) {
+        return this.http.post<any>(`${this.url}upload_cv`, formData);
+    }
 
+    public uploadImage(formData) {
+        return this.http.post<any>(`${this.url}upload_image`, formData);
+    }
 }

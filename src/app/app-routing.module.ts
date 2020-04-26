@@ -104,6 +104,10 @@ const routes: Routes = [
     path: 'account-type',
     loadChildren: () => import('./Pages/user-pages/account-type/account-type.module').then( m => m.AccountTypePageModule)
   },
+  {
+    path: 'cv-upload',
+    loadChildren: () => import('./Pages/user-pages/cv-upload/cv-upload.module').then( m => m.CvUploadPageModule)
+  },
 
 
 
