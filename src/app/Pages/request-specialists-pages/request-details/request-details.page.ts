@@ -123,7 +123,7 @@ export class RequestDetailsPage implements OnInit {
                     text: 'Cancel',
                     role: 'cancel',
                     cssClass: 'secondary',
-                    handler: (blah) => {
+                    handler: () => {
                         console.log('Confirm Cancel: blah');
                     }
                 }, {
@@ -148,7 +148,7 @@ export class RequestDetailsPage implements OnInit {
                     text: 'Cancel',
                     role: 'cancel',
                     cssClass: 'secondary',
-                    handler: (blah) => {
+                    handler: () => {
                         console.log('Confirm Cancel: blah');
                     }
                 }, {

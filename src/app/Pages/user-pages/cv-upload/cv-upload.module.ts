@@ -1,20 +1,20 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
 
-import { IonicModule } from '@ionic/angular';
+import {IonicModule} from '@ionic/angular';
 
-import { CvUploadPageRoutingModule } from './cv-upload-routing.module';
-
-import { CvUploadPage } from './cv-upload.page';
+import {CvUploadPage} from './cv-upload.page';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    CvUploadPageRoutingModule
-  ],
-  declarations: [CvUploadPage]
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        RouterModule.forChild([{path: '', component: CvUploadPage}])
+    ],
+    declarations: [CvUploadPage]
 })
-export class CvUploadPageModule {}
+export class CvUploadPageModule {
+}

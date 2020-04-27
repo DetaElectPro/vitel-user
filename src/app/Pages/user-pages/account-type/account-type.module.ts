@@ -1,20 +1,21 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
 
-import { IonicModule } from '@ionic/angular';
+import {IonicModule} from '@ionic/angular';
 
-import { AccountTypePageRoutingModule } from './account-type-routing.module';
 
-import { AccountTypePage } from './account-type.page';
+import {AccountTypePage} from './account-type.page';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    AccountTypePageRoutingModule
-  ],
-  declarations: [AccountTypePage]
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        RouterModule.forChild([{path: '', component: AccountTypePage}])
+    ],
+    declarations: [AccountTypePage]
 })
-export class AccountTypePageModule {}
+export class AccountTypePageModule {
+}

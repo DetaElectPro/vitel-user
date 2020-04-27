@@ -23,7 +23,7 @@ export class SettingPage implements OnInit {
         private route: Router) {
         this.token = this.storage.get('access_token');
 
-        this.checkCameraStoregPermission();
+        // this.checkCameraStoregPermission();
         this.checkStoregPermission();
 
     }
@@ -72,21 +72,21 @@ export class SettingPage implements OnInit {
             });
     }
 
-    checkCameraStoregPermission() {
-        this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.CAMERA).then(
-            result => {
-                if (result.hasPermission) {
-
-                    this.requestCameraermission();
-                } else {
-                    this.requestCameraermission();
-                }
-            },
-            err => {
-                alert(err);
-            }
-        );
-    }
+    // checkCameraStoregPermission() {
+    //     this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.CAMERA).then(
+    //         result => {
+    //             if (result.hasPermission) {
+    //
+    //                 this.requestCameraermission();
+    //             } else {
+    //                 this.requestCameraermission();
+    //             }
+    //         },
+    //         err => {
+    //             alert(err);
+    //         }
+    //     );
+    // }
 
     checkStoregPermission() {
         this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE).then(
@@ -105,15 +105,15 @@ export class SettingPage implements OnInit {
     }
 
 
-    requestCameraermission() {
-        this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.CAMER).then(
-            () => {
-                console.log('true');
-            }
-        ).catch(error => {
-            alert('Error requesting Camera permissions');
-        });
-    }
+    // requestCameraermission() {
+    //     this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.CAMER).then(
+    //         () => {
+    //             console.log('true');
+    //         }
+    //     ).catch(error => {
+    //         alert('Error requesting Camera permissions');
+    //     });
+    // }
 
     requestSTORAGEPermission() {
         this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE).then(
@@ -121,6 +121,8 @@ export class SettingPage implements OnInit {
                 console.log('true');
             }
         ).catch(error => {
+            console.log('error: ', error);
+
             alert('Error requesting STORAGE permissions');
         });
     }
