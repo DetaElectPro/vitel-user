@@ -1,7 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {AuthService} from '../../../Service/auth.service';
-import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
-import {LoadingController} from '@ionic/angular';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { LoadingController, ToastController } from '@ionic/angular';
+import { FileUploader, FileLikeObject } from 'ng2-file-upload';
+import { FileUploadeService } from 'src/app/Service/file-uploade.service';
+import { concat } from 'rxjs';
 
 @Component({
     selector: 'app-register',
@@ -9,57 +11,97 @@ import {LoadingController} from '@ionic/angular';
     styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
-    registerData: any = {name: '', phone: '', password: '', password_check: '', role: null, fcm_registration_id: null};
+    registerData: any = { name: '', phone: '', password: '', role: null, fcm_registration_id: null, image: null };
 
     result: any;
-    account: any = {type: null, role: null};
+    showPass = false;
+    passIcon = 'eye-outline';
+
+
+    public fileUploader: FileUploader = new FileUploader({});
+    public hasBaseDropZoneOver = false;
+    // registerDataForm: FormGroup;
 
     constructor(
-        private authServe: AuthService,
         private route: Router,
+        public toastController: ToastController,
         public activatedRoute: ActivatedRoute,
+        private authService: FileUploadeService,
         public loadingController: LoadingController
     ) {
         this.activatedRoute.queryParams.subscribe(params => {
             this.registerData.role = params.role;
-            this.account.type = params.type;
-            console.log(params);
         });
+
+        // this.registerDataForm = new FormGroup({
+        //     name: new FormControl('', [Validators.required, Validators.minLength(5)]),
+        //     image: new FormControl('', [Validators.required, Validators.minLength(1)]),
+        //     phone: new FormControl('', [Validators.required, Validators.minLength(9)]),
+        //     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+
+        // });
     }
 
     ngOnInit() {
         this.registerData.fcm_registration_id = localStorage.getItem('fcm_registration_id');
     }
 
+
+
+    getFiles(): FileLikeObject[] {
+        return this.fileUploader.queue.map((fileItem) => {
+            return fileItem.file;
+        });
+    }
+
     async userRegister() {
-        console.log('input: ', this.registerData);
         const loading = await this.loadingController.create({
             message: 'Please wait...',
             spinner: 'bubbles',
             translucent: true
         });
+
         await loading.present();
-        if (this.registerData.password === this.registerData.password_check) {
-            this.authServe.registerServes(this.registerData)
-                .then(async response => {
-                    await loading.dismiss();
-                    this.result = response;
-                    if (this.result.error) {
-                        alert(`Message: ${this.result.message}`);
-                    } else {
-                        // this.route.navigate(['/login']);
-                        this.toLogin();
-                    }
-                })
-                .catch(async err => {
-                    const errs = JSON.parse(err.responseText);
-                    console.log('serve Error: ', errs);
-                    await loading.dismiss();
-                });
-        } else {
-            await loading.dismiss();
-            alert(`password don't match`);
-        }
+        const files = this.getFiles();
+        const requests = [];
+        files.forEach((file) => {
+            const formData = new FormData();
+            formData.append('image', file.rawFile, file.name);
+            formData.append('name', this.registerData.name);
+            formData.append('phone', this.registerData.phone);
+            formData.append('password', this.registerData.password);
+            formData.append('role', this.registerData.role);
+
+            requests.push(this.authService.registerServes(formData));
+
+        });
+
+        concat(...requests).subscribe(
+            async response => {
+                await loading.dismiss();
+                this.result = response;
+                if (this.result.error) {
+                    alert(`Message: ${this.result.message}`);
+                } else {
+                    this.toLogin();
+                }
+            },
+            async err => {
+                await loading.dismiss();
+                const errs = JSON.parse(err.responseText);
+                console.log('serve Error: ', errs);
+            });
+    }
+
+    async presentToast(message) {
+        const toast = await this.toastController.create({
+            message: message,
+            duration: 3000,
+            color: 'primary',
+            position: 'middle'
+        });
+        toast.present();
+        this.route.navigate(['/'])
     }
 
     async toLogin() {
@@ -69,5 +111,14 @@ export class RegisterPage implements OnInit {
             }
         };
         await this.route.navigate(['/login'], navigationExtras);
+    }
+
+    showPassword() {
+        this.showPass = !this.showPass;
+        if (this.passIcon === 'eye-outline') {
+            this.passIcon = 'eye-off-outline';
+        } else {
+            this.passIcon = 'eye-outline';
+        }
     }
 }

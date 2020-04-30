@@ -100,14 +100,20 @@ const routes: Routes = [
   {
     path: 'corona-details',
     loadChildren: () => import('./Pages/Blog-pages/corona-details/corona-details.module').then(m => m.CoronaDetailsPageModule)
-  },  {
+  },
+  {
     path: 'account-type',
     loadChildren: () => import('./Pages/user-pages/account-type/account-type.module').then( m => m.AccountTypePageModule)
   },
   {
-    path: 'cv-upload',
-    loadChildren: () => import('./Pages/user-pages/cv-upload/cv-upload.module').then( m => m.CvUploadPageModule)
+    path: 'image-update',
+    loadChildren: () => import('./Pages/user-pages/image-update/image-update.module').then( m => m.ImageUpdatePageModule)
   },
+  {
+    path: 'cv-update',
+    loadChildren: () => import('./Pages/user-pages/cv-update/cv-update.module').then( m => m.CvUpdatePageModule)
+  },
+
 
 
 

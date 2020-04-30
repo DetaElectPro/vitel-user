@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {ActionSheetController, Platform} from '@ionic/angular';
-import {Storage} from '@ionic/storage';
-import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
-import {Router} from '@angular/router';
-import {AuthService} from '../../../Service/auth.service';
+import { Component, OnInit } from '@angular/core';
+import { ActionSheetController, Platform } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { Router } from '@angular/router';
+import { AuthService } from '../../../Service/auth.service';
 
 
 @Component({
@@ -41,25 +41,12 @@ export class HomePage implements OnInit {
                 this.updateFcmToken();
             }
         });
+    }
+
+
+    ionViewDidEnter() {
         this.getDashboardData();
-
     }
-
-
-    // ionViewDidEnter() {
-    //
-    // }
-
-    openCvUpdate() {
-        const browser = this.iab.create('https://api.vital-helth.com/profile/' + this.userInfo.id);
-        browser.on('loadstop').subscribe(event => {
-                console.log('sus: ', event);
-            },
-            error => {
-                console.log('error: ', error);
-            });
-    }
-
 
     getDashboardData() {
         this.userServ.checkUserService()
@@ -196,20 +183,20 @@ export class HomePage implements OnInit {
                     this.router.navigate(['/pharmacy-history']);
                 }
             },
-                {
-                    text: 'Your Accept history',
-                    icon: 'list-circle-outline',
-                    handler: () => {
-                        this.router.navigate(['/accept-pharmacy']);
-                    }
-                }, {
-                    text: 'Cancel',
-                    icon: 'close',
-                    role: 'cancel',
-                    handler: () => {
-                        console.log('Cancel clicked');
-                    }
-                }]
+            {
+                text: 'Your Accept history',
+                icon: 'list-circle-outline',
+                handler: () => {
+                    this.router.navigate(['/accept-pharmacy']);
+                }
+            }, {
+                text: 'Cancel',
+                icon: 'close',
+                role: 'cancel',
+                handler: () => {
+                    console.log('Cancel clicked');
+                }
+            }]
         });
         await actionSheet.present();
     }
