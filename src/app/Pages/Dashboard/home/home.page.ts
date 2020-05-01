@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActionSheetController, Platform } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../Service/auth.service';
 
@@ -19,7 +18,6 @@ export class HomePage implements OnInit {
         private platform: Platform,
         private storage: Storage,
         public router: Router,
-        private iab: InAppBrowser,
         private userServ: AuthService,
         public actionSheetController: ActionSheetController
     ) {

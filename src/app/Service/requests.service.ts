@@ -53,7 +53,10 @@ export class RequestsService {
      * Search request by title
      */
     public searchRequestsSecialists(title: string): Observable<any> {
-        return this.http.get(`${this.Url}search_request_specialists/${title}`);
+        const data = {
+            'title': title
+        };
+        return this.http.post(`${this.Url}search_request_specialists`, data);
     }
 
     /**

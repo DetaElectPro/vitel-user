@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="padding">
-    <ion-card *ngIf="userInfo" color="light">
+    <ion-card *ngIf="userInfo" color="light" routerLink="/image-update">
         <ion-item>
             <ion-avatar slot="start">
                 <img src="{{userInfo?.image}}"/>
@@ -13,6 +13,7 @@
             <ion-label>Welcome, <br>Dr. {{userInfo?.name}}</ion-label>
         </ion-item>
     </ion-card>
+
     <ion-grid>
         <ion-row>
             <ion-col (click)="requestActionSheet()" size="4">
