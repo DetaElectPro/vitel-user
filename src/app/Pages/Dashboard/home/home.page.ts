@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ActionSheetController, Platform } from '@ionic/angular';
-import { Storage } from '@ionic/storage';
-import { Router } from '@angular/router';
-import { AuthService } from '../../../Service/auth.service';
+import {Component, OnInit} from '@angular/core';
+import {ActionSheetController, Platform} from '@ionic/angular';
+import {Storage} from '@ionic/storage';
+import {Router} from '@angular/router';
+import {AuthService} from '../../../Service/auth.service';
 
 
 @Component({
@@ -33,7 +33,7 @@ export class HomePage implements OnInit {
             });
 
         this.platform.ready().then(() => {
-            console.log('Fcm: ', localStorage.getItem('fcm_registration_id'));
+            // console.log('Fcm: ', localStorage.getItem('fcm_registration_id'));
             if (localStorage.getItem('fcm_registration_id') === null || localStorage.getItem('fcm_registration_id') === undefined) {
             } else {
                 this.updateFcmToken();
@@ -49,7 +49,7 @@ export class HomePage implements OnInit {
     getDashboardData() {
         this.userServ.checkUserService()
             .subscribe(response => {
-                console.log('check_user: ', this.response = response);
+                this.response = response;
 
                 if (this.response.status === true) {
                 } else {
@@ -67,7 +67,7 @@ export class HomePage implements OnInit {
 
         await this.userServ.updateFcmToken(data)
             .subscribe(response => {
-                console.log('Fcm update res: ', response);
+                // console.log('Fcm update res: ', response);
                 // if (this.response.status === true) {
                 // } else {
                 //     alert('filed');
@@ -181,20 +181,20 @@ export class HomePage implements OnInit {
                     this.router.navigate(['/pharmacy-history']);
                 }
             },
-            {
-                text: 'Your Accept history',
-                icon: 'list-circle-outline',
-                handler: () => {
-                    this.router.navigate(['/accept-pharmacy']);
-                }
-            }, {
-                text: 'Cancel',
-                icon: 'close',
-                role: 'cancel',
-                handler: () => {
-                    console.log('Cancel clicked');
-                }
-            }]
+                {
+                    text: 'Your Accept history',
+                    icon: 'list-circle-outline',
+                    handler: () => {
+                        this.router.navigate(['/accept-pharmacy']);
+                    }
+                }, {
+                    text: 'Cancel',
+                    icon: 'close',
+                    role: 'cancel',
+                    handler: () => {
+                        console.log('Cancel clicked');
+                    }
+                }]
         });
         await actionSheet.present();
     }

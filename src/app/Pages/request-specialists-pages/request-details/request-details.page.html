@@ -1,11 +1,11 @@
 <ion-header>
     <ion-toolbar>
         <ion-buttons slot="start">
-            <ion-button expand="block" routerDirection="backward" routerLink="/request">
+            <ion-button expand="block" routerDirection="backward" routerLink="/requests">
                 <ion-icon name="arrow-back-outline"></ion-icon>
             </ion-button>
         </ion-buttons>
-        <ion-title>Request Details</ion-title>
+        <ion-title class="ion-text-center">Request Details</ion-title>
     </ion-toolbar>
 </ion-header>
 
@@ -21,7 +21,6 @@
             </ion-avatar>
             <ion-label>
                 <h3>Create by: DR. {{request.user.name}}</h3>
-                <!--                <p>{{item.dob}}</p>-->
             </ion-label>
         </ion-item>
 
@@ -52,7 +51,7 @@
     </ion-card>
     <ion-card>
         <ion-card-content>
-            <p>Price: {{request.price}}</p>
+            <p>Price: {{request.price}} /h</p>
             <p>End At: {{request.end_time| date: 'MM/ dd'}}</p>
             <p *ngIf="request.status == 2">Contact: {{request.user.phone}}</p>
         </ion-card-content>

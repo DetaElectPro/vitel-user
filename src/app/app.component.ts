@@ -4,7 +4,7 @@ import {Platform} from '@ionic/angular';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {FCM} from '@ionic-native/fcm/ngx';
-import {AndroidPermissions} from '@ionic-native/android-permissions/ngx';
+import {NavigationExtras, Router} from '@angular/router';
 
 @Component({
     selector: 'app-root',
@@ -18,6 +18,7 @@ export class AppComponent {
         private splashScreen: SplashScreen,
         private statusBar: StatusBar,
         private fcm: FCM,
+        private router: Router
     ) {
         this.initializeApp();
     }
@@ -43,11 +44,28 @@ export class AppComponent {
         this.fcm.onNotification().subscribe(data => {
             console.log(data);
             if (data.wasTapped) {
-                console.log('Received in background');
-                // this.router.navigate([data.landing_page, data.price]);
+                if (data.requestId) {
+                    const navigationExtras: NavigationExtras = {
+                        queryParams: {
+                            latitude: data.latitude,
+                            longitude: data.longitude,
+                            id: data.requestId,
+                        }
+                    };
+                    this.router.navigate([`request-details/${data.requestId}`], navigationExtras);
+                }
             } else {
                 console.log('Received in foreground');
-                // this.router.navigate([data.landing_page, data.price]);
+                if (data.requestId) {
+                    const navigationExtras: NavigationExtras = {
+                        queryParams: {
+                            latitude: data.latitude,
+                            longitude: data.longitude,
+                            id: data.requestId,
+                        }
+                    };
+                    this.router.navigate([`request-details/${data.requestId}`], navigationExtras);
+                }
             }
         });
 

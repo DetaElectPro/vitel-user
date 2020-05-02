@@ -58,13 +58,13 @@ export class RequestsPage implements OnInit {
         this.requestService.searchRequestsSecialists(this.requestsSearch).subscribe(
             resp => {
                 if (resp.count > 0) {
-                    this.requestsData = resp.results;
+                    this.requestsData = resp;
                     this.dataNotFound = false;
                 } else {
                     this.requestsData = [];
                     this.dataNotFound = true;
                 }
-                console.log('Search Result', resp);
+                // console.log('Search Result', resp);
             },
             err => {
                 console.log(err);

@@ -4,126 +4,126 @@ import {AlertController, LoadingController, ToastController} from '@ionic/angula
 import {EmergencyService} from '../../../Service/emergency.service';
 
 @Component({
-  selector: 'app-pharmacy-details',
-  templateUrl: './pharmacy-details.page.html',
-  styleUrls: ['./pharmacy-details.page.scss'],
+    selector: 'app-pharmacy-details',
+    templateUrl: './pharmacy-details.page.html',
+    styleUrls: ['./pharmacy-details.page.scss'],
 })
 export class PharmacyDetailsPage implements OnInit {
-  requestId: number;
-  result: any;
-  pharmacy: any;
-  acceptRes: any;
-  formCard = false;
-  formData = {price: null, address: ''};
+    requestId: number;
+    result: any;
+    pharmacy: any;
+    acceptRes: any;
+    formCard = false;
+    formData = {price: null, address: ''};
 
-  constructor(
-      public tostMessage: ToastController,
-      private activeRoute: ActivatedRoute,
-      private presentAlertConfirm: AlertController,
-      private loadingController: LoadingController,
-      public router: Router,
-      private pharmacyServe: EmergencyService
-  ) {
-    this.activeRoute.params.subscribe(
-        params => {
-          this.requestId = params.id;
-        }
-    );
-  }
-
-  ngOnInit() {
-    this.requestData();
-  }
-
-
-  async requestData() {
-    const loading = await this.loadingController.create({
-      message: 'Please wait...',
-      spinner: 'bubbles',
-      translucent: true
-    });
-    await loading.present();
-    await this.pharmacyServe.getPharmcyRequestbyID(this.requestId)
-        .subscribe(result => {
-          this.result = result;
-          this.pharmacy = this.result.data;
-          loading.dismiss();
-        }, err => {
-          console.log(err);
-          loading.dismiss();
-        });
-  }
-
-  acceptRequest(data) {
-    this.pharmacyServe.updatePharmcyRequest(this.requestId, data)
-        .subscribe(response => {
-              console.log(this.acceptRes = response);
-              if (this.acceptRes.success) {
-                this.succseMessage(this.acceptRes.message);
-                this.router.navigateByUrl('/');
-              } else {
-                this.faildMessage();
-              }
-
-            },
-            error => {
-              this.acceptRes = error;
-              alert('try later');
-              console.log(this.acceptRes);
+    constructor(
+        public tostMessage: ToastController,
+        private activeRoute: ActivatedRoute,
+        private presentAlertConfirm: AlertController,
+        private loadingController: LoadingController,
+        public router: Router,
+        private pharmacyServe: EmergencyService
+    ) {
+        this.activeRoute.params.subscribe(
+            params => {
+                this.requestId = params.id;
             }
         );
-  }
+    }
 
-  async emergencyConfirm(data) {
-    const alert = await this.presentAlertConfirm.create({
-      header: 'Confirm!',
-      message: 'Message <strong>Do you want to follow up and agree to the request?</strong>!!!',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: (blah) => {
-          }
-        }, {
-          text: 'Okay',
-          handler: () => {
-            console.log('Confirm Okay');
-            this.acceptRequest(data);
-          }
-        }
-      ]
-    });
+    ngOnInit() {
+        this.requestData();
+    }
 
-    await alert.present();
-  }
 
-  pharmacyConfirm() {
-    this.formCard = true;
-  }
+    async requestData() {
+        const loading = await this.loadingController.create({
+            message: 'Please wait...',
+            spinner: 'bubbles',
+            translucent: true
+        });
+        await loading.present();
+        await this.pharmacyServe.getPharmcyRequestbyID(this.requestId)
+            .subscribe(result => {
+                this.result = result;
+                this.pharmacy = this.result.data;
+                loading.dismiss();
+            }, err => {
+                console.log(err);
+                loading.dismiss();
+            });
+    }
 
-  requestCancel() {
-    this.formCard = false;
+    acceptRequest(data) {
+        this.pharmacyServe.updatePharmcyRequest(this.requestId, data)
+            .subscribe(response => {
+                    console.log(this.acceptRes = response);
+                    if (this.acceptRes.success) {
+                        this.succseMessage(this.acceptRes.message);
+                        this.router.navigateByUrl('/');
+                    } else {
+                        this.faildMessage();
+                    }
 
-  }
+                },
+                error => {
+                    this.acceptRes = error;
+                    this.faildMessage();
+                    console.log(this.acceptRes);
+                }
+            );
+    }
 
-  async succseMessage(messge) {
-    const toast = await this.tostMessage.create({
-      message: messge,
-      duration: 3000,
-      color: 'primary',
-      position: 'middle'
-    });
-    toast.present();
-  }
+    async emergencyConfirm(data) {
+        const alert = await this.presentAlertConfirm.create({
+            header: 'Confirm!',
+            message: 'Message <strong>Do you want to follow up and agree to the request?</strong>!!!',
+            buttons: [
+                {
+                    text: 'Cancel',
+                    role: 'cancel',
+                    cssClass: 'secondary',
+                    handler: (blah) => {
+                    }
+                }, {
+                    text: 'Okay',
+                    handler: () => {
+                        console.log('Confirm Okay');
+                        this.acceptRequest(data);
+                    }
+                }
+            ]
+        });
 
-  async faildMessage() {
-    const toast = await this.tostMessage.create({
-      message: 'try again with veiled data',
-      duration: 3000,
-      color: 'danger',
-      position: 'middle'
-    });
-    toast.present();
-  }
+        await alert.present();
+    }
+
+    pharmacyConfirm() {
+        this.formCard = true;
+    }
+
+    requestCancel() {
+        this.formCard = false;
+
+    }
+
+    async succseMessage(messge) {
+        const toast = await this.tostMessage.create({
+            message: messge,
+            duration: 3000,
+            color: 'success',
+            position: 'middle'
+        });
+        toast.present();
+    }
+
+    async faildMessage() {
+        const toast = await this.tostMessage.create({
+            message: 'try again with veiled data',
+            duration: 3000,
+            color: 'danger',
+            position: 'middle'
+        });
+        toast.present();
+    }
 }

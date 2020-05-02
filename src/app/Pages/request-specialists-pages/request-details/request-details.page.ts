@@ -166,7 +166,7 @@ export class RequestDetailsPage implements OnInit {
 
 
     ionViewDidEnter() {
-        this.map = new Map('mapId').setView([this.params.latitude, this.params.longitude], 20);
+        this.map = new Map('mapId').setView([this.params.latitude, this.params.longitude], 18);
         tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {
             // tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
             attribution: 'detaTech.xyz'
@@ -176,7 +176,7 @@ export class RequestDetailsPage implements OnInit {
 
     leafletMap() {
         const dot = icon({
-            iconUrl: 'assets/icon/pin.png',
+            iconUrl: 'assets/images/pin.png',
             // shadowUrl: 'dot-shadow.png',
             iconSize: [40, 40], // size of the icon
             shadowSize: [50, 64], // size of the shadow

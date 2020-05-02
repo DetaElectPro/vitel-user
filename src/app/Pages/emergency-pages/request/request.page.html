@@ -1,6 +1,11 @@
 <ion-header>
     <ion-toolbar>
-        <ion-title>Requests</ion-title>
+        <ion-buttons slot="start">
+            <ion-button expand="block" routerDirection="backward" routerLink="/tabs/home">
+                <ion-icon name="arrow-back-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title class="ion-text-center">Requests</ion-title>
     </ion-toolbar>
 </ion-header>
 <ion-content *ngIf="!emergencyData" class="ion-padding custom-skeleton">
@@ -24,16 +29,19 @@
     </ion-refresher>
     <ion-list>
         <ion-item *ngFor="let item of emergencyData" routerLink="/emergency-details/{{item.id}}">
+            <ion-avatar slot="start">
+                <img src="{{item?.user?.image}}"/>
+            </ion-avatar>
             <ion-label>
-<!--                <p>id: {{item?.id}}</p>-->
+                <!--                <p>id: {{item?.id}}</p>-->
                 <h2>Name: {{item?.name}}</h2>
                 <h3>Type: {{item?.type}}</h3>
                 <h3>available: {{item?.available}}</h3>
                 <p>Address: {{item?.address}}</p>
                 <p>Price per day: {{item?.price_per_day}}</p>
-<!--                <p>contact: {{item?.contact}}</p>-->
-<!--                <p>Post at: {{item?.created_at}}</p>-->
-<!--                <p>Last update at: {{item?.updated_at}}</p>-->
+                <!--                <p>contact: {{item?.contact}}</p>-->
+                <!--                <p>Post at: {{item?.created_at}}</p>-->
+                <!--                <p>Last update at: {{item?.updated_at}}</p>-->
             </ion-label>
             <ion-card-header>
 
