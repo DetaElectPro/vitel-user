@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { FileLikeObject, FileUploader } from 'ng2-file-upload';
-import { concat } from 'rxjs';
-import { Storage } from '@ionic/storage';
-import { FileUploadeService } from '../../../Service/file-uploade.service';
-import { MedicalBoard } from 'src/app/Models/medical-board';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { LoadingController, ToastController } from '@ionic/angular';
+import {Component, OnInit} from '@angular/core';
+import {FileLikeObject, FileUploader} from 'ng2-file-upload';
+import {concat} from 'rxjs';
+import {Storage} from '@ionic/storage';
+import {FileUploadeService} from '../../../Service/file-uploade.service';
+import {MedicalBoard} from 'src/app/Models/medical-board';
+import {FormGroup, FormControl, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {LoadingController, ToastController} from '@ionic/angular';
 
 @Component({
     selector: 'app-cv-update',
@@ -21,6 +21,7 @@ export class CvUpdatePage implements OnInit {
     medicalData: MedicalBoard;
     updateResponse: any;
     userInfo: any;
+
     constructor(
         private storage: Storage,
         public router: Router,
@@ -49,10 +50,14 @@ export class CvUpdatePage implements OnInit {
     }
 
     getFiles(): FileLikeObject[] {
-        return this.fileUploader.queue.map((fileItem) => {
-            return fileItem.file;
+        if (this.fileUploader.queue.length > 1) {
+            this.fileUploader.removeFromQueue(this.fileUploader.queue[0]);
+        } else {
+            return this.fileUploader.queue.map((fileItem) => {
+                return fileItem.file;
 
-        });
+            });
+        }
     }
 
     async uploadFiles() {
@@ -79,9 +84,8 @@ export class CvUpdatePage implements OnInit {
                 console.log(res);
                 this.updateResponse = res;
                 if (!this.updateResponse.error) {
-                    this.presentToast(this.updateResponse.message)
-                }
-                else {
+                    this.presentToast(this.updateResponse.message);
+                } else {
                     alert('Error');
                 }
             },
@@ -92,14 +96,14 @@ export class CvUpdatePage implements OnInit {
         );
     }
 
-    async presentToast(message) {
+    async presentToast(messageRes) {
         const toast = await this.toastController.create({
-            message: message,
+            message: messageRes,
             duration: 3000,
             color: 'primary',
             position: 'middle'
         });
         toast.present();
-        this.router.navigate(['/'])
+        this.router.navigate(['/']);
     }
 }

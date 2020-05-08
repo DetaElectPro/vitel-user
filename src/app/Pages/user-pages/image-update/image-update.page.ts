@@ -48,10 +48,14 @@ export class ImageUpdatePage implements OnInit {
     }
 
     getFiles(): FileLikeObject[] {
-        return this.fileUploader.queue.map((fileItem) => {
-            return fileItem.file;
+        if (this.fileUploader.queue.length > 1) {
+            this.fileUploader.removeFromQueue(this.fileUploader.queue[0]);
+        } else {
+            return this.fileUploader.queue.map((fileItem) => {
+                return fileItem.file;
 
-        });
+            });
+        }
     }
 
     async uploadFiles() {

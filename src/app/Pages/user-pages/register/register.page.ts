@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
-import { LoadingController, ToastController } from '@ionic/angular';
-import { FileUploader, FileLikeObject } from 'ng2-file-upload';
-import { FileUploadeService } from 'src/app/Service/file-uploade.service';
-import { concat } from 'rxjs';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
+import {LoadingController, ToastController} from '@ionic/angular';
+import {FileUploader, FileLikeObject} from 'ng2-file-upload';
+import {FileUploadeService} from 'src/app/Service/file-uploade.service';
+import {concat} from 'rxjs';
 
 @Component({
     selector: 'app-register',
@@ -11,16 +11,13 @@ import { concat } from 'rxjs';
     styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
-    registerData: any = { name: '', phone: '', password: '', role: null, fcm_registration_id: null, image: null };
+    registerData: any = {name: '', phone: '', password: '', role: null, fcm_registration_id: null, image: null};
 
     result: any;
     showPass = false;
     passIcon = 'eye-outline';
 
-
     public fileUploader: FileUploader = new FileUploader({});
-    public hasBaseDropZoneOver = false;
-    // registerDataForm: FormGroup;
 
     constructor(
         private route: Router,
@@ -33,13 +30,6 @@ export class RegisterPage implements OnInit {
             this.registerData.role = params.role;
         });
 
-        // this.registerDataForm = new FormGroup({
-        //     name: new FormControl('', [Validators.required, Validators.minLength(5)]),
-        //     image: new FormControl('', [Validators.required, Validators.minLength(1)]),
-        //     phone: new FormControl('', [Validators.required, Validators.minLength(9)]),
-        //     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
-
-        // });
     }
 
     ngOnInit() {
@@ -47,11 +37,14 @@ export class RegisterPage implements OnInit {
     }
 
 
-
     getFiles(): FileLikeObject[] {
-        return this.fileUploader.queue.map((fileItem) => {
-            return fileItem.file;
-        });
+        if (this.fileUploader.queue.length > 1) {
+            this.fileUploader.removeFromQueue(this.fileUploader.queue[0]);
+        } else {
+            return this.fileUploader.queue.map((fileItem) => {
+                return fileItem.file;
+            });
+        }
     }
 
     async userRegister() {
@@ -83,6 +76,7 @@ export class RegisterPage implements OnInit {
                 if (this.result.error) {
                     alert(`Message: ${this.result.message}`);
                 } else {
+                    this.presentToast(this.result.message);
                     this.toLogin();
                 }
             },
@@ -93,15 +87,15 @@ export class RegisterPage implements OnInit {
             });
     }
 
-    async presentToast(message) {
+    async presentToast(messageRes) {
         const toast = await this.toastController.create({
-            message: message,
+            message: messageRes,
             duration: 3000,
             color: 'primary',
             position: 'middle'
         });
         toast.present();
-        this.route.navigate(['/'])
+        this.route.navigate(['/']);
     }
 
     async toLogin() {
