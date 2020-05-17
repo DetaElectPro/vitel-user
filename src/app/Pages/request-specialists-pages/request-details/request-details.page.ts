@@ -195,4 +195,12 @@ export class RequestDetailsPage implements OnInit {
     ionViewWillLeave() {
         this.map.remove();
     }
+
+    doRefresh(event) {
+        this.requestData();
+
+        setTimeout(() => {
+            event.target.complete();
+        }, 2000);
+    }
 }

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../../Service/auth.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {LoadingController} from '@ionic/angular';
+import {LoadingController, ToastController} from '@ionic/angular';
 
 
 @Component({
@@ -20,7 +20,8 @@ export class LoginPage implements OnInit {
         private authServe: AuthService,
         private router: Router,
         public activatedRoute: ActivatedRoute,
-        public loadingController: LoadingController
+        public loadingController: LoadingController,
+        public toastController: ToastController
     ) {
         this.activatedRoute.queryParams.subscribe(params => {
             this.loginData.role = params.role;
@@ -48,18 +49,23 @@ export class LoginPage implements OnInit {
                 await loading.dismiss();
                 this.usersData = response;
                 if (this.usersData.error) {
-                    alert('error data');
+                    // alert('error data');
+                    this.errorToast(this.usersData.message);
                 } else {
+                    this.passToast(this.usersData.message);
                     if (this.usersData.user.status === 1) {
+                        this.passToast(this.usersData.message);
                         await this.router.navigate(['/medical-board']);
                     }
                     if (this.usersData.user.status === 2 || this.usersData.user.status === 3) {
-                        await this.router.navigate(['/']);
+                        this.passToast(this.usersData.message);
+                        await this.router.navigate(['/tabs/home']);
                     }
                 }
             })
             .catch(async err => {
                     await loading.dismiss();
+                    this.errorToast('Server Error check your internet or try later')
                     console.log('serve Error: ', err);
                 }
             );
@@ -72,5 +78,25 @@ export class LoginPage implements OnInit {
         } else {
             this.passIcon = 'eye-outline';
         }
+    }
+
+    async errorToast(messageRes) {
+        const toast = await this.toastController.create({
+            message: messageRes,
+            duration: 7000,
+            color: 'danger',
+            position: 'middle',
+        });
+        toast.present();
+    }
+
+    async passToast(messageRes) {
+        const toast = await this.toastController.create({
+            message: messageRes,
+            duration: 7000,
+            color: 'success',
+            position: 'middle',
+        });
+        toast.present();
     }
 }

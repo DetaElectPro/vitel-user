@@ -70,4 +70,13 @@
         </div>
 
     </ion-card>
+
+    <ion-refresher (ionRefresh)="doRefresh($event)" slot="fixed">
+        <ion-refresher-content
+                pullingIcon="arrow-down-outline"
+                pullingText="Pull to refresh"
+                refreshingSpinner="circles"
+                refreshingText="Refreshing...">
+        </ion-refresher-content>
+    </ion-refresher>
 </ion-content>

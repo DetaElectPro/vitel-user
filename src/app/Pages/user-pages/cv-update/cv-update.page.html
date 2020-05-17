@@ -1,9 +1,10 @@
 <ion-header>
-    <ion-toolbar> <ion-buttons slot="start">
-        <ion-button expand="block" routerDirection="backward" routerLink="/tabs/setting">
-            <ion-icon name="arrow-back-outline"></ion-icon>
-        </ion-button>
-    </ion-buttons>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-button expand="block" routerDirection="backward" routerLink="/tabs/setting">
+                <ion-icon name="arrow-back-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
         <ion-title class="ion-text-center">Cv Update</ion-title>
     </ion-toolbar>
 </ion-header>
@@ -12,15 +13,15 @@
 <ion-content class="ion-padding" color="dark">
     <ion-item *ngIf="userInfo">
         <ion-avatar slot="start">
-            <img src="{{userInfo?.image}}" />
+            <img src="{{userInfo?.image}}"/>
         </ion-avatar>
         <ion-label>Welcome, <br>Dr. {{userInfo?.name}}</ion-label>
     </ion-item>
 
     <form (ngSubmit)="uploadFiles()" [formGroup]="requestDataForm" novalidate>
         <ion-item class="input">
-            <input [uploader]="fileUploader" accept="application/pdf" formControlName="cv" ng2FileSelect type="file"
-                id="file" class="fileInput input" />
+            <input [uploader]="fileUploader" formControlName="cv" ng2FileSelect type="file"
+                   id="file" class="fileInput input"/>
             <label for="file">
                 <ion-icon color="primary" name="list-circle-outline"></ion-icon>
                 choose a Cv file
@@ -30,4 +31,7 @@
 
         <ion-button expand="full" [disabled]="requestDataForm.invalid" type="submit">Update Cv file</ion-button>
     </form>
+
+    <ion-button expand="full" [href]="userInfo?.employ?.cv" target="_blank">Download your Cv file</ion-button>
+
 </ion-content>

@@ -99,11 +99,11 @@ export class CvUpdatePage implements OnInit {
     async presentToast(messageRes) {
         const toast = await this.toastController.create({
             message: messageRes,
-            duration: 3000,
-            color: 'primary',
+            duration: 7000,
+            color: 'success',
             position: 'middle'
         });
         toast.present();
-        this.router.navigate(['/']);
+        this.router.navigate(['/tabs/home']);
     }
 }

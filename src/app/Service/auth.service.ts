@@ -12,6 +12,7 @@ const TOKEN_KEY = 'auth-token';
 
 export class AuthService {
     token: any;
+    response: any;
     user: any;
     url = 'https://api.vital-helth.com/api/';
 
@@ -47,10 +48,13 @@ export class AuthService {
 
     logout() {
         this.http.post(`${this.url}logout`, localStorage.getItem('token'));
+        this.storage.remove('token');
         return this.storage.remove('userInfo').then(res => {
-            console.log('logOut: ', res);
             this.storage.remove(TOKEN_KEY).then(() => {
                 localStorage.removeItem('token');
+
+                localStorage.clear();
+                this.storage.clear();
                 this.authenticationState.next(false);
             });
         });
@@ -72,34 +76,37 @@ export class AuthService {
         return new Promise((resolve, reject) => {
             this.http.post(this.url + 'auth/login', userData)
                 .subscribe(res => {
-                    this.token = res;
-                    this.user = res;
-                    this.token = this.token.token;
-                    localStorage.setItem('token', this.token);
-                    this.storage.set(TOKEN_KEY, this.token).then(() => {
-                        this.authenticationState.next(true);
-                    });
-                    this.storage.set('userInfo', this.user.user).then(r =>
-                        r.toString());
-                    resolve(res);
+                    this.response = res;
+                    if (!this.response.error) {
+                        this.token = res;
+                        this.user = res;
+                        this.token = this.token.token;
+                        localStorage.setItem('token', this.token);
+                        this.storage.set(TOKEN_KEY, this.token).then(() => {
+                            this.authenticationState.next(true);
+                        });
+                        this.storage.set('userInfo', this.user.user).then(r =>
+                            r.toString());
+                        resolve(res);
+                    }
                 }, (err) => {
                     reject(err);
                 });
         });
     }
 
-    registerServes(userData) {
-        return new Promise((resolve, reject) => {
-            this.http.post(this.url + 'auth/register', JSON.stringify(userData), {
-                headers: new HttpHeaders().set('Content-Type', 'application/json'),
-            })
-                .subscribe(res => {
-                    resolve(res);
-                }, (err) => {
-                    reject(err);
-                });
-        });
-    }
+    // registerServes(userData) {
+    //     return new Promise((resolve, reject) => {
+    //         this.http.post(this.url + 'auth/register', JSON.stringify(userData), {
+    //             headers: new HttpHeaders().set('Content-Type', 'application/json'),
+    //         })
+    //             .subscribe(res => {
+    //                 resolve(res);
+    //             }, (err) => {
+    //                 reject(err);
+    //             });
+    //     });
+    // }
 
     public resetPassword(phone): Observable<any> {
         return this.http.post(`${this.url}reset_password`, phone);

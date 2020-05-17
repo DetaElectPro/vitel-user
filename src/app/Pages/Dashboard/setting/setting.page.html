@@ -7,10 +7,10 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-    <ion-card *ngIf="token" color="light">
+    <ion-card *ngIf="userInfo" color="light">
         <ion-item>
             <ion-avatar slot="start">
-                <img src="{{userInfo?.image}}" />
+                <img src="{{userInfo?.image}}"/>
             </ion-avatar>
             <ion-label>Name: Dr. {{userInfo?.name}}</ion-label>
         </ion-item>
@@ -23,26 +23,27 @@
     <ion-list>
         <ion-item href="image-update">
             <span style="font-size: large">Profile</span>
-            <ion-icon color="primary" name="image-sharp" slot="end"></ion-icon>
+            <ion-icon src="assets/icon/image.svg" slot="end"></ion-icon>
+            <ion-icon color="primary" name="image-sharp"></ion-icon>
         </ion-item>
 
         <ion-item href="cv-update">
             <span style="font-size: large">Medical Board</span>
-            <ion-icon color="primary" name="document-attach-outline" slot="end"></ion-icon>
+            <ion-icon src="assets/icon/new-file.svg" slot="end"></ion-icon>
         </ion-item>
 
         <ion-item href="tabs/wallet">
             <span style="font-size: large"> My Wallet</span>
-            <ion-icon color="primary" name="wallet-sharp" slot="end"></ion-icon>
+            <ion-icon src="assets/icon/wallet.svg" slot="end"></ion-icon>
         </ion-item>
 
         <ion-item (click)="openTermsAndConditions()">
             <span style="font-size: large">Terms and conditions</span>
-            <ion-icon color="primary" name="document-attach-outline" slot="end"></ion-icon>
+            <ion-icon src="assets/icon/file-document1.svg" slot="end"></ion-icon>
         </ion-item>
         <ion-item (click)="openPrivacyPolicy()">
             <span style="font-size: large"> privacy policy.</span>
-            <ion-icon color="primary" name="file-tray-full-sharp" slot="end"></ion-icon>
+            <ion-icon src="assets/icon/file-document2.svg" slot="end"></ion-icon>
         </ion-item>
 
         <ion-button color="danger" (click)="logOut()" *ngIf="token" expand="full">
@@ -50,4 +51,6 @@
         </ion-button>
 
     </ion-list>
+
+    <p class="ion-text-center" style="color: red"> V 1.1</p>
 </ion-content>

@@ -72,8 +72,6 @@ export class ImageUpdatePage implements OnInit {
             formData.append('userId', this.userInfo.id);
             formData.append('image', file.rawFile, file.name);
             formData.append('email', this.requestData.email);
-            // formData.append('phone', this.requestData.phone);
-
             requests.push(this.uploadingService.uploadFormData(formData));
 
         });
@@ -102,7 +100,7 @@ export class ImageUpdatePage implements OnInit {
         const toast = await this.toastController.create({
             message: messageRes,
             duration: 3000,
-            color: 'primary',
+            color: 'success',
             position: 'middle'
         });
         toast.present();

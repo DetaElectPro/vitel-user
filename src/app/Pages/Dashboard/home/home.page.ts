@@ -82,13 +82,13 @@ export class HomePage implements OnInit {
             header: 'Ambulances Services',
             buttons: [{
                 text: 'Create Request',
-                icon: 'add-circle-outline',
+                icon: 'assets/icon/file-document2.svg',
                 handler: () => {
                     this.router.navigate(['/ambulance']);
                 }
             }, {
                 text: 'browser',
-                icon: 'list-circle-outline',
+                icon: 'assets/icon/clinic-history.svg',
                 handler: () => {
                     this.router.navigate(['/ambulance-history']);
                 }
@@ -109,13 +109,13 @@ export class HomePage implements OnInit {
             header: 'Requests Services',
             buttons: [{
                 text: 'Browse new requests',
-                icon: 'list-circle-outline',
+                icon: 'assets/icon/file-document2.svg',
                 handler: () => {
                     this.router.navigate(['/requests']);
                 }
             }, {
                 text: 'History',
-                icon: 'document-attach-outline',
+                icon: 'assets/icon/clinic-history.svg',
                 handler: () => {
                     this.router.navigate(['/history']);
                 }

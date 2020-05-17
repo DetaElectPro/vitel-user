@@ -48,50 +48,65 @@ export class RegisterPage implements OnInit {
     }
 
     async userRegister() {
-        const loading = await this.loadingController.create({
-            message: 'Please wait...',
-            spinner: 'bubbles',
-            translucent: true
-        });
-
-        await loading.present();
         const files = this.getFiles();
-        const requests = [];
-        files.forEach((file) => {
-            const formData = new FormData();
-            formData.append('image', file.rawFile, file.name);
-            formData.append('name', this.registerData.name);
-            formData.append('phone', this.registerData.phone);
-            formData.append('password', this.registerData.password);
-            formData.append('role', this.registerData.role);
-
-            requests.push(this.authService.registerServes(formData));
-
-        });
-
-        concat(...requests).subscribe(
-            async response => {
-                await loading.dismiss();
-                this.result = response;
-                if (this.result.error) {
-                    alert(`Message: ${this.result.message}`);
-                } else {
-                    this.presentToast(this.result.message);
-                    this.toLogin();
-                }
-            },
-            async err => {
-                await loading.dismiss();
-                const errs = JSON.parse(err.responseText);
-                console.log('serve Error: ', errs);
+        if (files.length === 0) {
+            alert('Profile Image Required Please choose an image');
+        } else {
+            const loading = await this.loadingController.create({
+                message: 'Please wait...',
+                spinner: 'bubbles',
+                translucent: true
             });
+
+            await loading.present();
+            const requests = [];
+            files.forEach((file) => {
+                const formData = new FormData();
+                formData.append('image', file.rawFile, file.name);
+                formData.append('name', this.registerData.name);
+                formData.append('phone', this.registerData.phone);
+                formData.append('password', this.registerData.password);
+                formData.append('role', this.registerData.role);
+
+                requests.push(this.authService.registerServes(formData));
+
+            });
+
+            concat(...requests).subscribe(
+                async response => {
+                    await loading.dismiss();
+                    this.result = response;
+                    if (this.result.error) {
+                        this.errorToast(this.result.message);
+                    } else {
+                        this.presentToast(this.result.message);
+                        this.toLogin();
+                    }
+                },
+                async err => {
+                    await loading.dismiss();
+                    // const errs = JSON.parse(err.responseText);
+                    this.errorToast('Server Error check your internet or try later');
+                });
+        }
     }
 
     async presentToast(messageRes) {
         const toast = await this.toastController.create({
             message: messageRes,
-            duration: 3000,
-            color: 'primary',
+            duration: 7000,
+            color: 'success',
+            position: 'middle'
+        });
+        toast.present();
+        this.route.navigate(['/']);
+    }
+
+    async errorToast(messageRes) {
+        const toast = await this.toastController.create({
+            message: messageRes,
+            duration: 7000,
+            color: 'danger',
             position: 'middle'
         });
         toast.present();

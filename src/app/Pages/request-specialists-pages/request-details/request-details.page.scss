@@ -1,14 +1,22 @@
-aion-content{
-  ion-card{
-    margin:0;
-    ion-row{
-      ion-col{
+ion-content {
+  p {
+    color: black;
+  }
+
+  ion-card {
+    margin: 0;
+
+    ion-row {
+      ion-col {
         text-align: start;
+        color: black;
       }
-      ion-col:last-child{
+
+      ion-col:last-child {
         text-align: center;
       }
-      ion-col:first-child{
+
+      ion-col:first-child {
         text-align: end;
       }
     }
