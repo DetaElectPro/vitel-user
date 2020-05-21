@@ -124,7 +124,6 @@ export class HomePage implements OnInit {
                 icon: 'close',
                 role: 'cancel',
                 handler: () => {
-                    console.log('Cancel clicked');
                 }
             }]
         });
@@ -136,23 +135,21 @@ export class HomePage implements OnInit {
             header: 'Requests Services',
             buttons: [{
                 text: 'Browse new requests',
-                icon: 'list-circle-outline',
+                icon: 'assets/icon/file-document2.svg',
                 handler: () => {
                     this.router.navigate(['/emergency-pages-request']);
                 }
             }, {
                 text: 'History',
-                icon: 'document-attach-outline',
+                icon: 'assets/icon/clinic-history.svg',
                 handler: () => {
-                    // this.router.navigate(['/emergency-pages-history']);
-                    alert('available soon');
+                    this.router.navigate(['/emergency-pages-history']);
                 }
             }, {
                 text: 'Cancel',
                 icon: 'close',
                 role: 'cancel',
                 handler: () => {
-                    console.log('Cancel clicked');
                 }
             }]
         });
@@ -170,7 +167,7 @@ export class HomePage implements OnInit {
                 }
             }, {
                 text: 'Last Request',
-                icon: 'list-circle-outline',
+                icon: 'assets/icon/clinic-history.svg',
                 handler: () => {
                     this.router.navigate(['/pharmacy']);
                 }
@@ -192,7 +189,6 @@ export class HomePage implements OnInit {
                     icon: 'close',
                     role: 'cancel',
                     handler: () => {
-                        console.log('Cancel clicked');
                     }
                 }]
         });

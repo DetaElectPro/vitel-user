@@ -1,10 +1,10 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
-import {Platform} from '@ionic/angular';
-import {SplashScreen} from '@ionic-native/splash-screen/ngx';
-import {StatusBar} from '@ionic-native/status-bar/ngx';
-import {FCM} from '@ionic-native/fcm/ngx';
-import {NavigationExtras, Router} from '@angular/router';
+import { Platform, AlertController } from '@ionic/angular';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { FCM } from '@ionic-native/fcm/ngx';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
     selector: 'app-root',
@@ -18,7 +18,8 @@ export class AppComponent {
         private splashScreen: SplashScreen,
         private statusBar: StatusBar,
         private fcm: FCM,
-        private router: Router
+        private router: Router,
+        public alertCrtl: AlertController
     ) {
         this.initializeApp();
     }
@@ -26,7 +27,7 @@ export class AppComponent {
     initializeApp() {
         this.platform.ready().then(() => {
             // this.statusBar.styleDefault();
-            this.statusBar.backgroundColorByHexString('#003a58');
+            this.statusBar.backgroundColorByHexString('#1dcc9b');
             this.splashScreen.hide();
             this.getFCM();
         });
@@ -56,6 +57,7 @@ export class AppComponent {
                 }
             } else {
                 console.log('Received in foreground');
+                this.normaleAlert('your received new message', 'Request');
                 if (data.requestId) {
                     const navigationExtras: NavigationExtras = {
                         queryParams: {
@@ -75,5 +77,32 @@ export class AppComponent {
     }
 
 
+    checkInternet() {
+        window.addEventListener('offline', () => {
+            this.presentAlert('no internet connection', 'please check your internet, and try again');
+        });
+    }
+
+    async presentAlert(messageRes, headerRes) {
+        const alert = await this.alertCrtl.create({
+            header: headerRes,
+            message: messageRes,
+            cssClass: 'danger',
+            buttons: ['OK']
+        });
+
+        await alert.present();
+    }
+
+
+    async normaleAlert(messageRes, headerRes) {
+        const alert = await this.alertCrtl.create({
+            header: headerRes,
+            message: messageRes,
+            buttons: ['OK']
+        });
+
+        await alert.present();
+    }
 }
 

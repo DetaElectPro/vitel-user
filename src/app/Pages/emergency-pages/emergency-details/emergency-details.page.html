@@ -37,8 +37,8 @@
             <h3> Price : {{emergency?.price_per_day}}</h3>
             <p>Address: {{emergency?.address}}</p>
             <p>contact: {{emergency?.contact}}</p>
-            <p>Post at: {{emergency?.created_at}}</p>
-            <p>Last update at: {{emergency?.updated_at}}</p>
+            <p>Post at: {{emergency?.created_at | date: 'yyyy-mm-dd  hh:mm'}}</p>
+            <p>Last update at: {{emergency?.updated_at | date: 'yyyy-mm-dd  hh:mm'}}</p>
 
         </ion-card-content>
         <ion-row>
@@ -52,34 +52,21 @@
                     Available: {{emergency?.available}}
                 </ion-button>
             </ion-col>
-            <!--            <ion-col class="ion-no-padding" size="5">-->
-            <!--                <ion-button color="primary" fill="clear" size="small">-->
-            <!--                    -->
-            <!--                </ion-button>-->
-            <!--            </ion-col>-->
 
         </ion-row>
     </ion-card>
     <ion-card>
-        <!--        <ion-card-content>-->
-        <!--                        <p>Price: {{emergency.price}}</p>-->
-        <!--                        <p>End At: {{emergency.end_time| date: 'MM/ dd'}}</p>-->
-        <!--                        <p *ngIf="emergency.status == 2">-->
-        <!--                            Contact: {{emergency.user.phone}}</p>-->
-        <!--        </ion-card-content>-->
-
         <!--                <div *ngIf="emergency.status == 1" class="ion-text-center ion-align-items-center">-->
         <div class="ion-text-center ion-align-items-center" disabled="">
             <ion-button (click)="emergencyConfirm()" disabled="" expand="block">
-                <ion-icon name="thumbs-up"></ion-icon>
-                <div>Accept</div>
+                <ion-icon name="thumbs-up"></ion-icon>&nbsp; Request
             </ion-button>
         </div>
         <!--                <div *ngIf="emergency.status == 2">-->
-        <ion-button (click)="requestCancel()" color="danger" disabled="" expand="block">
-            <ion-icon name="thumbs-up"></ion-icon>
-            <div>Cancel</div>
-        </ion-button>
+        <!--        <ion-button (click)="requestCancel()" color="danger" disabled="" expand="block">-->
+        <!--            <ion-icon name="thumbs-up"></ion-icon>-->
+        <!--            <div>Cancel</div>-->
+        <!--        </ion-button>-->
         <!--                </div>-->
 
     </ion-card>

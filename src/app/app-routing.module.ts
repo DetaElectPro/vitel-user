@@ -113,6 +113,14 @@ const routes: Routes = [
         path: 'cv-update',
         loadChildren: () => import('./Pages/user-pages/cv-update/cv-update.module').then(m => m.CvUpdatePageModule)
     },
+    {
+        path: 'welcome',
+        loadChildren: () => import('./Pages/welcome/welcome.module').then(m => m.WelcomePageModule)
+    },  {
+    path: 'profile',
+    loadChildren: () => import('./Pages/user-pages/profile/profile.module').then( m => m.ProfilePageModule)
+  },
+
 
 
 ];

@@ -1,38 +1,17 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
     providedIn: 'root'
 })
 export class RequestsService {
     Url = 'https://api.vital-helth.com/api/';
-    // Url = 'http://localhost:8000/api/';
-    // Url = 'http://192.168.2.6:8000/api/';
-    token = `Bearer ${localStorage.getItem('token')}`;
-    private myHeaders: any;
 
     constructor(
         private http: HttpClient,
     ) {
-        this.myHeaders = {
-            headers: new HttpHeaders()
-                .set('Content-Type', 'application/json')
-                .set('Authorization', this.token)
-        };
     }
-
-    /**
-     * Add page value url param
-     */
-    getByPage(page: number): string {
-        if (page) {
-            return '&page=' + page;
-        } else {
-            return '';
-        }
-    }
-
 
     /**
      * Return list of Requests as observable
@@ -54,7 +33,7 @@ export class RequestsService {
      */
     public searchRequestsSecialists(title: string): Observable<any> {
         const data = {
-            'title': title
+            title
         };
         return this.http.post(`${this.Url}search_request_specialists`, data);
     }

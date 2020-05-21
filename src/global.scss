@@ -54,7 +54,20 @@ ion-content {
   }
 }
 
+//ion-toolbar {
+//  --background: var(--ion-color-primary);
+//  --color: var(--ion-color-light);
+//}
 ion-toolbar {
   --background: var(--ion-color-primary);
   --color: var(--ion-color-light);
 }
+
+.item.sc-ion-label-ios-h, .item .sc-ion-label-ios-h {
+  font-size: small;
+}
+
+.item.sc-ion-label-md-h, .item .sc-ion-label-md-h {
+  font-size: small;
+}
+

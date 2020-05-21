@@ -1,34 +1,111 @@
-<ion-header [translucent]="true">
-    <ion-toolbar>
+<!--<ion-header [translucent]="true">-->
+<!--    <ion-toolbar>-->
+<!--        <ion-buttons slot="start">-->
+<!--            <ion-button expand="block" routerDirection="backward" routerLink="/tabs/setting">-->
+<!--                <ion-icon name="arrow-back-outline"></ion-icon>-->
+<!--            </ion-button>-->
+<!--        </ion-buttons>-->
+<!--        <ion-title class="ion-text-center">-->
+<!--            My Wallet-->
+<!--        </ion-title>-->
+<!--    </ion-toolbar>-->
+<!--</ion-header>-->
+
+<!--<ion-content [fullscreen]="true">-->
+<!--    <div class="card">-->
+<!--        <div class="card-body">-->
+<!--            <ion-item>-->
+<!--                My Balance-->
+<!--                <span class="wallet-outline" slot="end"> {{data?.balance}}</span>-->
+<!--            </ion-item>-->
+
+<!--            <div>-->
+<!--                <p class="text-d-purple"> Buy More</p>-->
+<!--                <ion-button expand="full" href="tel:{{0114847667}}">Call-->
+<!--                    <ion-icon name="call"></ion-icon>-->
+<!--                </ion-button>-->
+<!--                <ion-button (click)="bokApp()" color="danger" expand="full">Bok-->
+<!--                    <ion-icon name="card"></ion-icon>-->
+<!--                </ion-button>-->
+
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</ion-content>-->
+
+
+<ion-header class="flat">
+    <ion-toolbar class="colored">
         <ion-buttons slot="start">
             <ion-button expand="block" routerDirection="backward" routerLink="/tabs/setting">
-                <ion-icon name="arrow-back-outline"></ion-icon>
+                <ion-icon color="light" name="arrow-back-outline"></ion-icon>
             </ion-button>
         </ion-buttons>
-        <ion-title class="ion-text-center">
-            My Wallet
-        </ion-title>
+        <ion-title color="light" class="ion-text-center">Wallet</ion-title>
+        <ion-buttons slot="end">
+            <ion-button color="light">
+                <ion-icon color="light" name="apps"></ion-icon>
+            </ion-button>
+        </ion-buttons>
     </ion-toolbar>
 </ion-header>
-
-<ion-content [fullscreen]="true">
-    <div class="card">
-        <div class="card-body">
-            <ion-item>
-                My Balance
-                <span class="wallet-outline" slot="end"> {{data?.balance}}</span>
-            </ion-item>
-
-            <div>
-                <p class="text-d-purple"> Buy More</p>
-                <ion-button expand="full" href="tel:{{0114847667}}">Call
-                    <ion-icon name="call"></ion-icon>
-                </ion-button>
-                <ion-button (click)="bokApp()" color="danger" expand="full">Bok
-                    <ion-icon name="card"></ion-icon>
-                </ion-button>
-
-            </div>
+<ion-content>
+    <div class="header__extended">
+        <div class="total">
+            <div class="label">Total balance</div>
+            <div class="value"> {{data?.balance}}</div>
+            <!--            <div class="balance">+ $3968,00</div>-->
         </div>
     </div>
+    <p class="text-d-purple"> Buy More</p>
+    <ion-button expand="full" href="tel:{{0114847667}}"> &nbsp; Call
+        <ion-icon name="call"></ion-icon>
+    </ion-button>
+    <ion-button (click)="bokApp()" color="danger" expand="full"> &nbsp; mBok
+        <ion-icon name="card"></ion-icon>
+    </ion-button>
+
+    <!--    <section class="transactions">-->
+    <!--        <ion-label class="section__title" slot="start">-->
+    <!--            Recent Transactions-->
+    <!--            <ion-text class="more-link" text-right>View All</ion-text>-->
+    <!--        </ion-label>-->
+    <!--        <ion-list class="transactions__list">-->
+    <!--            <ion-item lines="inset">-->
+    <!--                <ion-avatar slot="start">-->
+    <!--                    <img src="https://picsum.photos/400/320?image=1027">-->
+    <!--                </ion-avatar>-->
+    <!--                <ion-label>-->
+    <!--                    <ion-text>-->
+    <!--                        <h3>Dr. Somename</h3>-->
+    <!--                    </ion-text>-->
+    <!--                    <p>Speciality, Location</p>-->
+    <!--                </ion-label>-->
+    <!--            </ion-item>-->
+    <!--            <ion-item lines="none">-->
+    <!--                <ion-avatar slot="start">-->
+    <!--                    <img src="https://picsum.photos/400/320?image=996">-->
+    <!--                </ion-avatar>-->
+    <!--                <ion-label>-->
+    <!--                    <ion-text>-->
+    <!--                        <h3>Dr. Somename</h3>-->
+    <!--                    </ion-text>-->
+    <!--                    <p>Speciality, Location</p>-->
+    <!--                </ion-label>-->
+    <!--            </ion-item>-->
+    <!--            <ion-item lines="none">-->
+    <!--                <ion-avatar slot="start">-->
+    <!--                    <img src="https://picsum.photos/400/320?image=996">-->
+    <!--                </ion-avatar>-->
+    <!--                <ion-label>-->
+    <!--                    <ion-text>-->
+    <!--                        <h3>Dr. Somename</h3>-->
+    <!--                    </ion-text>-->
+    <!--                    <p>Speciality, Location</p>-->
+    <!--                </ion-label>-->
+    <!--            </ion-item>-->
+    <!--        </ion-list>-->
+    <!--    </section>-->
+
+
 </ion-content>

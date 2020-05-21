@@ -26,6 +26,7 @@ export class HistoryPage implements OnInit {
     }
 
     doRefresh(event) {
+        this.result = null;
         this.requestData();
 
         setTimeout(() => {
@@ -36,7 +37,7 @@ export class HistoryPage implements OnInit {
     requestData() {
         this.historyServ.userEmergencyHistory()
             .subscribe(res => {
-                    this.result = res;
+                    console.log('res: ', this.result = res);
                     this.perPage = this.result.per_page;
                     this.page = this.result.current_page;
                     this.totalData = this.result.total;

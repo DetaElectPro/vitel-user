@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.detatech.vitaluser" version="0.0.1" xmlns="http://www.w3.org/ns/widgets">
-    <name>Vital Doctor</name>
+<widget id="com.detatech.vitaluser" version="1.1" xmlns="http://www.w3.org/ns/widgets">
+    <name>Hawjah Doctor</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="info@detatech.xyz" href="http://detatech.xyz/">DetaTech</author>
     <content src="index.html" />
