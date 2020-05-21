@@ -23,7 +23,7 @@ export class ProfilePage implements OnInit {
     ngOnInit() {
         this.storage.get('userInfo')
             .then(res => {
-                console.log('storage: ', this.userInfo = res);
+                this.userInfo = res;
             })
             .catch(erro => {
                 alert(erro);
@@ -43,7 +43,4 @@ export class ProfilePage implements OnInit {
         return false;
     }
 
-    goBack() {
-        this.nav.back();
-    }
 }
