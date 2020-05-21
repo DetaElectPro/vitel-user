@@ -94,23 +94,22 @@ export class RegisterPage implements OnInit {
     async presentToast(messageRes) {
         const toast = await this.toastController.create({
             message: messageRes,
-            duration: 7000,
+            duration: 5000,
             color: 'success',
             position: 'middle'
         });
         toast.present();
-        this.route.navigate(['/']);
+        this.route.navigate(['/account-type']);
     }
 
     async errorToast(messageRes) {
         const toast = await this.toastController.create({
             message: messageRes,
-            duration: 7000,
+            duration: 5000,
             color: 'danger',
             position: 'middle'
         });
         toast.present();
-        this.route.navigate(['/']);
     }
 
     async toLogin() {
