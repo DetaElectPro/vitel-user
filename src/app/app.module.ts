@@ -15,7 +15,9 @@ import {TokenInterceptor} from './interceptors/token.interceptor';
 import {FCM} from '@ionic-native/fcm/ngx';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 
-
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+const config: SocketIoConfig = { url: 'http://localhost:3001', options: {} };
+ 
 @NgModule({
     declarations: [AppComponent],
     entryComponents: [],
@@ -23,6 +25,7 @@ import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
         IonicModule.forRoot(),
         IonicStorageModule.forRoot(),
         AppRoutingModule,
+        SocketIoModule.forRoot(config),
         HttpClientModule,
         IonicSelectableModule],
     providers: [

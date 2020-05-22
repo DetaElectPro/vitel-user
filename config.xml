@@ -1,7 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.detatech.vitaluser"
- version="1.0.1"
-  xmlns="http://www.w3.org/ns/widgets">
+<widget id="com.detatech.vitaluser" version="1.0.1" xmlns="http://www.w3.org/ns/widgets">
     <name>Hawjah Doctor</name>
     <description>An awesome DetaTechApp.</description>
     <author email="info@detatech.sd" href="https://detatech.sd/">DetaTech</author>

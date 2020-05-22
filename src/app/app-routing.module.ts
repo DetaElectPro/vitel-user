@@ -124,6 +124,10 @@ const routes: Routes = [
     path: 'about-us',
     loadChildren: () => import('./Pages/about-us/about-us.module').then( m => m.AboutUsPageModule)
   },
+  {
+    path: 'home-chat',
+    loadChildren: () => import('./Pages/Chat/home-chat/home-chat.module').then( m => m.HomeChatPageModule)
+  },
 
 
 
