@@ -14,7 +14,7 @@ export class HomeChatPage implements OnInit {
   messages = [];
   currentUser = '';
   userInfo: any = { name: null, phone: null };
-
+ data: any;
   constructor(
     private socket: Socket,
     private toastCtrl: ToastController,
@@ -48,10 +48,11 @@ export class HomeChatPage implements OnInit {
     this.socket.emit('set-user', user);
 
 
-    this.socket.fromEvent('users-changed').subscribe(data => {
-      const user = data.user;
-      const user = data.user;
-      if (data.event === 'left') {
+    this.socket.fromEvent('users-changed').subscribe(response => {
+        this.data = response;
+        this.data = this.data.user;
+      // @ts-ignore
+        if (response.event === 'left') {
         this.showToast('User left: ' + user);
       } else {
         this.showToast('User joined: ' + user);
