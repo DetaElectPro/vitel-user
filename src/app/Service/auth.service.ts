@@ -95,19 +95,6 @@ export class AuthService {
         });
     }
 
-    // registerServes(userData) {
-    //     return new Promise((resolve, reject) => {
-    //         this.http.post(this.url + 'auth/register', JSON.stringify(userData), {
-    //             headers: new HttpHeaders().set('Content-Type', 'application/json'),
-    //         })
-    //             .subscribe(res => {
-    //                 resolve(res);
-    //             }, (err) => {
-    //                 reject(err);
-    //             });
-    //     });
-    // }
-
     public resetPassword(phone): Observable<any> {
         return this.http.post(`${this.url}reset_password`, phone);
     }
@@ -128,7 +115,6 @@ export class AuthService {
      */
     public medicalFiledService(): Observable<any> {
         return this.http.get(this.url + 'medical_specialties');
-        // return this.http.get(this.url + 'medical_fields');
     }
 
     public checkUserService(): Observable<any> {

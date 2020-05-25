@@ -1,12 +1,11 @@
-import { Injectable } from '@angular/core';
-import { HttpBackend, HttpClient } from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpBackend, HttpClient} from '@angular/common/http';
 
 @Injectable({
     providedIn: 'root'
 })
 export class FileUploadeService {
     Url = 'https://api.vital-helth.com/api/';
-
 
 
     private httpClient: HttpClient;

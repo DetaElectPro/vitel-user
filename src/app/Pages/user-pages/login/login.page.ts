@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../../Service/auth.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LoadingController, ToastController} from '@ionic/angular';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 
 @Component({
@@ -15,6 +16,7 @@ export class LoginPage implements OnInit {
     account: any = {type: null, role: null};
     showPass = false;
     passIcon = 'eye-outline';
+    LoginForm: FormGroup;
 
     constructor(
         private authServe: AuthService,
@@ -26,7 +28,15 @@ export class LoginPage implements OnInit {
         this.activatedRoute.queryParams.subscribe(params => {
             this.loginData.role = params.role;
             this.account.type = params.type;
-            console.log(params);
+        });
+
+
+        this.LoginForm = new FormGroup({
+            phone: new FormControl('', [Validators.required,
+                Validators.pattern('(^9\\d{8}$)|(^1\\d{8}$)'),
+                Validators.minLength(9), Validators.maxLength(9)]),
+            password: new FormControl('', [Validators.required,
+                Validators.minLength(6), Validators.maxLength(25)]),
         });
     }
 
@@ -45,11 +55,9 @@ export class LoginPage implements OnInit {
         await loading.present();
         this.authServe.loginServes(this.loginData)
             .then(async response => {
-                console.log(response);
                 await loading.dismiss();
                 this.usersData = response;
                 if (this.usersData.error) {
-                    // alert('error data');
                     this.errorToast(this.usersData.message);
                 } else {
                     this.passToast(this.usersData.message);
@@ -65,7 +73,7 @@ export class LoginPage implements OnInit {
             })
             .catch(async err => {
                     await loading.dismiss();
-                    this.errorToast('Server Error check your internet or try later')
+                    this.errorToast('Server Error check your internet or try later');
                     console.log('serve Error: ', err);
                 }
             );

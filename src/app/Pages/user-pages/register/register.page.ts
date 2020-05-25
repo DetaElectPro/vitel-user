@@ -4,6 +4,7 @@ import {LoadingController, ToastController} from '@ionic/angular';
 import {FileUploader, FileLikeObject} from 'ng2-file-upload';
 import {FileUploadeService} from 'src/app/Service/file-uploade.service';
 import {concat} from 'rxjs';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
     selector: 'app-register',
@@ -16,6 +17,7 @@ export class RegisterPage implements OnInit {
     result: any;
     showPass = false;
     passIcon = 'eye-outline';
+    RegisterForm: FormGroup;
 
     public fileUploader: FileUploader = new FileUploader({});
 
@@ -28,6 +30,18 @@ export class RegisterPage implements OnInit {
     ) {
         this.activatedRoute.queryParams.subscribe(params => {
             this.registerData.role = params.role;
+        });
+
+        this.RegisterForm = new FormGroup({
+            image: new FormControl('', [Validators.nullValidator]),
+            name: new FormControl('', [Validators.required,
+                Validators.pattern('^[a-zA-Z ]+[a-zA-Z ]*$'),
+                Validators.minLength(6), Validators.maxLength(50)]),
+            phone: new FormControl('', [Validators.required,
+                Validators.pattern('(^9\\d{8}$)|(^1\\d{8}$)'),
+                Validators.minLength(9), Validators.maxLength(9)]),
+            password: new FormControl('', [Validators.required,
+                Validators.minLength(6), Validators.maxLength(25)]),
         });
 
     }

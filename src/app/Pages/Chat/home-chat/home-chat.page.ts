@@ -25,7 +25,7 @@ export class HomeChatPage implements OnInit {
       .then(res => {
         console.log(this.userInfo = res);
         setTimeout(() => {
-          this.startChat()
+          this.startChat();
       }, 2000);
       })
       .catch(erro => {
@@ -35,19 +35,23 @@ export class HomeChatPage implements OnInit {
 
   }
 
-  startChat(){
+  startChat() {
 
     this.socket.connect();
     this.socket.emit('authenticate', { token: localStorage.getItem('token') });
-    let name = this.userInfo.name
+    const name = this.userInfo.name;
+    const user = this.userInfo;
     console.log('log', this.userInfo);
     this.currentUser = name;
 
     this.socket.emit('set-name', name);
+    this.socket.emit('set-user', user);
+
 
     this.socket.fromEvent('users-changed').subscribe(data => {
-      let user = data['user'];
-      if (data['event'] === 'left') {
+      const user = data.user;
+      const user = data.user;
+      if (data.event === 'left') {
         this.showToast('User left: ' + user);
       } else {
         this.showToast('User joined: ' + user);
@@ -55,6 +59,9 @@ export class HomeChatPage implements OnInit {
     });
 
     this.socket.fromEvent('message').subscribe(message => {
+      // this.storage.set('chat-message', message).then(messages =>{
+      //   this.
+      // })
       this.messages.push(message);
     });
   }
@@ -68,7 +75,7 @@ export class HomeChatPage implements OnInit {
   }
 
   async showToast(msg) {
-    let toast = await this.toastCtrl.create({
+    const toast = await this.toastCtrl.create({
       message: msg,
       position: 'top',
       duration: 2000
