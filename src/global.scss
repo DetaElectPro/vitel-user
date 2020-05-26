@@ -54,10 +54,7 @@ ion-content {
   }
 }
 
-//ion-toolbar {
-//  --background: var(--ion-color-primary);
-//  --color: var(--ion-color-light);
-//}
+
 ion-toolbar {
   --background: var(--ion-color-primary);
   --color: var(--ion-color-light);
@@ -71,3 +68,7 @@ ion-toolbar {
   font-size: small;
 }
 
+
+ion-button {
+  color: white;
+}

@@ -4,7 +4,7 @@ import {LoadingController} from '@ionic/angular';
 import {AuthService} from '../../../Service/auth.service';
 import {formatDate} from '@angular/common';
 import {Router} from '@angular/router';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
     selector: 'app-medical-board',
@@ -29,18 +29,34 @@ export class MedicalBoardPage implements OnInit {
     constructor(
         private router: Router,
         private loadingController: LoadingController,
-        private medicalServ: AuthService
+        private medicalServ: AuthService,
+        // private formBuilder: FormBuilder
     ) {
+        // this.MedicalForm = this.formBuilder.group({
+        //     medical_registration_number: ['', Validators.required,
+        //         Validators.minLength(5),
+        //         Validators.maxLength(12)],
+        //     registration_date: ['', Validators.required],
+        //     graduation_date: ['', Validators.required],
+        //     medical_field_id: ['', Validators.required],
+        //     address: [Validators.required,
+        //         Validators.minLength(5), Validators.maxLength(90)],
+        //     years_of_experience: ['', Validators.required,
+        //         Validators.minLength(1), Validators.maxLength(2)],
+        //     birth_of_date: ['', Validators.required]
+        // });
+
+
         this.MedicalForm = new FormGroup({
-            medical_registration_number: new FormControl('', [Validators.required,
-                Validators.minLength(5), Validators.maxLength(12)]),
             registration_date: new FormControl('', [Validators.required]),
             graduation_date: new FormControl('', [Validators.required]),
             medical_field_id: new FormControl('', [Validators.required]),
             address: new FormControl('', [Validators.required,
-                Validators.minLength(5), Validators.maxLength(90),
-                Validators.pattern('^[a-zA-Z ]+[a-zA-Z ]*$'),
-            ]),
+                Validators.minLength(5), Validators.maxLength(90)]),
+            medical_registration_number: new FormControl('', [Validators.required,
+                Validators.minLength(5), Validators.maxLength(12)]),
+            years_of_experience: new FormControl('', [Validators.required,
+                Validators.minLength(1), Validators.maxLength(2)]),
             birth_of_date: new FormControl('', [Validators.required]),
         });
     }
@@ -80,7 +96,7 @@ export class MedicalBoardPage implements OnInit {
 
     async getMedicalFiled() {
         const loading = this.loadingController.create({
-            spinner: null,
+            spinner: 'bubbles',
             message: 'Please wait...',
             translucent: true,
         });

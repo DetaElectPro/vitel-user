@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
-import {LoadingController, ToastController} from '@ionic/angular';
+import {AlertController, LoadingController, ToastController} from '@ionic/angular';
 import {FileUploader, FileLikeObject} from 'ng2-file-upload';
 import {FileUploadeService} from 'src/app/Service/file-uploade.service';
 import {concat} from 'rxjs';
@@ -26,7 +26,8 @@ export class RegisterPage implements OnInit {
         public toastController: ToastController,
         public activatedRoute: ActivatedRoute,
         private authService: FileUploadeService,
-        public loadingController: LoadingController
+        public loadingController: LoadingController,
+        public alertController: AlertController
     ) {
         this.activatedRoute.queryParams.subscribe(params => {
             this.registerData.role = params.role;
@@ -62,46 +63,50 @@ export class RegisterPage implements OnInit {
     }
 
     async userRegister() {
-        const files = this.getFiles();
-        if (files.length === 0) {
-            alert('Profile Image Required Please choose an image');
+        const phone = String(this.registerData.phone).charAt(0);
+        if (phone === '0') {
+            this.errorAlert(`The phone number field can't start with 0`);
         } else {
-            const loading = await this.loadingController.create({
-                message: 'Please wait...',
-                spinner: 'bubbles',
-                translucent: true
-            });
-
-            await loading.present();
-            const requests = [];
-            files.forEach((file) => {
-                const formData = new FormData();
-                formData.append('image', file.rawFile, file.name);
-                formData.append('name', this.registerData.name);
-                formData.append('phone', this.registerData.phone);
-                formData.append('password', this.registerData.password);
-                formData.append('role', this.registerData.role);
-
-                requests.push(this.authService.registerServes(formData));
-
-            });
-
-            concat(...requests).subscribe(
-                async response => {
-                    await loading.dismiss();
-                    this.result = response;
-                    if (this.result.error) {
-                        this.errorToast(this.result.message);
-                    } else {
-                        this.presentToast(this.result.message);
-                        this.toLogin();
-                    }
-                },
-                async err => {
-                    await loading.dismiss();
-                    // const errs = JSON.parse(err.responseText);
-                    this.errorToast('Server Error check your internet or try later');
+            const files = this.getFiles();
+            if (files.length === 0) {
+                alert('Profile Image Required Please choose an image');
+            } else {
+                const loading = await this.loadingController.create({
+                    message: 'Please wait...',
+                    spinner: 'bubbles',
+                    translucent: true
                 });
+
+                await loading.present();
+                const requests = [];
+                files.forEach((file) => {
+                    const formData = new FormData();
+                    formData.append('image', file.rawFile, file.name);
+                    formData.append('name', this.registerData.name);
+                    formData.append('phone', this.registerData.phone);
+                    formData.append('password', this.registerData.password);
+                    formData.append('role', this.registerData.role);
+
+                    requests.push(this.authService.registerServes(formData));
+
+                });
+
+                concat(...requests).subscribe(
+                    async response => {
+                        await loading.dismiss();
+                        this.result = response;
+                        if (this.result.error) {
+                            this.errorToast(this.result.message);
+                        } else {
+                            this.presentToast(this.result.message);
+                            this.toLogin();
+                        }
+                    },
+                    async err => {
+                        await loading.dismiss();
+                        this.errorToast('Server Error check your internet or try later');
+                    });
+            }
         }
     }
 
@@ -142,5 +147,17 @@ export class RegisterPage implements OnInit {
         } else {
             this.passIcon = 'eye-outline';
         }
+    }
+
+    async errorAlert(messageRes) {
+        const alert = await this.alertController.create({
+            header: 'Alert',
+            cssClass: 'error-alert',
+            message: `<b>${messageRes}</b>`,
+            animated: true,
+            buttons: ['OK']
+        });
+
+        await alert.present();
     }
 }
