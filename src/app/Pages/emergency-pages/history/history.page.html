@@ -9,17 +9,6 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="!historyData">
-    <div class="ion-padding custom-skeleton">
-        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
-        <ion-skeleton-text animated></ion-skeleton-text>
-        <ion-skeleton-text animated style="width: 88%"></ion-skeleton-text>
-        <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
-        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
-    </div>
-</ion-content>
-
-
 <ion-content *ngIf="historyData">
     <ion-refresher (ionRefresh)="doRefresh($event)" slot="fixed">
         <ion-refresher-content
@@ -34,10 +23,11 @@
             <ion-col class="ion-text-center bgcolor">Title</ion-col>
             <ion-col class="ion-text-center bgcolor">available</ion-col>
             <ion-col class="ion-text-center bgcolor">Date</ion-col>
+            <ion-col class="ion-text-center accolor">Action</ion-col>
         </ion-row>
         <ion-row *ngFor="let item of historyData">
-            <ion-col class="text-blue ion-text-center"
-                     routerLink="/emergency-pages-history/{{item.id}}">{{item.type}}</ion-col>
+            <ion-col class="ion-text-center"
+                     routerLink="/emergency-details/{{item.id}}">{{item.type}}</ion-col>
 
             <ion-col class="ion-text-center">
                 {{item.available}}
@@ -45,7 +35,10 @@
 
 
             <ion-col class="ion-text-center"
-                     routerLink="/emergency-pages-history/{{item.id}}">{{item.created_at| date: 'y-MM-d'}}</ion-col>
+                     routerLink="/emergency-details/{{item.id}}">{{item.created_at| date: 'y-MM-d'}}</ion-col>
+            <ion-col>
+                <ion-button routerLink="/emergency-details/{{item.id}}" size="small">open</ion-button>
+            </ion-col>
         </ion-row>
     </ion-grid>
 
@@ -59,3 +52,13 @@
 
 </ion-content>
 
+
+<ion-content *ngIf="!historyData">
+    <div class="ion-padding custom-skeleton">
+        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        <ion-skeleton-text animated></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 88%"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+    </div>
+</ion-content>

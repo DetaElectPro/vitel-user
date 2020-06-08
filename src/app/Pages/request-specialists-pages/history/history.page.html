@@ -32,10 +32,11 @@
             <ion-col class="bgcolor">Title</ion-col>
             <ion-col class="bgcolor">Status</ion-col>
             <ion-col class="bgcolor">Date</ion-col>
+            <ion-col class="accolor">Action</ion-col>
         </ion-row>
         <ion-row *ngFor="let item of historyData">
 
-            <ion-col (click)="openDetails(item)">{{item.name}}</ion-col>
+            <ion-col (click)="openDetails(item)"><b>{{item.name}}</b></ion-col>
 
             <ion-col *ngIf="item.status ==2">
                 <ion-button (click)="openDetails(item)" color="warning" size="small">Waiting</ion-button>
@@ -48,6 +49,9 @@
             </ion-col>
 
             <ion-col (click)="openDetails(item)">{{item.start_time| date: 'y-MM-d'}}</ion-col>
+            <ion-col>
+                <ion-button routerLink="/request-details/{{item.id}}" size="small">open</ion-button>
+            </ion-col>
         </ion-row>
     </ion-grid>
 
