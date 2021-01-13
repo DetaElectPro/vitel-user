@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Platform} from '@ionic/angular';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Storage} from '@ionic/storage';
 
 const TOKEN_KEY = 'auth-token';
@@ -14,6 +14,7 @@ export class AuthService {
     token: any;
     response: any;
     user: any;
+    // url = 'https://api-test.vital-helth.com/api/';
     url = 'https://api.vital-helth.com/api/';
 
     authenticationState = new BehaviorSubject(null);

@@ -10,7 +10,7 @@
   "proxies": [
     {
       "path": "/api/",
-      "proxyUrl": "https://api.vital-helth.com/api"
+      "proxyUrl": "https://api-test.vital-helth.com/api"
     }
   ]
 

@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
     providedIn: 'root'
 })
 export class EmergencyService {
+    // Url = 'https://api-test.vital-helth.com/api/';
     Url = 'https://api.vital-helth.com/api/';
     // Url = 'http://localhost:8000/api/';
     // Url = 'http://192.168.2.6:8000/api/';
@@ -22,12 +23,7 @@ export class EmergencyService {
         // };
     }
 
-    /**
-     * Show my History request
-     */
-    // public addEmergency(data): Observable<any> {
-    //   return this.http.post(`${this.Url}emergency_serviced`, data);
-    // }
+
     public addEmergency(data): Observable<any> {
         return this.http.get(`${this.Url}emergency_serviced`);
     }

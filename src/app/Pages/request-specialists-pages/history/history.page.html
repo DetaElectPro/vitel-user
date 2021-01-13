@@ -50,7 +50,7 @@
 
             <ion-col (click)="openDetails(item)">{{item.start_time| date: 'y-MM-d'}}</ion-col>
             <ion-col>
-                <ion-button routerLink="/request-details/{{item.id}}" size="small">open</ion-button>
+                <ion-button (click)="openDetails(item)" size="small">open</ion-button>
             </ion-col>
         </ion-row>
     </ion-grid>

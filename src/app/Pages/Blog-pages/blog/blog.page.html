@@ -2,13 +2,50 @@
     <ion-toolbar>
         <ion-buttons slot="start">
             <ion-button expand="block" routerDirection="backward" routerLink="/tabs/home">
-                <ion-icon name="arrow-back-outline"></ion-icon>
+                <ion-icon name="arrow-back-outline">Back</ion-icon>
             </ion-button>
         </ion-buttons>
         <ion-title class="ion-text-center">Blog</ion-title>
     </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-    <h1>Soon</h1>
+
+<ion-content *ngIf="blogData" [fullscreen]="true" class="card-background-page">
+    <ion-searchbar (ionCancel)="clearSearch()" (ionChange)="searchRequests()" animated
+                   showCancelButton="focus"></ion-searchbar>
+    <ion-refresher (ionRefresh)="doRefresh($event)" slot="fixed">
+        <ion-refresher-content
+                pullingIcon="arrow-down-outline"
+                pullingText="Pull to refresh"
+                refreshingSpinner="circles"
+                refreshingText="Refreshing...">
+        </ion-refresher-content>
+    </ion-refresher>
+
+    <!-- card with header and title inside having images with title and subtitle on it with iterations -->
+    <ion-card *ngFor="let blog of blogData" routerLink="/blog-details/{{blog.id}}">
+        <img style="height: 100px; width: 100%" [src]="blog.image"/>
+        <ion-card-header>
+            <ion-card-title class="ion-text-center">{{blog.title}}</ion-card-title>
+        </ion-card-header>
+        <ion-button color="danger" expand="block" routerLink="/blog-details/{{blog.id}}">Read More..</ion-button>
+
+    </ion-card>
+
+
+    <ion-infinite-scroll (ionInfinite)="loadData($event)" threshold="100px">
+        <ion-infinite-scroll-content
+                loadingSpinner="bubbles"
+                loadingText="Loading more data...">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+
+    <ion-content *ngIf="!blogData" class="ion-padding custom-skeleton">
+        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        <ion-skeleton-text animated></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 88%"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+    </ion-content>
 </ion-content>

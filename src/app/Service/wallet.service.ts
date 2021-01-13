@@ -7,6 +7,7 @@ import {HttpClient} from '@angular/common/http';
 })
 export class WalletService {
 
+    // Url = 'https://api-test.vital-helth.com/api/';
     Url = 'https://api.vital-helth.com/api/';
 
     constructor(

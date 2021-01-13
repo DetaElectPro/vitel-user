@@ -1,9 +1,28 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>blog-details</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-button expand="block" routerDirection="backward" routerLink="/tabs/home">
+                <ion-icon name="arrow-back-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title class="ion-text-center">Blog details</ion-title>
+    </ion-toolbar>
 </ion-header>
+<ion-content *ngIf="blogData">
+    <div class="blog-page">
+        <div class="page-title ion-text-center" [innerHTML]="blogData?.title"></div>
+        <div>
+            <img style="height: 125px; width: 100%" [src]="blogData.image">
+        </div>
+        <p class="page-content" [innerHTML]="blogData?.content"></p>
+        <p class="page-date">Published on {{blogData?.created_at | date:'yyy-MMM-d'}}</p>
+    </div>
+</ion-content>
 
-<ion-content>
-
+<ion-content *ngIf="!blogData" class="ion-padding custom-skeleton">
+    <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+    <ion-skeleton-text animated></ion-skeleton-text>
+    <ion-skeleton-text animated style="width: 88%"></ion-skeleton-text>
+    <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+    <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
 </ion-content>

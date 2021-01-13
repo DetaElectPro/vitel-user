@@ -5,6 +5,7 @@ import {HttpBackend, HttpClient} from '@angular/common/http';
     providedIn: 'root'
 })
 export class FileUploadeService {
+    // Url = 'https://api-test.vital-helth.com/api/';
     Url = 'https://api.vital-helth.com/api/';
 
 
